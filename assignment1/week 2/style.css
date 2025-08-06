@@ -1,0 +1,59 @@
+/* * {
+  color: hotpink;
+} */
+
+/* 
+My reasoning behind the color palette:
+because this is a intro to css and I want to show difference in different styling so I a using bright contrasting colors. */
+body {
+  font-family: "Playwrite AU QLD", cursive;
+  font-optical-sizing: auto;
+  font-style: normal;
+  background-color: antiquewhite;
+}
+.blue-color {
+  color: blue;
+}
+
+h1 {
+  color: blueviolet;
+  font-weight: bold;
+  font-size: 32px;
+  font-family: "Playwrite AU QLD", cursive;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+}
+
+h2 {
+  color: rgb(32, 164, 164);
+}
+
+/* p {
+  /* font-weight: bold; */
+/* */
+
+.blue-color {
+  color: blue;
+}
+#purple-color,
+h3 {
+  color: purple;
+  font-family: "Lobster", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* h1 {
+  color: yellow;
+} */
+section {
+  text-align: center;
+  border: 2px solid crimson;
+  margin-bottom: 20px;
+  background-color: rgb(205, 255, 244);
+}
+
+h2 {
+  border: 1px dashed green;
+}
