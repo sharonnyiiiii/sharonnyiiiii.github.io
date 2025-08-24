@@ -1,0 +1,161 @@
+body {
+  margin: 0;
+  font-family: "Amatic SC", cursive;
+  background: #dbefff;
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 50px 20px;
+  background: url("true.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+header h1 {
+  font-family: "Great Vibes", cursive;
+  font-size: 70px;
+  margin: 0;
+  color: #446d99;
+}
+header p {
+  font-size: 22px;
+  margin-top: 10px;
+  color: #335577;
+}
+
+/* Main Board */
+.main-board {
+  margin: 30px auto;
+  padding: 40px;
+  max-width: 1200px;
+  border: 15px solid #f8e7b3; /* 奶黄色边框 */
+  border-radius: 30px;
+  background: #ffffffcc; /* 半透明背景 */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Door Grid */
+.door-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  justify-items: center;
+  max-width: 100%;
+}
+
+/* Door */
+.door {
+  position: relative;
+  width: 150px;
+  height: 220px;
+  perspective: 1000px;
+}
+
+.door-front,
+.door-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  transition: transform 1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Front (with wood texture + knob) */
+.door-front {
+  background: url("https://www.transparenttextures.com/patterns/wood-pattern.png")
+    #8ca6cf;
+  background-size: cover;
+  color: white;
+  font-size: 28px;
+  border: 3px solid #4a6a91;
+  z-index: 2;
+  transform-origin: center;
+  position: relative;
+}
+.knob {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle at 30% 30%, #f9f9f9, #c5c5c5, #999);
+  border-radius: 50%;
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Inside (Back) */
+.door-back {
+  background: #f9fbff;
+  color: #333;
+  font-size: 16px;
+  transform: rotateY(180deg);
+  border: 2px solid #a9c7e2;
+}
+
+/* Flip */
+.door:hover .door-front {
+  transform: rotateY(180deg);
+}
+.door:hover .door-back {
+  transform: rotateY(0deg);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  color: #555;
+  background: #eaf7ff;
+  margin-top: 40px;
+}
+
+/* Snow Effect */
+.snow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+}
+.snow::before,
+.snow::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  width: 100%;
+  height: 200%;
+  background-image: radial-gradient(white 2px, transparent 2px),
+    radial-gradient(white 4px, transparent 4px),
+    radial-gradient(white 6px, transparent 6px);
+  background-size: 40px 40px, 80px 80px, 120px 120px;
+  animation: snowFall 15s linear infinite;
+}
+.snow::after {
+  animation-duration: 25s; /* 不同速度 */
+  opacity: 0.6;
+}
+@keyframes snowFall {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
