@@ -5,33 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sharon Yii Interactive Media</title>
     <link rel="stylesheet" href="style.css" />
+
     <link
-      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Amatic+SC:wght@700&display=swap"
-      rel="stylesheet"
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><filter id='glow'><feGaussianBlur stdDeviation='3' result='coloredBlur'/><feMerge><feMergeNode in='coloredBlur'/><feMergeNode in='SourceGraphic'/></feMerge></filter></defs><text y='.9em' font-size='90' filter='url(%23glow)' style='fill:white;filter:drop-shadow(0 0 5px white) drop-shadow(0 0 10px white) drop-shadow(0 0 15px white)'>⛄</text></svg>"
     />
   </head>
   <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Snow overlay -->
-    <div class="snowing"></div>
+    <div class="snow"></div>
+
+    <!-- Click Button Header -->
+    <div class="click-header">
+      <a
+        href="https://www.myoungaekim.com/index.html"
+        class="click-button"
+        target="_blank"
+        aria-label="Visit MyoungAe Kim's website (opens in new tab)"
+        >CLICK</a
+      >
+    </div>
 
     <!-- Header -->
-    <header>
-      <h1>Sharon Yii</h1>
+    <header id="top">
+      <h1 aria-label="Sharon Yii Interactive Media">
+        <div class="snowman-icon" aria-hidden="true">⛄</div>
+        <span class="large-letter">S</span>haron
+        <span class="large-letter">Y</span>ii
+      </h1>
       <p>Interactive Media Assignment 1 ❄️</p>
     </header>
 
     <!-- Middle Board with contrasting border -->
-    <div class="main-board">
+    <div class="main-board" id="main-content">
       <section class="door-grid">
+        <!-- Snowflake decorations -->
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+        <div class="snowflake"></div>
+
         <div class="door">
           <div class="door-front">
             Q1
-            <div class="knob"></div>
+            <div class="knob" aria-hidden="true"></div>
           </div>
           <div class="door-back">
             <p>
-              I noticed the clickable calendar grid first, which sparked
-              curiosity.
+              The first thing I noticed was that the website felt difficult to
+              understand at first glance. Unlike a typical webpage with obvious
+              navigation features, this one did not provide clear directions.
+              Because of this, I felt curious and began to explore through
+              interaction.
             </p>
           </div>
         </div>
@@ -42,8 +69,20 @@
           </div>
           <div class="door-back">
             <p>
-              My actions: scrolling, hovering, clicking dates, reading hidden
-              content.
+              I scrolled down the webpage first, because the unusual layout did
+              not present a clear path. Unlike conventional single-scrolling
+              websites, this one had two different sections of content on the
+              same page. I noticed hints from the images on the site, and some
+              icons began to appear. I clicked on them to see what would happen.
+              I discovered hidden 3D elements inside the advent calendar. I
+              clicked more frequently to uncover all the hidden elements. I
+              clicked across the calendar grid and realized not every box
+              contained hidden elements. After ensuring I had explored all the
+              advent calendar boxes, I moved to the right side of the webpage to
+              expect further features. I clicked on each project displayed on
+              the site. I returned to the main page and noticed that all
+              previously discovered hidden elements had reset in the calendar
+              grid.
             </p>
           </div>
         </div>
@@ -54,8 +93,9 @@
           </div>
           <div class="door-back">
             <p>
-              I spent most time opening different dates and checking their
-              content.
+              I spent most of my time discovering the Christmas icons hidden
+              inside the advent calendar, which made the experience playful and
+              surprising.
             </p>
           </div>
         </div>
@@ -66,8 +106,9 @@
           </div>
           <div class="door-back">
             <p>
-              The most common action was clicking on the calendar days
-              repeatedly.
+              The most common action I performed was clicking repeatedly to
+              uncover hidden features and check if anything new could be
+              revealed.
             </p>
           </div>
         </div>
@@ -78,7 +119,10 @@
           </div>
           <div class="door-back">
             <p>
-              The primary goal is to make content discovery fun and engaging.
+              I believe the primary goal is to evoke the user's curiosity and
+              encourage self-directed navigation. This method holds the user's
+              attention by creating unexpected discoveries, allowing them to
+              absorb the content unconsciously while being entertained.
             </p>
           </div>
         </div>
@@ -89,7 +133,11 @@
           </div>
           <div class="door-back">
             <p>
-              It communicates through hidden content revealed by clicking dates.
+              The experience communicates its goal by leaving space for
+              imagination. As users interact, they are rewarded with charming
+              elements that make the process engaging and immersive. This
+              playful design keeps the user involved and motivates them to
+              continue exploring.
             </p>
           </div>
         </div>
@@ -100,8 +148,9 @@
           </div>
           <div class="door-back">
             <p>
-              It feels like it should be used many times, short sessions of
-              discovery.
+              The experience feels designed for short bursts of engagement
+              around 1–2 minutes at a time and could be revisited 2–3 times for
+              renewed enjoyment.
             </p>
           </div>
         </div>
@@ -112,8 +161,10 @@
           </div>
           <div class="door-back">
             <p>
-              The repeatable calendar grid signals ongoing interactions over
-              time.
+              It communicates this through its random and unstructured
+              interactive features, which suggest that the site is not meant for
+              a single linear visit but rather for repeated, playful
+              exploration.
             </p>
           </div>
         </div>
@@ -124,7 +175,8 @@
           </div>
           <div class="door-back">
             <p>
-              It references calendars and event posters as familiar media forms.
+              The experience references advent calendars, interactive posters,
+              and playful web art installations.
             </p>
           </div>
         </div>
@@ -135,8 +187,11 @@
           </div>
           <div class="door-back">
             <p>
-              It tells me to treat it playfully like opening doors to reveal
-              surprises.
+              It suggests that as a user, I should not expect straightforward
+              information delivery. Instead, I should approach the site
+              playfully, allowing curiosity to guide me. This strategy reflects
+              the importance of using design to sustain attention while
+              balancing aesthetics and storytelling.
             </p>
           </div>
         </div>
@@ -146,7 +201,10 @@
             <div class="knob"></div>
           </div>
           <div class="door-back">
-            <p>It makes me feel curious and excited when engaging with it.</p>
+            <p>
+              It communicates that I should feel curious and excited,
+              experiencing a sense of wonder as I uncover hidden surprises.
+            </p>
           </div>
         </div>
         <div class="door">
@@ -155,7 +213,13 @@
             <div class="knob"></div>
           </div>
           <div class="door-back">
-            <p>The frustrating part: some dates reveal little or no content.</p>
+            <p>
+              The most frustrating part was the landing page layout. At first, I
+              did not know what to do, which could easily confuse or discourage
+              impatient users. An improvement would be to include a small hint
+              guiding the user to click on the calendar first instead of
+              randomly clicking around.
+            </p>
           </div>
         </div>
         <div class="door">
@@ -165,8 +229,12 @@
           </div>
           <div class="door-back">
             <p>
-              The most satisfying part is the surprise of discovering hidden
-              pieces.
+              The most satisfying part was the anticipation of opening each
+              advent calendar box. Each revisit reset the grid to its original
+              state, allowing me to re-explore as if it were new. I particularly
+              enjoyed discovering Christmas icons with hidden text underneath.
+              When clicked, the background color sometimes changed to red,
+              creating a delightful "double-layered" surprise I did not expect.
             </p>
           </div>
         </div>
@@ -175,7 +243,7 @@
 
     <!-- Footer -->
     <footer>
-      <p>&copy; 2025 | Designed by Sharon Yii | ❄️ Snowy Edition</p>
+      <p>&copy; 2025 | Designed by Sharon Yii | ❄️ s4130923</p>
     </footer>
   </body>
 </html>
