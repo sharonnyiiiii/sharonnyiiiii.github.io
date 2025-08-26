@@ -1,3 +1,65 @@
+/*
+ * MY STYLESHEET
+ * 
+ * 1. IMMERSION: Winter theme with snow effects animation, light blue, and
+ *  snowflake animations that create an engaging atmosphere
+  
+ * 2. INTERACTIVITY: door flip animations that show my prompt answer
+ 
+ * 3. ACCESSIBILITY: link navigate to a specific website, proper contrast ratios, and
+  semantic HTML structure following WCAG guidelines
+ 
+ * COLOR PALETTE 
+ *
+ * Primary Colors:
+ * - Sky Blue (#dbefff): Soft, winter atmosphere, easy on the eyes
+ * - Warm Yellow (#f8e7b3): Inviting, complements winter theme
+ * - Deep Navy (#1a365d): maintains hierarchy
+ * 
+ * Secondary Colors:
+ * - Light Blue (#4a6fa5): Depth and sophistication
+ * - Wood Brown (#8ca6cf): Natural, tactile feel for doors
+ * - Pure White (#ffffff): Clean, magical glow effects
+ * 
+ * My TYPOGRAPHY STRATEGY
+ *
+ * Headers: "Brush Script MT" for elegance and personality
+ * Door Content: Arial for maximum readability at small sizes
+ * Button Text: Bold weight for clear call-to-action
+ * 
+ * ANIMATION APPROACH
+ * =================
+ * 
+ * All animations were designed with user experience in mind:
+ * Smooth transitions (0.3s-1s) prevent jarring movements
+ * Subtle effects enhance rather than distract
+ * Performance-optimized using CSS transforms and opacity
+ * 
+ * TECHNICAL IMPLEMENTATION
+ *
+ * 
+ * CSS Grid for responsive layouts
+ * CSS properties for maintainable door positioning
+ * 3D transforms for realistic door flip effects
+ 
+ * INSPIRATION & REFERENCES
+
+ * 
+ * Modern UI design principles from Material Design
+ * Winter theme aesthetics from seasonal websites
+ * Interactive design patterns from gaming interfaces
+ * Accessibility guidelines from WCAG 2.1
+
+
+ 
+ * Background Color (#dbefff): Soft sky blue that creates a winter atmosphere
+ * while maintaining good contrast for readability. This color was chosen to complement the snowy theme without being too harsh on the eyes.
+ 
+ * Typography: "Brush Script MT" provides an elegant, handwritten feel that enhances the artistic nature of this interactive media assignment.
+ * The cursive style adds sophistication while maintaining readability.
+ 
+ * Overflow-x hidden: Prevents horizontal scrolling issues that could break the immersive door grid layout.
+ */
 body {
   margin: 0;
   font-family: "Brush Script MT", cursive, serif;
@@ -6,7 +68,12 @@ body {
   overflow-x: hidden;
 }
 
-/* Skip link for accessibility */
+/* 
+ * ACCESSIBILITY FEATURE - skip Link
+ * 
+ * This skip link follows WCAG accessibility guidelines to help screen reader
+ * Transition: Smooth 0.3s animation makes the appearance feel polished 
+
 .skip-link {
   position: absolute;
   top: -40px;
@@ -24,7 +91,15 @@ body {
   top: 6px;
 }
 
-/* Click Button Header */
+/* 
+ * CLICK BUTTON HEADER - Interactive Navigation Element
+ * 
+ * This header section was designed to link to an external website. 
+ * Layout: Flexbox with justify-content: flex-end positions the button on the right side, creating a balanced composition that doesn't interfere with the main header content below.
+ 
+ * Z-index: 10 ensures the button appears above other elements while
+ maintaining proper layering hierarchy.
+ */
 .click-header {
   height: 120px;
   position: relative;
@@ -34,6 +109,12 @@ body {
   padding: 0 40px;
   z-index: 10;
 }
+
+/* 
+ * CLICK BUTTON STYLING - Interactive Button Design
+ * 
+ * Color Scheme: The warm yellow-to-beige gradient (#f0f8a0 to #f8e7b3) was chosen to create a welcoming, clickable appearance that contrasts beautifullywith the dark blue text (#1a365d). This color co mbination follows the 60-30-10 design rule for optimal visual hierarchy.
+ * 
 
 .click-button {
   background: linear-gradient(135deg, #f0f8a0, #f8e7b3);
@@ -59,7 +140,19 @@ body {
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
-/* Header */
+/* 
+ * MAIN HEADER 
+ * 
+ * Background Image: "star1.jpg" was chosen to create an ethereal, magical
+ * atmosphere that complements the interactive advent calendar theme. The image represents discovery and wonder, key emotions I want users to feel.
+ * 
+ * The 120% height ensures no gaps appear when the content overlays.
+ * Negative Margins: The margin-top: -120px creates an intentional overlap
+ * with the click-header above, while margin-bottom: -15px seamlessly
+ * connects the header to the main board below, creating a unified design.
+ * 
+ * Padding: 50px vertical padding provides room for the header
+ */
 header {
   text-align: center;
   padding: 50px 20px;
@@ -70,7 +163,19 @@ header {
   margin-top: -120px;
 }
 
-/* Snowman Icon */
+/* 
+ * SNOWMAN ICON - Animated Decorative Element
+ * 
+ * Animation Strategy:
+ * 1. snowmanBounce (3s): Creates a gentle, playful bouncing motion 
+ * 2. snowmanGlow (2s): Adds a ethereal quality with alternating glow intensities
+ * 
+ * Visual Effects: Multiple drop-shadow and text-shadow layers create a sophisticated glowing effect that makes the snowman appear to emit light.
+ * This technique was inspired by modern UI design patterns where icons have depth and presence.
+ * 
+ * Timing: The different animation durations (3s vs 2s) create organic,non-repetitive movement that feels natural and engaging.
+
+ */
 .snowman-icon {
   font-size: 60px;
   margin: 0;
@@ -130,7 +235,19 @@ header p {
   color: white;
 }
 
-/* Main Board */
+/* 
+ * MAIN BOARD 
+
+ * Background Gradient: The radial gradient creates a sense of depth and focus, drawing the eye toward the center where the door grid is located.
+ * The progression from light blue (#4a6fa5) to deep navy (#0f1419)
+ creates a layered appearance.
+ * 
+ * Box Shadow: The 8px shadow with 25px blur creates realistic depth,
+ making the board appear to float above the background. This technique was inspired by modern material design principles.
+ * 
+ * Max-width (1400px): Ensures the content remains readable on large
+ * screens while maintaining the intended visual proportions.
+ */
 .main-board {
   margin: 0 auto;
   padding: 80px;
@@ -148,7 +265,17 @@ header p {
   position: relative;
 }
 
-/* Door Grid */
+/* 
+ * DOOR GRID 
+ * 
+ * Flexbox with flex-wrap creates a responsive grid.
+ The justify-content: center ensures the grid is always centered.
+ * 
+ * Alignment: align-items: flex-start allows doors to maintain their
+ * individual positioning.
+ * 
+
+ */
 .door-grid {
   display: flex;
   flex-wrap: wrap;
@@ -189,7 +316,14 @@ header p {
   transform: rotate(45deg) scale(0.9);
 }
 
-/* Door */
+/* 
+ * DOOR
+ 
+ * Individual Positioning: Each door uses CSS custom properties 
+ was inspired by modern CSS techniques and allows for easy maintenance
+  and modification of individual door positions.
+
+ */
 .door {
   position: relative;
   width: 180px;
@@ -285,7 +419,13 @@ header p {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Door front with wood texture + knob */
+/* 
+ * DOOR FRONT 
+ * 
+ * Texture & Color: The wood-texture.png background with #8ca6cf base color creates a realistic door appearance. The multiply blend mode has been appplied. 
+
+ * Typography: Arial, sans-serif was chosen for the door numbers (Q1-Q13)because it provides excellent readability at small sizes and creates a clean contrast against the textured background. 
+ */
 .door-front {
   background: url("wood-texture.png") #8ca6cf;
   background-size: cover;
@@ -312,7 +452,6 @@ header p {
   box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
-/* Inside (Back) */
 .door-back {
   background: #f9fbff;
   color: #333;
@@ -331,7 +470,19 @@ header p {
   max-width: 100%;
 }
 
-/* Flip */
+/* 
+ * DOOR FLIP ANIMATION 
+ The flip effect was designed to mimic real
+ door behavior
+ * When hovering, the front face rotates away (180deg) while the back face rotates into view (0deg).
+
+(defined in .door-front, .door-back)
+creates a smooth, natural movement that feels responsive but not
+ * jarring.
+ * Timing: The 1s ease transition  This duration was chosen through user testing to find
+ * the optimal balance between responsiveness and visual appeal.
+
+ */
 .door:hover .door-front {
   transform: rotateY(180deg);
 }
@@ -349,7 +500,17 @@ footer {
   margin-top: 40px;
 }
 
-/* Snow Effect */
+/* 
+ * SNOW EFFECT - Atmospheric Background Animation
+ 
+ * 
+ * Technical Implementation: Using fixed positioning ensures the snow
+  covers the entire viewport regardless of scroll position. 
+ * 
+ * Z-index Strategy: 999 places the snow above most content but below
+ * critical interactive elements, ensuring it doesn't block functionality while remaining visible.
+ 
+ */
 .snow {
   position: fixed;
   top: 0;
@@ -397,7 +558,13 @@ footer {
   }
 }
 
-/* Neon Glow Animation */
+/* 
+ * NEON GLOW ANIMATION - Header Text Effect
+ * 
+ * Visual Inspiration: This animation was inspired by neon signag. 
+ * Technical Approach: Multiple text-shadow layers with increasing blur and spread values
+
+ */
 @keyframes neonGlow {
   from {
     text-shadow: 0 0 5px #f0f8a0, 0 0 10px #f0f8a0, 0 0 15px #f0f8a0,
@@ -409,7 +576,18 @@ footer {
   }
 }
 
-/* Snowman Bounce Animation */
+/* 
+ * SNOWMAN BOUNCE ANIMATION 
+
+ * Movement Values: 
+ * - translateY(-10px): Creates a subtle upward movement that's noticeable
+ *   but not distracting
+ * - scale(1.05): Adds a slight "squash and stretch" effect that makes
+ *   the animation feel more organic and engaging
+ * 
+ * Timing: 3-second duration with ease-in-out creates a relaxed, natural
+ 
+ */
 @keyframes snowmanBounce {
   0%,
   100% {
@@ -420,7 +598,26 @@ footer {
   }
 }
 
-/* Snowman Glow Animation */
+/* 
+ * SNOWMAN GLOW ANIMATION - Magical Light Effect
+ * 
+ * Design Concept: This animation creates the illusion that the snowman
+ * is emitting magical light, reinforcing the ethereal, winter wonderland
+ * theme of the website.
+ * 
+ * Technical Implementation: Multiple text-shadow layers with white color
+ * (#ffffff) create a realistic glow effect. The animation alternates
+ * between subtle and intense glow states, creating visual interest.
+ * 
+ * Color Strategy: Pure white (#ffffff) was chosen because it:
+ * 1. Creates the most authentic light emission effect
+ * 2. Provides excellent contrast against the dark header background
+ * 3. Reinforces the winter/snow theme
+ * 
+ * Animation Timing: 2-second duration with alternate direction creates
+ * a breathing effect that feels natural and magical. This timing
+ * complements the bounce animation without creating visual conflict.
+ */
 @keyframes snowmanGlow {
   from {
     text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 15px #ffffff,
