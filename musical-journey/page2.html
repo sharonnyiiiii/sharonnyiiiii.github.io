@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Musical Journey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Space+Grotesk&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .back-home {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 4000;
+        transition: transform 0.2s ease, background 0.2s ease;
+      }
+      .back-home:hover {
+        transform: scale(1.06);
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .back-home svg {
+        width: 22px;
+        height: 22px;
+        fill: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <video
+      class="bg-video"
+      src="bg.mp4?v=2"
+      autoplay
+      muted
+      loop
+      playsinline
+    ></video>
+    <!-- Transition overlay on page load -->
+    <div
+      id="p2-transition"
+      style="
+        position: fixed;
+        inset: 0;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 5000;
+        opacity: 1;
+        transition: opacity 1s ease;
+      "
+    >
+      <video
+        id="p2-video"
+        src="transition.mp4"
+        muted
+        playsinline
+        style="width: 100%; height: 100%; object-fit: cover"
+      ></video>
+    </div>
+    <!-- Back button to index.html (parallax + entry) -->
+    <a class="back-home" href="index.html" aria-label="Back to entry">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+      </svg>
+    </a>
+
+    <!-- Musical Journey Page -->
+    <div id="musical-journey" class="musical-journey" style="display: block">
+      <header class="header">
+        <div class="header-content">
+          <h1 class="main-title">A Musical Journey</h1>
+        </div>
+      </header>
+
+      <main class="main-container">
+        <section class="album-section section-1">
+          <div class="album-container">
+            <div class="album-item">
+              <div class="outer">
+                <div class="cover" id="cover-1">
+                  <img src="ylangylang.jpg" alt="FKJ - Ylang Ylang" />
+                  <audio
+                    src="FKJ - Ylang Ylang.mp3"
+                    id="song-1"
+                    volume="1.0"
+                  ></audio>
+                </div>
+                <img
+                  src="vinyl.png"
+                  alt="Vinyl Record"
+                  class="vinyl"
+                  id="vinyl-1"
+                />
+              </div>
+              <div class="album-info">
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+              </div>
+            </div>
+
+            <div class="album-item">
+              <div class="outer">
+                <div class="cover" id="cover-2">
+                  <img src="us.jpg" alt="FKJ - Tadow" />
+                  <audio src="us.mp3" id="song-2" volume="1.0"></audio>
+                </div>
+                <img
+                  src="vinyl.png"
+                  alt="Vinyl Record"
+                  class="vinyl"
+                  id="vinyl-2"
+                />
+              </div>
+              <div class="album-info">
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="album-section section-2">
+          <div class="album-container">
+            <div class="album-item">
+              <div class="outer">
+                <div class="cover" id="cover-3">
+                  <img src="moments.jpg" alt="FKJ - Moments (Part 1)" />
+                  <audio
+                    src="Moments (Part 1).mp3"
+                    id="song-3"
+                    volume="1.0"
+                  ></audio>
+                </div>
+                <img
+                  src="vinyl.png"
+                  alt="Vinyl Record"
+                  class="vinyl"
+                  id="vinyl-3"
+                />
+              </div>
+              <div class="album-info">
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+              </div>
+            </div>
+
+            <div class="album-item">
+              <div class="outer">
+                <div class="cover" id="cover-4">
+                  <img src="wayout.jpg" alt="FKJ - Way Out" />
+                  <audio src="wayout.mp3" id="song-4" volume="1.0"></audio>
+                </div>
+                <img
+                  src="vinyl.png"
+                  alt="Vinyl Record"
+                  class="vinyl"
+                  id="vinyl-4"
+                />
+              </div>
+              <div class="album-info">
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="album-section section-3">
+          <div class="album-container">
+            <div class="album-item">
+              <div class="outer">
+                <div class="cover" id="cover-5">
+                  <img src="anthem.jpg" alt="FKJ - Anthem" />
+                  <audio src="anthem.mp3" id="song-5" volume="1.0"></audio>
+                </div>
+                <img
+                  src="vinyl.png"
+                  alt="Vinyl Record"
+                  class="vinyl"
+                  id="vinyl-5"
+                />
+              </div>
+              <div class="album-info">
+                <div class="song-info">
+                  <h3>Song Name</h3>
+                  <p>Artist</p>
+                </div>
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+              </div>
+            </div>
+
+            <div class="album-item">
+              <div class="album-info">
+                <div class="song-info">
+                  <h3>Song Name -</h3>
+                  <p>Artist</p>
+                </div>
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+              </div>
+              <div class="outer">
+                <div class="cover" id="cover-6">
+                  <img src="vcover.png" alt="FKJ - Vibin' Out" />
+                  <audio
+                    src="FKJ - Ylang Ylang.mp3"
+                    id="song-6"
+                    volume="1.0"
+                  ></audio>
+                </div>
+                <img
+                  src="vinyl.png"
+                  alt="Vinyl Record"
+                  class="vinyl"
+                  id="vinyl-6"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Instagram CTA -->
+      <!--
+        Inspiration note:
+        I get the inspiration from LUNE website. I really like how the text
+        turns into fully filled text on hover, and I really like the text style.
+        The font size perfectly grabs the user's attention while maintaining
+        the aesthetic of the overall webpage.
+      -->
+      <section class="instagram-cta" aria-label="Instagram link section">
+        <a
+          class="instagram-link"
+          href="https://www.instagram.com/frenchkiwijuice/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open Instagram: @frenchkiwijuice"
+        >
+          <svg
+            class="c-instagram-svg"
+            viewBox="0 0 800 120"
+            role="img"
+            aria-hidden="true"
+          >
+            <title>Instagram</title>
+            <defs>
+              <clipPath id="clip-instagram-text">
+                <text
+                  x="50%"
+                  y="50%"
+                  dominant-baseline="middle"
+                  text-anchor="middle"
+                >
+                  Instagram
+                </text>
+              </clipPath>
+              <radialGradient id="glow-gradient" cx="50%" cy="50%" r="60%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+                <stop offset="60%" stop-color="#ffffff" stop-opacity="0.5" />
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+              </radialGradient>
+              <filter
+                id="glow-blur"
+                x="-50%"
+                y="-50%"
+                width="200%"
+                height="200%"
+              >
+                <feGaussianBlur in="SourceGraphic" stdDeviation="8" />
+              </filter>
+            </defs>
+
+            <!-- Base outline text -->
+            <text
+              x="50%"
+              y="50%"
+              dominant-baseline="middle"
+              text-anchor="middle"
+            >
+              Instagram
+            </text>
+
+            <!-- Animated glow sweeps clipped to text (left and right converge to center) -->
+            <g clip-path="url(#clip-instagram-text)">
+              <rect
+                class="glow-sweep glow-sweep-left"
+                x="0"
+                y="0"
+                width="800"
+                height="120"
+                fill="url(#glow-gradient)"
+                filter="url(#glow-blur)"
+              />
+              <rect
+                class="glow-sweep glow-sweep-right"
+                x="0"
+                y="0"
+                width="800"
+                height="120"
+                fill="url(#glow-gradient)"
+                filter="url(#glow-blur)"
+              />
+            </g>
+          </svg>
+        </a>
+      </section>
+
+      <audio id="audio1" preload="none" volume="1.0">
+        <source src="FKJ - Ylang Ylang.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audio2" preload="none" volume="1.0">
+        <source src="us.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audio3" preload="none" volume="1.0">
+        <source src="Moments (Part 1).mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audio4" preload="none" volume="1.0">
+        <source src="FKJ - Ylang Ylang.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audio5" preload="none" volume="1.0">
+        <source src="anthem.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audio6" preload="none" volume="1.0">
+        <source src="FKJ - Ylang Ylang.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // Play transition video on load, then fade overlay out
+      window.addEventListener("load", () => {
+        const overlay = document.getElementById("p2-transition");
+        const vid = document.getElementById("p2-video");
+        if (vid) {
+          try {
+            vid.currentTime = 0;
+            vid.play();
+          } catch (e) {}
+        }
+        // Let it play ~1.2s then fade out quickly
+        setTimeout(() => {
+          overlay.style.opacity = "0";
+          setTimeout(() => {
+            overlay.style.display = "none";
+          }, 1000);
+        }, 1200);
+      });
+    </script>
+  </body>
+</html>

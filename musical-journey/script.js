@@ -1,4 +1,6 @@
 // Simple Vinyl Player Implementation with Unwrap Effect
+// Lid interaction for covers (learned with ChatGPT guidance):
+// toggles a 3D overlay lid on each cover when clicked.
 const cover1 = document.querySelector("#cover-1");
 const vinyl1 = document.querySelector("#vinyl-1");
 const song1 = document.querySelector("#song-1");
@@ -32,32 +34,50 @@ const wrapper6 = document.querySelector("#wrapper-6");
 // Vinyl 1
 cover1.addEventListener("mouseenter", () => openRecord(vinyl1));
 cover1.addEventListener("mouseleave", () => closeRecord(vinyl1));
-cover1.addEventListener("click", () => playRecord(vinyl1, song1, wrapper1));
+cover1.addEventListener("click", () => {
+  toggleLid(cover1);
+  playRecord(vinyl1, song1, wrapper1);
+});
 
 // Vinyl 2
 cover2.addEventListener("mouseenter", () => openRecord(vinyl2));
 cover2.addEventListener("mouseleave", () => closeRecord(vinyl2));
-cover2.addEventListener("click", () => playRecord(vinyl2, song2, wrapper2));
+cover2.addEventListener("click", () => {
+  toggleLid(cover2);
+  playRecord(vinyl2, song2, wrapper2);
+});
 
 // Vinyl 3
 cover3.addEventListener("mouseenter", () => openRecord(vinyl3));
 cover3.addEventListener("mouseleave", () => closeRecord(vinyl3));
-cover3.addEventListener("click", () => playRecord(vinyl3, song3, wrapper3));
+cover3.addEventListener("click", () => {
+  toggleLid(cover3);
+  playRecord(vinyl3, song3, wrapper3);
+});
 
 // Vinyl 4
 cover4.addEventListener("mouseenter", () => openRecord(vinyl4));
 cover4.addEventListener("mouseleave", () => closeRecord(vinyl4));
-cover4.addEventListener("click", () => playRecord(vinyl4, song4, wrapper4));
+cover4.addEventListener("click", () => {
+  toggleLid(cover4);
+  playRecord(vinyl4, song4, wrapper4);
+});
 
 // Vinyl 5
 cover5.addEventListener("mouseenter", () => openRecord(vinyl5));
 cover5.addEventListener("mouseleave", () => closeRecord(vinyl5));
-cover5.addEventListener("click", () => playRecord(vinyl5, song5, wrapper5));
+cover5.addEventListener("click", () => {
+  toggleLid(cover5);
+  playRecord(vinyl5, song5, wrapper5);
+});
 
 // Vinyl 6
 cover6.addEventListener("mouseenter", () => openRecord(vinyl6));
 cover6.addEventListener("mouseleave", () => closeRecord(vinyl6));
-cover6.addEventListener("click", () => playRecord(vinyl6, song6, wrapper6));
+cover6.addEventListener("click", () => {
+  toggleLid(cover6);
+  playRecord(vinyl6, song6, wrapper6);
+});
 
 function openRecord(vinyl) {
   vinyl.classList.add("openrecord");
@@ -70,28 +90,17 @@ function closeRecord(vinyl) {
 function playRecord(vinyl, song, wrapper) {
   vinyl.classList.toggle("playrecord");
 
-  // Trigger unwrap effect when starting to play
+  // Play/pause audio without wrapper effects
   if (song.paused || song.ended) {
-    wrapper.classList.remove("fade-in");
-    wrapper.classList.add("unwrap");
+    song.volume = 1.0; // Set volume to 100%
     song.play();
   } else {
-    // Trigger fade-in effect when pausing
-    wrapper.classList.remove("unwrap");
-    wrapper.classList.add("fade-in");
     song.pause();
   }
 }
 
-// Scroll to top functionality
-const scrollTopBtn = document.querySelector(".scroll-top");
-if (scrollTopBtn) {
-  scrollTopBtn.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  });
+function toggleLid(coverEl) {
+  coverEl.classList.toggle("lid-open");
 }
 
 // Parallax hero scroll interaction
@@ -112,5 +121,24 @@ window.addEventListener("scroll", () => {
   if (text) {
     const offset = value * 0.35; // tune intensity
     text.style.transform = `translate(-50%, calc(-50% + ${offset}px))`;
+  }
+});
+
+// Initialize all audio elements with increased volume
+document.addEventListener("DOMContentLoaded", () => {
+  // Set volume for all song elements
+  for (let i = 1; i <= 6; i++) {
+    const songElement = document.querySelector(`#song-${i}`);
+    if (songElement) {
+      songElement.volume = 1.0;
+    }
+  }
+
+  // Set volume for all audio elements
+  for (let i = 1; i <= 6; i++) {
+    const audioElement = document.querySelector(`#audio${i}`);
+    if (audioElement) {
+      audioElement.volume = 1.0;
+    }
   }
 });

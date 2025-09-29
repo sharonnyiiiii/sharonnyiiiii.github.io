@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vinyl Record Collection</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>My Vinyl Collection</h1>
+      <p>Click on any record to play your favorite tracks</p>
+    </header>
+
+    <main class="container">
+      <!-- Left Side - Vinyl Record Display -->
+      <section class="vinyl-display">
+        <section class="main-vinyl-container">
+          <img
+            src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop&crop=center"
+            alt="Vinyl Record"
+            class="main-vinyl-image"
+            id="mainVinylImage"
+          />
+          <section class="main-play-button" id="mainPlayButton">
+            <span class="main-play-icon">▶</span>
+          </section>
+          <section class="vinyl-center-hole"></section>
+        </section>
+      </section>
+
+      <!-- Right Side - Song Selection and Lyrics -->
+      <section class="song-selection">
+        <h2>Select a Song</h2>
+        <section class="song-list">
+          <section class="song-item" data-song="song1">
+            <section class="song-thumbnail">
+              <img
+                src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=80&h=80&fit=crop&crop=center"
+                alt="Bohemian Rhapsody"
+                class="thumbnail-image"
+              />
+            </section>
+            <section class="song-preview">
+              <h4>Bohemian Rhapsody</h4>
+              <p class="artist">Queen • 1975</p>
+            </section>
+          </section>
+
+          <section class="song-item" data-song="song2">
+            <section class="song-thumbnail">
+              <img
+                src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=80&h=80&fit=crop&crop=center"
+                alt="Hotel California"
+                class="thumbnail-image"
+              />
+            </section>
+            <section class="song-preview">
+              <h4>Hotel California</h4>
+              <p class="artist">Eagles • 1976</p>
+            </section>
+          </section>
+
+          <section class="song-item" data-song="song3">
+            <section class="song-thumbnail">
+              <img
+                src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=80&h=80&fit=crop&crop=center"
+                alt="Imagine"
+                class="thumbnail-image"
+              />
+            </section>
+            <section class="song-preview">
+              <h4>Imagine</h4>
+              <p class="artist">John Lennon • 1971</p>
+            </section>
+          </section>
+
+          <section class="song-item" data-song="song4">
+            <section class="song-thumbnail">
+              <img
+                src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=80&h=80&fit=crop&crop=center"
+                alt="Stairway to Heaven"
+                class="thumbnail-image"
+              />
+            </section>
+            <section class="song-preview">
+              <h4>Stairway to Heaven</h4>
+              <p class="artist">Led Zeppelin • 1971</p>
+            </section>
+          </section>
+
+          <section class="song-item" data-song="song5">
+            <section class="song-thumbnail">
+              <img
+                src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=80&h=80&fit=crop&crop=center"
+                alt="Sweet Child O' Mine"
+                class="thumbnail-image"
+              />
+            </section>
+            <section class="song-preview">
+              <h4>Sweet Child O' Mine</h4>
+              <p class="artist">Guns N' Roses • 1987</p>
+            </section>
+          </section>
+
+          <section class="song-item" data-song="song6">
+            <section class="song-thumbnail">
+              <img
+                src="https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=80&h=80&fit=crop&crop=center"
+                alt="Billie Jean"
+                class="thumbnail-image"
+              />
+            </section>
+            <section class="song-preview">
+              <h4>Billie Jean</h4>
+              <p class="artist">Michael Jackson • 1982</p>
+            </section>
+          </section>
+        </section>
+
+        <!-- Current Song Info and Lyrics -->
+        <section class="current-song-info" id="currentSongInfo">
+          <h3 id="currentSongTitle">Select a song to view details</h3>
+          <p id="currentSongArtist"></p>
+          <section class="lyrics-container">
+            <h4>Lyrics</h4>
+            <p id="currentSongLyrics" class="lyrics-text">
+              Click on any song to see the lyrics and start playing...
+            </p>
+          </section>
+        </section>
+      </section>
+
+      <!-- Audio Player -->
+      <section class="audio-player" id="audioPlayer">
+        <section class="player-controls">
+          <button id="prevBtn">⏮</button>
+          <button id="playPauseBtn">▶</button>
+          <button id="nextBtn">⏭</button>
+        </section>
+        <section class="player-info">
+          <h4 id="currentSong">Select a record to play</h4>
+          <p id="currentArtist"></p>
+        </section>
+        <audio id="audio" preload="none">
+          <source src="" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

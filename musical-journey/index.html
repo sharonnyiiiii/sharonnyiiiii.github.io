@@ -10,10 +10,26 @@
       href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Space+Grotesk&display=swap"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Background video -->
+    <video
+      class="bg-video"
+      src="bg.mp4?v=2"
+      autoplay
+      muted
+      loop
+      playsinline
+    ></video>
+
     <!-- Parallax Hero (scroll first, then door entry below) -->
     <section class="parallax-hero" aria-label="Moon Light Parallax">
       <img src="bg.jpg" id="bg" alt="Background" />
@@ -65,10 +81,6 @@
       <header class="header">
         <div class="header-content">
           <h1 class="main-title">A Musical Journey</h1>
-          <div class="header-controls">
-            <div class="logo-icon">●</div>
-            <button class="scroll-top">↑</button>
-          </div>
         </div>
       </header>
 
@@ -78,14 +90,14 @@
         <section class="album-section section-1">
           <div class="album-container">
             <div class="album-item">
-              <div class="album-number">1</div>
               <div class="outer">
                 <div class="cover" id="cover-1">
                   <img src="ylangylang.jpg" alt="FKJ - Ylang Ylang" />
-                  <div class="wrapper" id="wrapper-1">
-                    <img src="wrapper.png" alt="Plastic Wrapper" />
-                  </div>
-                  <audio src="FKJ - Ylang Ylang.mp3" id="song-1"></audio>
+                  <audio
+                    src="FKJ - Ylang Ylang.mp3"
+                    id="song-1"
+                    volume="1.0"
+                  ></audio>
                 </div>
                 <img
                   src="vinyl.png"
@@ -105,10 +117,7 @@
               <div class="outer">
                 <div class="cover" id="cover-2">
                   <img src="us.jpg" alt="FKJ - Tadow" />
-                  <div class="wrapper" id="wrapper-2">
-                    <img src="wrapper.png" alt="Plastic Wrapper" />
-                  </div>
-                  <audio src="us.mp3" id="song-2"></audio>
+                  <audio src="us.mp3" id="song-2" volume="1.0"></audio>
                 </div>
                 <img
                   src="vinyl.png"
@@ -133,11 +142,12 @@
             <div class="album-item">
               <div class="outer">
                 <div class="cover" id="cover-3">
-                  <img src="vcover.png" alt="FKJ - Skyline" />
-                  <div class="wrapper" id="wrapper-3">
-                    <img src="wrapper.png" alt="Plastic Wrapper" />
-                  </div>
-                  <audio src="FKJ - Ylang Ylang.mp3" id="song-3"></audio>
+                  <img src="moments.jpg" alt="FKJ - Moments (Part 1)" />
+                  <audio
+                    src="Moments (Part 1).mp3"
+                    id="song-3"
+                    volume="1.0"
+                  ></audio>
                 </div>
                 <img
                   src="vinyl.png"
@@ -156,11 +166,8 @@
             <div class="album-item">
               <div class="outer">
                 <div class="cover" id="cover-4">
-                  <img src="vcover.png" alt="FKJ - Go Back Home" />
-                  <div class="wrapper" id="wrapper-4">
-                    <img src="wrapper.png" alt="Plastic Wrapper" />
-                  </div>
-                  <audio src="FKJ - Ylang Ylang.mp3" id="song-4"></audio>
+                  <img src="wayout.jpg" alt="FKJ - Way Out" />
+                  <audio src="wayout.mp3" id="song-4" volume="1.0"></audio>
                 </div>
                 <img
                   src="vinyl.png"
@@ -184,11 +191,8 @@
             <div class="album-item">
               <div class="outer">
                 <div class="cover" id="cover-5">
-                  <img src="vcover.png" alt="FKJ - Lying Together" />
-                  <div class="wrapper" id="wrapper-5">
-                    <img src="wrapper.png" alt="Plastic Wrapper" />
-                  </div>
-                  <audio src="FKJ - Ylang Ylang.mp3" id="song-5"></audio>
+                  <img src="anthem.jpg" alt="FKJ - Anthem" />
+                  <audio src="anthem.mp3" id="song-5" volume="1.0"></audio>
                 </div>
                 <img
                   src="vinyl.png"
@@ -221,10 +225,11 @@
               <div class="outer">
                 <div class="cover" id="cover-6">
                   <img src="vcover.png" alt="FKJ - Vibin' Out" />
-                  <div class="wrapper" id="wrapper-6">
-                    <img src="wrapper.png" alt="Plastic Wrapper" />
-                  </div>
-                  <audio src="FKJ - Ylang Ylang.mp3" id="song-6"></audio>
+                  <audio
+                    src="FKJ - Ylang Ylang.mp3"
+                    id="song-6"
+                    volume="1.0"
+                  ></audio>
                 </div>
                 <img
                   src="vinyl.png"
@@ -239,6 +244,13 @@
       </main>
 
       <!-- Instagram CTA -->
+      <!--
+        Inspiration note:
+        I get the inspiration from LUNE website. I really like how the text
+        turns into fully filled text on hover, and I really like the text style.
+        The font size perfectly grabs the user's attention while maintaining
+        the aesthetic of the overall webpage.
+      -->
       <section class="instagram-cta" aria-label="Instagram link section">
         <a
           class="instagram-link"
@@ -317,22 +329,22 @@
       </section>
 
       <!-- Audio elements for each vinyl record -->
-      <audio id="audio1" preload="none">
+      <audio id="audio1" preload="none" volume="1.0">
         <source src="FKJ - Ylang Ylang.mp3" type="audio/mpeg" />
       </audio>
-      <audio id="audio2" preload="none">
+      <audio id="audio2" preload="none" volume="1.0">
         <source src="us.mp3" type="audio/mpeg" />
       </audio>
-      <audio id="audio3" preload="none">
+      <audio id="audio3" preload="none" volume="1.0">
+        <source src="Moments (Part 1).mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audio4" preload="none" volume="1.0">
         <source src="FKJ - Ylang Ylang.mp3" type="audio/mpeg" />
       </audio>
-      <audio id="audio4" preload="none">
-        <source src="FKJ - Ylang Ylang.mp3" type="audio/mpeg" />
+      <audio id="audio5" preload="none" volume="1.0">
+        <source src="anthem.mp3" type="audio/mpeg" />
       </audio>
-      <audio id="audio5" preload="none">
-        <source src="FKJ - Ylang Ylang.mp3" type="audio/mpeg" />
-      </audio>
-      <audio id="audio6" preload="none">
+      <audio id="audio6" preload="none" volume="1.0">
         <source src="FKJ - Ylang Ylang.mp3" type="audio/mpeg" />
       </audio>
 
@@ -352,10 +364,10 @@
             cover: "us.jpg",
           },
           audio3: {
-            title: "Skyline",
+            title: "Moments (Part 1)",
             artist: "FKJ",
-            year: "2017",
-            cover: "vcover.png",
+            year: "2019",
+            cover: "moments.jpg",
           },
           audio4: {
             title: "Go Back Home",
@@ -528,9 +540,9 @@
       }
 
       .door {
-        --glow-color: rgb(217, 176, 255);
-        --glow-spread-color: rgba(191, 123, 255, 0.781);
-        --door-color: rgb(100, 61, 136);
+        --glow-color: rgb(120, 180, 255);
+        --glow-spread-color: rgba(90, 160, 255, 0.75);
+        --door-color: rgb(35, 70, 120);
         width: 80px;
         height: 200px;
         cursor: pointer;
@@ -715,46 +727,8 @@
     <!-- Entry Page JavaScript -->
     <script>
       function enterMusicalJourney() {
-        const entryPage = document.getElementById("entry-page");
-        const musicalJourney = document.getElementById("musical-journey");
-        const overlay = document.getElementById("transition-overlay");
-        const video = document.getElementById("transition-video");
-
-        // Show transition overlay above entry page and play video
-        overlay.style.display = "flex";
-        // Quick fade-in for overlay
-        const prev = overlay.style.transition;
-        overlay.style.transition = "opacity 300ms ease";
-        void overlay.offsetHeight;
-        overlay.style.opacity = "1";
-        setTimeout(() => {
-          overlay.style.transition = "opacity 2.5s ease";
-        }, 300);
-
-        if (video) {
-          try {
-            video.currentTime = 0;
-            video.play();
-          } catch (e) {}
-        }
-
-        // After 2 seconds, fade out the overlay over 2.5 seconds
-        setTimeout(() => {
-          overlay.style.opacity = "0";
-
-          // After fade completes, hide overlay and reveal main page
-          setTimeout(() => {
-            overlay.style.display = "none";
-            overlay.style.opacity = "1"; // reset for next time
-            entryPage.style.display = "none";
-            musicalJourney.style.display = "block";
-
-            // Initialize musical journey
-            if (typeof new MusicalJourneyPlayer() === "function") {
-              new MusicalJourneyPlayer();
-            }
-          }, 2500);
-        }, 2000);
+        // Directly navigate to page2.html (transition will play there)
+        window.location.href = "page2.html";
       }
 
       // Add click ripple effect to button

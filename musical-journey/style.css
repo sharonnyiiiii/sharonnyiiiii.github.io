@@ -7,18 +7,29 @@
 
 body {
   font-family: "Arial", sans-serif;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background: #000000;
   color: #ffffff;
   min-height: 100vh;
   line-height: 1.6;
   overflow-x: hidden;
 }
 
+/* Fullscreen background video */
+.bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+  filter: brightness(0.75) contrast(1.05);
+}
+
 /* Header Styles */
 .header {
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
-  border-bottom: 2px solid #ff6b6b;
   padding: 2rem 0;
 }
 
@@ -32,55 +43,12 @@ body {
 }
 
 .main-title {
+  font-family: "Dancing Script", cursive;
   font-size: 3rem;
-  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
-  font-weight: bold;
-}
-
-.header-controls {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.logo-icon {
-  width: 40px;
-  height: 40px;
-  background: #ff6b6b;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.logo-icon:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
-}
-
-.scroll-top {
-  background: rgba(255, 107, 107, 0.8);
-  border: none;
-  color: white;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
-}
-
-.scroll-top:hover {
-  background: rgba(255, 107, 107, 1);
-  transform: translateY(-2px);
+  color: #4ecdc4;
+  text-shadow: 0 0 20px rgba(78, 205, 196, 0.8),
+    0 0 40px rgba(78, 205, 196, 0.6), 0 0 60px rgba(78, 205, 196, 0.4);
+  font-weight: 700;
 }
 
 /* Main Container */
@@ -93,64 +61,45 @@ body {
 /* Album Sections */
 .album-section {
   margin-bottom: 4rem;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
   padding: 3rem;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .album-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 3rem;
-  margin-bottom: 2rem;
+  flex-direction: column; /* single column stack */
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 6rem; /* large vertical spacing between vinyls */
+  margin: 0 auto 4rem; /* center container and add spacing below */
   position: relative;
+  max-width: 1100px; /* keep gallery width contained and centered */
 }
 
 .album-item {
   display: flex;
   align-items: center;
   gap: 2rem;
-  flex: 1;
+  flex: none; /* ensure each is its own row */
   position: relative;
+  width: max-content; /* shrink to content for left/right alignment */
+  margin-bottom: 0; /* spacing handled by container gap */
 }
 
-/* Enhanced Zigzag Pattern */
+/* Alternating columns: clean left/right without positional shifts */
 .album-item:nth-child(even) {
   flex-direction: row-reverse;
-  transform: translateY(40px);
 }
 
+/* Single-column zigzag alignment */
 .album-item:nth-child(odd) {
-  transform: translateY(-20px);
+  margin-right: auto; /* left aligned */
 }
 
-/* Alternative zigzag with more dramatic positioning */
-.section-1 .album-item:nth-child(1) {
-  transform: translateY(-30px) translateX(-20px);
+.album-item:nth-child(even) {
+  margin-left: auto; /* right aligned */
 }
 
-.section-1 .album-item:nth-child(2) {
-  transform: translateY(30px) translateX(20px);
-}
-
-.section-2 .album-item:nth-child(1) {
-  transform: translateY(40px) translateX(-30px);
-}
-
-.section-2 .album-item:nth-child(2) {
-  transform: translateY(-20px) translateX(30px);
-}
-
-.section-3 .album-item:nth-child(1) {
-  transform: translateY(-25px) translateX(-25px);
-}
-
-.section-3 .album-item:nth-child(2) {
-  transform: translateY(35px) translateX(25px);
-}
+/* Remove previous transform-based zigzag to keep equal page margins */
 
 /* Album Number */
 .album-number {
@@ -178,6 +127,7 @@ body {
   align-items: center;
   position: relative;
   box-shadow: 2px 2px rgba(133, 144, 147, 0.269);
+  margin-bottom: 1.5rem; /* additional spacing directly on each vinyl cover */
 }
 
 .vinyl {
@@ -193,6 +143,14 @@ body {
 
 /* Second vinyl slides out to the left */
 #vinyl-2.openrecord {
+  translate: -100px 0px;
+}
+
+/* Fourth vinyl slides out to the left with ease-out */
+#vinyl-4 {
+  transition: translate 0.6s ease-out;
+}
+#vinyl-4.openrecord {
   translate: -100px 0px;
 }
 
@@ -219,6 +177,61 @@ body {
   z-index: 1;
   position: relative;
   cursor: pointer;
+  border: 3px solid rgba(255, 255, 255, 0.55); /* brighter half-transparent border */
+  border-radius: 8px;
+}
+
+/*
+  Lid Interaction (learned with ChatGPT guidance)
+  Adds a 3D "lid" overlay that flips open on click.
+*/
+/* Lid overlay on album cover */
+.cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.06) 35%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  backdrop-filter: blur(2px);
+  transform-origin: top center;
+  transform: perspective(800px) rotateX(0deg) translateZ(0);
+  transition: transform 0.8s ease-in-out;
+  pointer-events: none; /* clicks pass to cover */
+  z-index: 2;
+}
+
+/* When lid is opened */
+.cover.lid-open::before {
+  transform: perspective(800px) rotateX(-75deg) translateZ(8px);
+}
+
+/*
+  Drop shadow under every album cover (learned with ChatGPT guidance)
+  Creates a soft elliptical shadow under the square cover using a radial gradient.
+*/
+.cover::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -16px;
+  /* shift shadow further towards the left */
+  transform: translateX(-55%);
+  width: 100%;
+  height: 26px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.42) 55%,
+    rgba(0, 0, 0, 0) 72%
+  );
+  filter: blur(4px);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .cover img {
@@ -640,29 +653,6 @@ body {
 }
 
 /* Section-specific styles */
-.section-1 {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 107, 107, 0.1),
-    rgba(78, 205, 196, 0.1)
-  );
-}
-
-.section-2 {
-  background: linear-gradient(
-    135deg,
-    rgba(78, 205, 196, 0.1),
-    rgba(69, 183, 209, 0.1)
-  );
-}
-
-.section-3 {
-  background: linear-gradient(
-    135deg,
-    rgba(69, 183, 209, 0.1),
-    rgba(255, 107, 107, 0.1)
-  );
-}
 
 /* Enhanced hover effects with zigzag consideration */
 .section-1 .album-item:nth-child(1):hover {
@@ -691,33 +681,6 @@ body {
 
 .album-item:hover .info-lines {
   background: rgba(255, 107, 107, 0.5);
-}
-
-/* Zigzag connecting lines (optional decorative element) */
-.album-container::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 60%;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 107, 107, 0.3) 20%,
-    rgba(78, 205, 196, 0.3) 40%,
-    rgba(69, 183, 209, 0.3) 60%,
-    rgba(255, 107, 107, 0.3) 80%,
-    transparent 100%
-  );
-  transform: translate(-50%, -50%);
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.album-section:hover .album-container::before {
-  opacity: 1;
 }
 
 /* Loading animation for vinyl records */
@@ -787,6 +750,22 @@ body {
   transform: translateY(0);
   letter-spacing: 4px;
   filter: brightness(1.1);
+}
+
+/* Layout overrides to ensure equal page margins and remove any residual offsets */
+.section-1 .album-item:nth-child(1),
+.section-1 .album-item:nth-child(2),
+.section-2 .album-item:nth-child(1),
+.section-2 .album-item:nth-child(2),
+.section-3 .album-item:nth-child(1),
+.section-3 .album-item:nth-child(2),
+.section-1 .album-item:nth-child(1):hover,
+.section-1 .album-item:nth-child(2):hover,
+.section-2 .album-item:nth-child(1):hover,
+.section-2 .album-item:nth-child(2):hover,
+.section-3 .album-item:nth-child(1):hover,
+.section-3 .album-item:nth-child(2):hover {
+  transform: none !important;
 }
 
 /* Glow sweep animation */
