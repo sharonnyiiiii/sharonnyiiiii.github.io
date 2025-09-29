@@ -23,13 +23,12 @@ body {
   object-fit: cover;
   z-index: -1;
   pointer-events: none;
-  filter: brightness(0.75) contrast(1.05);
+  filter: brightness(0.5) contrast(1.05);
 }
 
 /* Header Styles */
 .header {
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
+  background: transparent;
   padding: 2rem 0;
 }
 
@@ -51,6 +50,24 @@ body {
   font-weight: 700;
 }
 
+/* Spinning animation for FKJ text (learned from W3Schools tutorial) */
+.main-title-artist {
+  font-family: "Space Grotesk", sans-serif;
+  color: #000000;
+  text-shadow: none;
+  display: inline-block;
+  animation: spinFKJ 3s linear infinite;
+}
+
+@keyframes spinFKJ {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* Main Container */
 .main-container {
   max-width: 1200px;
@@ -69,7 +86,7 @@ body {
   flex-direction: column; /* single column stack */
   justify-content: flex-start;
   align-items: stretch;
-  gap: 6rem; /* large vertical spacing between vinyls */
+  gap: 8rem; /* increased vertical spacing between vinyls */
   margin: 0 auto 4rem; /* center container and add spacing below */
   position: relative;
   max-width: 1100px; /* keep gallery width contained and centered */
@@ -97,6 +114,36 @@ body {
 
 .album-item:nth-child(even) {
   margin-left: auto; /* right aligned */
+}
+
+/* Adjust song info positioning to avoid vinyl overlap */
+.section-1 .album-item:nth-child(1) .album-info {
+  margin-left: 4rem; /* move vinyl 1 song info more to the right */
+}
+
+.section-1 .album-item:nth-child(2) .album-info {
+  margin-right: 2rem; /* move vinyl 2 song info more to the right */
+}
+
+/* Prevent overlap for section 2 (vinyls 3 & 4) when vinyl slides out */
+.section-2 .album-item:nth-child(1) .album-info {
+  margin-left: 4rem;
+}
+.section-2 .album-item:nth-child(2) .album-info {
+  margin-right: 4rem;
+}
+
+/* Prevent overlap for section 3 (vinyls 5 & 6) when vinyl slides out */
+.section-3 .album-item:nth-child(1) .album-info {
+  margin-left: 4rem;
+}
+.section-3 .album-item:nth-child(2) .album-info {
+  margin-right: 8rem;
+}
+
+/* Move vinyl 6 container further to the right */
+.section-3 .album-item:nth-child(2) {
+  margin-left: 6rem;
 }
 
 /* Remove previous transform-based zigzag to keep equal page margins */
@@ -128,6 +175,20 @@ body {
   position: relative;
   box-shadow: 2px 2px rgba(133, 144, 147, 0.269);
   margin-bottom: 1.5rem; /* additional spacing directly on each vinyl cover */
+}
+
+/* Play/Pause overlay icon positioned just above each vinyl cover */
+.play-pause-overlay {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% - 70px); /* overlap half of 140px icon height */
+  transform: translateX(-50%);
+  width: 140px; /* slightly reduced */
+  height: 140px; /* slightly reduced */
+  opacity: 0.65; /* reduced transparency as requested */
+  pointer-events: auto;
+  z-index: 3;
+  user-select: none;
 }
 
 .vinyl {
@@ -422,14 +483,40 @@ body {
 }
 
 .song-info h3 {
-  font-size: 1.5rem;
-  color: #4ecdc4;
+  font-family: "Dancing Script", cursive;
+  font-size: 1.8rem;
+  color: #ffffff;
   margin-bottom: 0.5rem;
+  opacity: 0;
 }
 
 .song-info p {
   font-size: 1rem;
-  color: #b0b0b0;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  opacity: 0;
+}
+
+.release-info {
+  opacity: 0;
+}
+
+/* Animate song details only when the album item enters viewport */
+.album-item.in-view .song-info h3 {
+  animation: fadeInUp 0.8s ease-out 0.1s forwards;
+}
+.album-item.in-view .song-info p:not(.release-info) {
+  animation: fadeInUp 0.8s ease-out 0.25s forwards;
+}
+.album-item.in-view .song-info .release-info {
+  animation: fadeInUp 0.8s ease-out 0.4s forwards;
+}
+
+.release-info {
+  font-size: 0.75rem;
+  color: #999;
+  font-style: italic;
+  margin-top: 0.5rem;
 }
 
 /* Artist Avatar */
@@ -490,6 +577,26 @@ body {
   }
   60% {
     transform: translateY(-5px);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typewriter {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
   }
 }
 

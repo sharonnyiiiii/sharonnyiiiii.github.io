@@ -141,4 +141,107 @@ document.addEventListener("DOMContentLoaded", () => {
       audioElement.volume = 1.0;
     }
   }
+
+  // Inject play/pause overlays above each vinyl cover and sync with audio state
+  const items = [
+    { outer: document.querySelector("#cover-1")?.parentElement, audio: song1 },
+    { outer: document.querySelector("#cover-2")?.parentElement, audio: song2 },
+    { outer: document.querySelector("#cover-3")?.parentElement, audio: song3 },
+    { outer: document.querySelector("#cover-4")?.parentElement, audio: song4 },
+    { outer: document.querySelector("#cover-5")?.parentElement, audio: song5 },
+    { outer: document.querySelector("#cover-6")?.parentElement, audio: song6 },
+  ];
+
+  items.forEach((item, idx) => {
+    if (!item.outer || !item.audio) return;
+    const overlay = document.createElement("img");
+    overlay.className = "play-pause-overlay";
+    overlay.alt = "Play/Pause";
+    overlay.src = "play.png";
+    // ensure overlay is clickable without affecting other UI
+    overlay.addEventListener("click", (e) => {
+      e.stopPropagation();
+      // Simulate clicking the cover to reuse existing logic
+      const coverEl = document.querySelector(`#cover-${idx + 1}`);
+      if (coverEl) coverEl.click();
+    });
+    item.outer.appendChild(overlay);
+
+    const updateIcon = () => {
+      overlay.src = item.audio.paused ? "play.png" : "pause.png";
+    };
+
+    // Initial icon state
+    updateIcon();
+
+    // Sync on audio events
+    item.audio.addEventListener("play", updateIcon);
+    item.audio.addEventListener("pause", updateIcon);
+    item.audio.addEventListener("ended", () => {
+      item.audio.currentTime = 0;
+      updateIcon();
+    });
+  });
+
+  // Trigger text animations for song details
+  const triggerTextAnimations = () => {
+    const songInfos = document.querySelectorAll(".song-info");
+    songInfos.forEach((songInfo, index) => {
+      // Reset animations
+      const h3 = songInfo.querySelector("h3");
+      const paragraphs = songInfo.querySelectorAll("p");
+      const releaseInfo = songInfo.querySelector(".release-info");
+
+      if (h3) {
+        h3.style.animation = "none";
+        h3.offsetHeight; // Trigger reflow
+        h3.style.animation = `fadeInUp 0.8s ease-out ${
+          0.2 + index * 0.3
+        }s forwards`;
+      }
+
+      paragraphs.forEach((p, pIndex) => {
+        if (p !== releaseInfo) {
+          p.style.animation = "none";
+          p.offsetHeight; // Trigger reflow
+          p.style.animation = `fadeInUp 0.8s ease-out ${
+            0.4 + index * 0.3 + pIndex * 0.2
+          }s forwards`;
+        }
+      });
+
+      if (releaseInfo) {
+        releaseInfo.style.animation = "none";
+        releaseInfo.offsetHeight; // Trigger reflow
+        releaseInfo.style.animation = `fadeInUp 0.8s ease-out ${
+          0.6 + index * 0.3
+        }s forwards`;
+      }
+    });
+  };
+
+  // Trigger animations after a short delay to ensure page is loaded
+  // setTimeout(triggerTextAnimations, 500);
+
+  // IntersectionObserver to trigger text animations only when section is in view
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const item = entry.target;
+        if (entry.isIntersecting) {
+          item.classList.add("in-view");
+        } else {
+          item.classList.remove("in-view");
+        }
+      });
+    },
+    {
+      root: null,
+      threshold: 0.25,
+    }
+  );
+
+  document
+    .querySelectorAll(".album-item")
+    .forEach((el) => observer.observe(el));
 });
