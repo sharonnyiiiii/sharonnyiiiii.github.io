@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Musical Journey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Space+Grotesk&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Parallax Hero (scroll first, then door entry below) -->
+    <section class="parallax-hero" aria-label="Moon Light Parallax">
+      <img src="bg.jpg" id="bg" alt="Background" />
+      <img src="moon.png" id="moon" alt="Moon" />
+      <img src="mountain.png" id="mountain" alt="Mountain" />
+      <img src="road.png" id="road" alt="Road" />
+      <h2 id="text">FKJ</h2>
+    </section>
+    <!-- Entry Page -->
+    <!-- 
+    I got the inspiration from a youtube turorial from youtuber @ProjectDarkbIox, and i like the buttom glowing effect when the mouse hover on it, and this insire me about making a door like effect that navigate user to entry the musical journey, this visual will be quite poetry.
+    -->
+    <div id="entry-page" class="entry-page">
+      <!-- Floating vinyl records background -->
+      <div class="vinyl-bg">
+        <div class="floating-vinyl"></div>
+        <div class="floating-vinyl"></div>
+        <div class="floating-vinyl"></div>
+        <div class="floating-vinyl"></div>
+        <div class="floating-vinyl"></div>
+        <div class="floating-vinyl"></div>
+      </div>
+
+      <div class="container">
+        <div class="door" onclick="enterMusicalJourney()">
+          <div class="door-panel"></div>
+        </div>
+        <div class="door-label">Enter Musical Journey</div>
+      </div>
+
+      <!-- Transition Video Overlay -->
+      <div
+        id="transition-overlay"
+        class="transition-overlay"
+        aria-hidden="true"
+      >
+        <video
+          id="transition-video"
+          src="transition.mp4"
+          muted
+          playsinline
+        ></video>
+      </div>
+    </div>
+
+    <!-- Musical Journey Page -->
+    <div id="musical-journey" class="musical-journey" style="display: none">
+      <!-- Header with title and controls -->
+      <header class="header">
+        <div class="header-content">
+          <h1 class="main-title">A Musical Journey</h1>
+          <div class="header-controls">
+            <div class="logo-icon">●</div>
+            <button class="scroll-top">↑</button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main content container -->
+      <main class="main-container">
+        <!-- Section 1: Top Albums -->
+        <section class="album-section section-1">
+          <div class="album-container">
+            <div class="album-item">
+              <div class="album-number">1</div>
+              <div class="outer">
+                <div class="cover" id="cover-1">
+                  <img src="ylangylang.jpg" alt="FKJ - Ylang Ylang" />
+                  <div class="wrapper" id="wrapper-1">
+                    <img src="wrapper.png" alt="Plastic Wrapper" />
+                  </div>
+                  <audio src="FKJ - Ylang Ylang.mp3" id="song-1"></audio>
+                </div>
+                <img
+                  src="vinyl.png"
+                  alt="Vinyl Record"
+                  class="vinyl"
+                  id="vinyl-1"
+                />
+              </div>
+              <div class="album-info">
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+              </div>
+            </div>
+
+            <div class="album-item">
+              <div class="outer">
+                <div class="cover" id="cover-2">
+                  <img src="us.jpg" alt="FKJ - Tadow" />
+                  <div class="wrapper" id="wrapper-2">
+                    <img src="wrapper.png" alt="Plastic Wrapper" />
+                  </div>
+                  <audio src="us.mp3" id="song-2"></audio>
+                </div>
+                <img
+                  src="vinyl.png"
+                  alt="Vinyl Record"
+                  class="vinyl"
+                  id="vinyl-2"
+                />
+              </div>
+              <div class="album-info">
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+              </div>
+            </div>
+          </div>
+          <div class="scroll-indicator">↓</div>
+        </section>
+
+        <!-- Section 2: Middle Albums -->
+        <section class="album-section section-2">
+          <div class="album-container">
+            <div class="album-item">
+              <div class="outer">
+                <div class="cover" id="cover-3">
+                  <img src="vcover.png" alt="FKJ - Skyline" />
+                  <div class="wrapper" id="wrapper-3">
+                    <img src="wrapper.png" alt="Plastic Wrapper" />
+                  </div>
+                  <audio src="FKJ - Ylang Ylang.mp3" id="song-3"></audio>
+                </div>
+                <img
+                  src="vinyl.png"
+                  alt="Vinyl Record"
+                  class="vinyl"
+                  id="vinyl-3"
+                />
+              </div>
+              <div class="album-info">
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+              </div>
+            </div>
+
+            <div class="album-item">
+              <div class="outer">
+                <div class="cover" id="cover-4">
+                  <img src="vcover.png" alt="FKJ - Go Back Home" />
+                  <div class="wrapper" id="wrapper-4">
+                    <img src="wrapper.png" alt="Plastic Wrapper" />
+                  </div>
+                  <audio src="FKJ - Ylang Ylang.mp3" id="song-4"></audio>
+                </div>
+                <img
+                  src="vinyl.png"
+                  alt="Vinyl Record"
+                  class="vinyl"
+                  id="vinyl-4"
+                />
+              </div>
+              <div class="album-info">
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 3: Bottom Albums -->
+        <section class="album-section section-3">
+          <div class="album-container">
+            <div class="album-item">
+              <div class="outer">
+                <div class="cover" id="cover-5">
+                  <img src="vcover.png" alt="FKJ - Lying Together" />
+                  <div class="wrapper" id="wrapper-5">
+                    <img src="wrapper.png" alt="Plastic Wrapper" />
+                  </div>
+                  <audio src="FKJ - Ylang Ylang.mp3" id="song-5"></audio>
+                </div>
+                <img
+                  src="vinyl.png"
+                  alt="Vinyl Record"
+                  class="vinyl"
+                  id="vinyl-5"
+                />
+              </div>
+              <div class="album-info">
+                <div class="song-info">
+                  <h3>Song Name</h3>
+                  <p>Artist</p>
+                </div>
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+              </div>
+            </div>
+
+            <div class="album-item">
+              <div class="album-info">
+                <div class="song-info">
+                  <h3>Song Name -</h3>
+                  <p>Artist</p>
+                </div>
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+                <div class="info-lines"></div>
+              </div>
+              <div class="outer">
+                <div class="cover" id="cover-6">
+                  <img src="vcover.png" alt="FKJ - Vibin' Out" />
+                  <div class="wrapper" id="wrapper-6">
+                    <img src="wrapper.png" alt="Plastic Wrapper" />
+                  </div>
+                  <audio src="FKJ - Ylang Ylang.mp3" id="song-6"></audio>
+                </div>
+                <img
+                  src="vinyl.png"
+                  alt="Vinyl Record"
+                  class="vinyl"
+                  id="vinyl-6"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Instagram CTA -->
+      <section class="instagram-cta" aria-label="Instagram link section">
+        <a
+          class="instagram-link"
+          href="https://www.instagram.com/frenchkiwijuice/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open Instagram: @frenchkiwijuice"
+        >
+          <svg
+            class="c-instagram-svg"
+            viewBox="0 0 800 120"
+            role="img"
+            aria-hidden="true"
+          >
+            <title>Instagram</title>
+            <defs>
+              <clipPath id="clip-instagram-text">
+                <text
+                  x="50%"
+                  y="50%"
+                  dominant-baseline="middle"
+                  text-anchor="middle"
+                >
+                  Instagram
+                </text>
+              </clipPath>
+              <radialGradient id="glow-gradient" cx="50%" cy="50%" r="60%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+                <stop offset="60%" stop-color="#ffffff" stop-opacity="0.5" />
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+              </radialGradient>
+              <filter
+                id="glow-blur"
+                x="-50%"
+                y="-50%"
+                width="200%"
+                height="200%"
+              >
+                <feGaussianBlur in="SourceGraphic" stdDeviation="8" />
+              </filter>
+            </defs>
+
+            <!-- Base outline text -->
+            <text
+              x="50%"
+              y="50%"
+              dominant-baseline="middle"
+              text-anchor="middle"
+            >
+              Instagram
+            </text>
+
+            <!-- Animated glow sweeps clipped to text (left and right converge to center) -->
+            <g clip-path="url(#clip-instagram-text)">
+              <rect
+                class="glow-sweep glow-sweep-left"
+                x="0"
+                y="0"
+                width="800"
+                height="120"
+                fill="url(#glow-gradient)"
+                filter="url(#glow-blur)"
+              />
+              <rect
+                class="glow-sweep glow-sweep-right"
+                x="0"
+                y="0"
+                width="800"
+                height="120"
+                fill="url(#glow-gradient)"
+                filter="url(#glow-blur)"
+              />
+            </g>
+          </svg>
+        </a>
+      </section>
+
+      <!-- Audio elements for each vinyl record -->
+      <audio id="audio1" preload="none">
+        <source src="FKJ - Ylang Ylang.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audio2" preload="none">
+        <source src="us.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audio3" preload="none">
+        <source src="FKJ - Ylang Ylang.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audio4" preload="none">
+        <source src="FKJ - Ylang Ylang.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audio5" preload="none">
+        <source src="FKJ - Ylang Ylang.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audio6" preload="none">
+        <source src="FKJ - Ylang Ylang.mp3" type="audio/mpeg" />
+      </audio>
+
+      <!-- Music data -->
+      <script>
+        const musicData = {
+          audio1: {
+            title: "Ylang Ylang",
+            artist: "FKJ",
+            year: "2019",
+            cover: "ylangylang.jpg",
+          },
+          audio2: {
+            title: "Tadow",
+            artist: "FKJ",
+            year: "2017",
+            cover: "us.jpg",
+          },
+          audio3: {
+            title: "Skyline",
+            artist: "FKJ",
+            year: "2017",
+            cover: "vcover.png",
+          },
+          audio4: {
+            title: "Go Back Home",
+            artist: "FKJ",
+            year: "2017",
+            cover: "vcover.png",
+          },
+          audio5: {
+            title: "Lying Together",
+            artist: "FKJ",
+            year: "2017",
+            cover: "vcover.png",
+          },
+          audio6: {
+            title: "Vibin' Out",
+            artist: "FKJ",
+            year: "2017",
+            cover: "vcover.png",
+          },
+        };
+      </script>
+    </div>
+
+    <script src="script.js"></script>
+
+    <!-- Entry Page Styles -->
+    <style>
+      .entry-page {
+        min-height: 100vh;
+        background: #000000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: "Arial", sans-serif;
+        color: #ffffff;
+        overflow: hidden;
+        position: relative;
+        transition: opacity 0.5s ease;
+      }
+
+      .entry-page.fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .container {
+        text-align: center;
+        z-index: 10;
+        position: absolute;
+        bottom: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* Parallax hero styles (scoped) */
+      .parallax-hero {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #0a2a43;
+      }
+
+      .parallax-hero::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 180px;
+        background: linear-gradient(
+          to top,
+          #000000,
+          rgba(10, 42, 67, 0.85),
+          rgba(10, 42, 67, 0.4),
+          transparent
+        );
+        z-index: 10000;
+      }
+
+      .parallax-hero::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.25);
+        z-index: 10000;
+        mix-blend-mode: multiply;
+      }
+
+      .parallax-hero img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+        filter: brightness(0.75) contrast(1.2) saturate(0.9);
+      }
+
+      /* Centered glowing FKJ title with strong glow */
+      #text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #eef6ff;
+        font-size: clamp(3.5rem, 12vw, 11rem);
+        z-index: 1;
+        letter-spacing: 0.08em;
+        font-weight: 800;
+        text-shadow: 0 0 28px rgba(230, 245, 255, 1),
+          0 0 64px rgba(120, 190, 255, 0.98), 0 0 140px rgba(50, 110, 230, 0.9);
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      /* Moon glow enhancement */
+      #moon {
+        filter: brightness(1.2) contrast(1.4) saturate(1.05)
+          drop-shadow(0 0 22px rgba(235, 250, 255, 1))
+          drop-shadow(0 0 58px rgba(130, 195, 255, 0.95))
+          drop-shadow(0 0 140px rgba(50, 110, 230, 0.85));
+      }
+
+      /* Cool blue tint and dim for background layers */
+      #bg,
+      #mountain,
+      #road {
+        filter: brightness(0.5) contrast(1.4) saturate(1.1) hue-rotate(200deg);
+      }
+
+      .entry-page h1 {
+        font-size: 4rem;
+        background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
+        font-weight: bold;
+        margin-bottom: 2rem;
+        animation: titleGlow 3s ease-in-out infinite alternate;
+      }
+
+      @keyframes titleGlow {
+        0% {
+          text-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
+        }
+        100% {
+          text-shadow: 0 0 50px rgba(255, 107, 107, 0.8),
+            0 0 80px rgba(78, 205, 196, 0.6);
+        }
+      }
+
+      .entry-page p {
+        font-size: 1.2rem;
+        color: #b0b0b0;
+        margin-bottom: 3rem;
+        max-width: 600px;
+        line-height: 1.6;
+      }
+
+      .door {
+        --glow-color: rgb(217, 176, 255);
+        --glow-spread-color: rgba(191, 123, 255, 0.781);
+        --door-color: rgb(100, 61, 136);
+        width: 80px;
+        height: 200px;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.3s;
+        perspective: 1000px;
+      }
+
+      .door-panel {
+        width: 100%;
+        height: 100%;
+        background-color: var(--door-color);
+        border: 0.25em solid var(--glow-color);
+        border-radius: 0.5em;
+        box-shadow: 0 0 1em 0.25em var(--glow-color),
+          0 0 4em 1em var(--glow-spread-color),
+          inset 0 0 0.74em 0.25em var(--glow-color);
+        text-shadow: 0 0 0.5em var(--glow-color);
+        position: relative;
+        transition: all 0.3s;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1em 0.5em;
+      }
+
+      .door-label {
+        color: var(--glow-color);
+        font-size: 14px;
+        font-weight: bold;
+        text-shadow: 0 0 0.5em var(--glow-color);
+        text-align: center;
+        margin-top: 1.5em;
+        letter-spacing: 0.1em;
+      }
+
+      .door:hover .door-panel {
+        background-color: var(--glow-color);
+        color: var(--door-color);
+        box-shadow: 0 0 1em 0.25em var(--glow-color),
+          0 0 4em 2em var(--glow-spread-color),
+          inset 0 0 0.75em 0.25em var(--glow-color);
+        text-shadow: 0 0 0.5em var(--door-color);
+      }
+
+      .door::after {
+        pointer-events: none;
+        content: "";
+        position: absolute;
+        top: 120%;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: var(--glow-spread-color);
+        filter: blur(2em);
+        opacity: 0.7;
+        transform: perspective(1.5em) rotateX(35deg) scale(1, 0.6);
+        z-index: -1;
+      }
+
+      .door:active .door-panel {
+        box-shadow: 0 0 0.6em 0.25em var(--glow-color),
+          0 0 2.5em 2em var(--glow-spread-color),
+          inset 0 0 0.5em 0.25em var(--glow-color);
+        text-shadow: 0 0 0.5em var(--door-color);
+      }
+
+      /* Transition video overlay */
+      .transition-overlay {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        display: none;
+        opacity: 0;
+        transition: opacity 2.5s ease;
+        align-items: center;
+        justify-content: center;
+        z-index: 3000;
+      }
+
+      .transition-overlay video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Floating vinyl records background */
+      .vinyl-bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .floating-vinyl {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        background: radial-gradient(
+          circle,
+          #333 0%,
+          #222 30%,
+          #111 60%,
+          #000 100%
+        );
+        border-radius: 50%;
+        border: 2px solid #444;
+        opacity: 0.1;
+        animation: float 20s infinite linear;
+      }
+
+      .floating-vinyl:nth-child(1) {
+        top: 10%;
+        left: 10%;
+        animation-delay: 0s;
+      }
+
+      .floating-vinyl:nth-child(2) {
+        top: 20%;
+        right: 15%;
+        animation-delay: 3s;
+      }
+
+      .floating-vinyl:nth-child(3) {
+        bottom: 30%;
+        left: 20%;
+        animation-delay: 6s;
+      }
+
+      .floating-vinyl:nth-child(4) {
+        bottom: 20%;
+        right: 10%;
+        animation-delay: 9s;
+      }
+
+      .floating-vinyl:nth-child(5) {
+        top: 50%;
+        left: 5%;
+        animation-delay: 12s;
+      }
+
+      .floating-vinyl:nth-child(6) {
+        top: 60%;
+        right: 5%;
+        animation-delay: 15s;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(180deg);
+        }
+        100% {
+          transform: translateY(0px) rotate(360deg);
+        }
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .entry-page h1 {
+          font-size: 2.5rem;
+        }
+
+        .entry-page p {
+          font-size: 1rem;
+          padding: 0 2rem;
+        }
+
+        .entry-page button {
+          font-size: 14px;
+          padding: 0.8em 2em;
+        }
+      }
+    </style>
+
+    <!-- Entry Page JavaScript -->
+    <script>
+      function enterMusicalJourney() {
+        const entryPage = document.getElementById("entry-page");
+        const musicalJourney = document.getElementById("musical-journey");
+        const overlay = document.getElementById("transition-overlay");
+        const video = document.getElementById("transition-video");
+
+        // Show transition overlay above entry page and play video
+        overlay.style.display = "flex";
+        // Quick fade-in for overlay
+        const prev = overlay.style.transition;
+        overlay.style.transition = "opacity 300ms ease";
+        void overlay.offsetHeight;
+        overlay.style.opacity = "1";
+        setTimeout(() => {
+          overlay.style.transition = "opacity 2.5s ease";
+        }, 300);
+
+        if (video) {
+          try {
+            video.currentTime = 0;
+            video.play();
+          } catch (e) {}
+        }
+
+        // After 2 seconds, fade out the overlay over 2.5 seconds
+        setTimeout(() => {
+          overlay.style.opacity = "0";
+
+          // After fade completes, hide overlay and reveal main page
+          setTimeout(() => {
+            overlay.style.display = "none";
+            overlay.style.opacity = "1"; // reset for next time
+            entryPage.style.display = "none";
+            musicalJourney.style.display = "block";
+
+            // Initialize musical journey
+            if (typeof new MusicalJourneyPlayer() === "function") {
+              new MusicalJourneyPlayer();
+            }
+          }, 2500);
+        }, 2000);
+      }
+
+      // Add click ripple effect to button
+      document.addEventListener("DOMContentLoaded", function () {
+        const button = document.querySelector(".entry-page button");
+        if (button) {
+          button.addEventListener("click", function (e) {
+            const ripple = document.createElement("span");
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+
+            ripple.style.cssText = `
+              position: absolute;
+              width: ${size}px;
+              height: ${size}px;
+              left: ${x}px;
+              top: ${y}px;
+              background: rgba(217, 176, 255, 0.3);
+              border-radius: 50%;
+              transform: scale(0);
+              animation: ripple 0.6s linear;
+              pointer-events: none;
+              z-index: 1;
+            `;
+
+            this.style.position = "relative";
+            this.style.overflow = "hidden";
+            this.appendChild(ripple);
+
+            setTimeout(() => {
+              ripple.remove();
+            }, 600);
+          });
+        }
+
+        // Add ripple animation styles
+        const style = document.createElement("style");
+        style.textContent = `
+          @keyframes ripple {
+            to {
+              transform: scale(4);
+              opacity: 0;
+            }
+          }
+        `;
+        document.head.appendChild(style);
+      });
+    </script>
+  </body>
+</html>
