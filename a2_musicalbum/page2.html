@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Musical Journey</title>
+    <link rel="icon" type="image/png" href="fkjicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Space+Grotesk&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .back-home {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 4000;
+        transition: transform 0.2s ease, background 0.2s ease;
+      }
+      .back-home:hover {
+        transform: scale(1.06);
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .back-home svg {
+        width: 22px;
+        height: 22px;
+        fill: #ffffff;
+      }
+
+      /* Page2 specific header styles */
+      .main-title {
+        color: #000000 !important;
+        text-shadow: none !important;
+      }
+
+      .main-title-artist {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        vertical-align: middle;
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <video
+      class="bg-video"
+      src="bg.mp4?v=2"
+      autoplay
+      muted
+      loop
+      playsinline
+    ></video>
+    <!-- 
+    This transition video embodies what I call the "memory lapse" effect—a seamless 
+    bridge between my entry concept and main content. Initially, the navigation was 
+    too abrupt, so I implemented this subtle transition inspired by video editing 
+    techniques (cross-fade transitions). The looping video of swaying tree shadows 
+    plays briefly when you click the door, creating a natural, memory-like transition 
+    that smoothly guides users from the tangible world into FKJ's abstract universe. 
+    By adjusting the video's fade-out duration, I achieved that kongpai effect—the 
+    disorienting, dreamy quality where reality shifts and you find yourself somewhere 
+    else entirely.
+    -->
+    <div
+      id="p2-transition"
+      style="
+        position: fixed;
+        inset: 0;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 5000;
+        opacity: 1;
+        transition: opacity 1s ease;
+      "
+    >
+      <video
+        id="p2-video"
+        src="transition.mp4"
+        muted
+        playsinline
+        style="width: 100%; height: 100%; object-fit: cover"
+      ></video>
+    </div>
+    <a class="back-home" href="index.html" aria-label="Back to entry">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+      </svg>
+    </a>
+
+    <div id="musical-journey" class="musical-journey" style="display: block">
+      <header class="header">
+        <div class="header-content">
+          <!-- 
+          The 360-degree spinning FKJ logo serves multiple purposes in my design. 
+          It's engaging and helps brand the artist's name effectively, but more importantly, 
+          it reflects the hypnotic, cyclical nature of FKJ's music. The constant rotation 
+          mirrors how his tracks loop in your consciousness—that sophisticated fusion 
+          of electronic rhythms and jazz harmonies that requires gradual immersion to 
+          fully appreciate. It's also a subtle nod to vinyl records spinning on turntables, 
+          bridging the physical and digital worlds while reinforcing the musical journey theme.
+          -->
+          <h1 class="main-title">
+            A Musical Journey with
+            <img src="fkjrotate.png" alt="FKJ" class="main-title-artist" />
+          </h1>
+        </div>
+      </header>
+
+      <!-- 
+      The main content page embodies my vision of a soft, non-obvious structure without 
+      clear directional icons or strict grids—inspired by FKJ's own website. I chose 
+      a warm, abstract background of looping tree shadows under sunlight, reflecting 
+      my color palette's gradual transition from dark, cool tones to natural, soft colors 
+      dominated by diffused light. The vinyl covers with their lid-opening effect are 
+      my tribute to the tactile experience of music, referencing my lecturer's design 
+      for a vinyl record player. The zigzag arrangement deliberately suggests a pathway, 
+      reinforcing the central theme of a "musical journey" through FKJ's discography. 
+      Each vinyl slides out in different directions, creating a dynamic, almost dancing 
+      quality that mirrors the rhythm in his diverse style—from highly rhythmic electronic 
+      tracks to quiet, piano-driven melodies.
+      -->
+      <main class="main-container">
+        <section class="album-section section-1">
+          <div class="album-container">
+            <div class="album-item">
+              <div class="outer">
+                <div class="cover" id="cover-1">
+                  <img src="ylangylang.jpg" alt="FKJ - Ylang Ylang" />
+                  <audio
+                    src="FKJ - Ylang Ylang.mp3"
+                    id="song-1"
+                    volume="1.0"
+                  ></audio>
+                </div>
+                <img
+                  src="vinyl.png"
+                  alt="Vinyl Record"
+                  class="vinyl"
+                  id="vinyl-1"
+                />
+              </div>
+              <div class="album-info">
+                <div class="song-info">
+                  <h3>Ylang Ylang</h3>
+                  <p>
+                    The EP concept comes from the Ylang Ylang room that he and
+                    his wife stayed in while giving birth to their daughter.
+                    After a complication, their daughter tragically did not
+                    survive birth and this is where ultimately the idea for the
+                    EP stemmed from. These 6 tracks tie together themes of life,
+                    loss, and the importance of relationships between people.
+                  </p>
+                  <p class="release-info">Released ion November 2019</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="album-item">
+              <div class="outer">
+                <div class="cover" id="cover-2">
+                  <img src="us.jpg" alt="FKJ - Tadow" />
+                  <audio src="us.mp3" id="song-2" volume="1.0"></audio>
+                </div>
+                <img
+                  src="vinyl.png"
+                  alt="Vinyl Record"
+                  class="vinyl"
+                  id="vinyl-2"
+                />
+              </div>
+              <div class="album-info">
+                <div class="song-info">
+                  <h3>Us</h3>
+                  <p>
+                    "Us" is featured on FKJ's second album, V I N C E N T. FKJ's
+                    "Us" is a soulful, jazz-infused electronic track, described
+                    as a blend of soulful, limitless music for a genre-fluid
+                    generation. The composition features soft electronic pulses,
+                    light piano progressions, a gorgeous saxophone solo, and
+                    soothing, falsetto-laden vocals.
+                  </p>
+                  <p class="release-info">Released on June 10, 2022</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="album-section section-2">
+          <div class="album-container">
+            <div class="album-item">
+              <div class="outer">
+                <div class="cover" id="cover-3">
+                  <img src="moments.jpg" alt="FKJ - Moments (Part 1)" />
+                  <audio
+                    src="Moments (Part 1).mp3"
+                    id="song-3"
+                    volume="1.0"
+                  ></audio>
+                </div>
+                <img
+                  src="vinyl.png"
+                  alt="Vinyl Record"
+                  class="vinyl"
+                  id="vinyl-3"
+                />
+              </div>
+              <div class="album-info">
+                <div class="song-info">
+                  <h3>Moments, Pt. 1</h3>
+                  <p>
+                    "Moments, Pt. 1" is a song by French electronic musician FKJ
+                    (Vincent Fenton), released on his single album "Moments" and
+                    available on platforms like Apple Music and Shazam. FKJ
+                    performed and wrote the song, which features his signature
+                    piano and vocals. The song is part of a two-part "Moments"
+                    single, alongside "Moments (Part 2)".
+                  </p>
+                  <p class="release-info">Released on September 8, 2025</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="album-item">
+              <div class="outer">
+                <div class="cover" id="cover-4">
+                  <img src="wayout.jpg" alt="FKJ - Way Out" />
+                  <audio src="wayout.mp3" id="song-4" volume="1.0"></audio>
+                </div>
+                <img
+                  src="vinyl.png"
+                  alt="Vinyl Record"
+                  class="vinyl"
+                  id="vinyl-4"
+                />
+              </div>
+              <div class="album-info">
+                <div class="song-info">
+                  <h3>Way Out</h3>
+                  <p>
+                    “Way Out” is an invitation to leave my busy adult mind and
+                    yours too who are listening. I put these footsteps and door
+                    sounds on the intro because I was imagining this scene of an
+                    exit, running away from a too serious and anxious state of
+                    mind. The escape would end and I would land in a childish
+                    world where the kid inside of me that doesn’t care and just
+                    plays would re-emerge.
+                  </p>
+                  <p class="release-info">Released on June 10, 2022</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="album-section section-3">
+          <div class="album-container">
+            <div class="album-item">
+              <div class="outer">
+                <div class="cover" id="cover-5">
+                  <img src="anthem.jpg" alt="FKJ - Anthem" />
+                  <audio src="anthem.mp3" id="song-5" volume="1.0"></audio>
+                </div>
+                <img
+                  src="vinyl.png"
+                  alt="Vinyl Record"
+                  class="vinyl"
+                  id="vinyl-5"
+                />
+              </div>
+              <div class="album-info">
+                <div class="song-info">
+                  <h3>Anthem</h3>
+                  <p>
+                    Anthem (Just Piano Version) · FKJ · Vincent Fenton — Just
+                    Piano. ℗ 2021 FKJ under exclusive license to AWAL Recordings
+                    Ltd. Producer: FKJ.
+                  </p>
+                  <p class="release-info">Released on August 13, 2021</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="album-item">
+              <div class="album-info">
+                <div class="song-info">
+                  <h3>Last Hour</h3>
+                  <p>
+                    "Last Hour" is a solo piano piece by the French electronic
+                    musician FKJ (Vincent Fenton), featured on his 2021 album
+                    Just Piano. The track is a contemporary jazz and
+                    classical-inspired instrumental, characterized by a calming
+                    yet energetic piano melody.
+                  </p>
+                  <p class="release-info">Released on August 13, 2021</p>
+                </div>
+              </div>
+              <div class="outer">
+                <div class="cover" id="cover-6">
+                  <img src="lasthour.jpg" alt="FKJ - Last Hour" />
+                  <audio src="lasthour.mp3" id="song-6" volume="1.0"></audio>
+                </div>
+                <img
+                  src="vinyl.png"
+                  alt="Vinyl Record"
+                  class="vinyl"
+                  id="vinyl-6"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- 
+      This Instagram link represents the external interaction aspect of my design—inspired 
+      by Lune's website. I wanted to provide an optional path for users who wish to learn 
+      more about FKJ after listening, creating a way to connect with the artist beyond 
+      the site and continue the experience. The specific font style, size, and hover 
+      effect were directly inspired by Lune's clean, modern design—how their text transforms 
+      on hover from outline to filled, creating a beautiful moment of revelation. The large, 
+      bold typography demands attention without overwhelming the page's soft, non-obvious 
+      structure. It's my way of saying "this journey doesn't end here," offering a bridge 
+      from the abstract musical universe back to the tangible world of the artist.
+      -->
+      <section class="instagram-cta" aria-label="Instagram link section">
+        <a
+          class="instagram-link"
+          href="https://www.instagram.com/frenchkiwijuice/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open Instagram: @frenchkiwijuice"
+        >
+          <svg
+            class="c-instagram-svg"
+            viewBox="0 0 800 120"
+            role="img"
+            aria-hidden="true"
+          >
+            <title>Instagram</title>
+            <defs>
+              <clipPath id="clip-instagram-text">
+                <text
+                  x="50%"
+                  y="50%"
+                  dominant-baseline="middle"
+                  text-anchor="middle"
+                >
+                  Instagram
+                </text>
+              </clipPath>
+              <radialGradient id="glow-gradient" cx="50%" cy="50%" r="60%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+                <stop offset="60%" stop-color="#ffffff" stop-opacity="0.5" />
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+              </radialGradient>
+              <filter
+                id="glow-blur"
+                x="-50%"
+                y="-50%"
+                width="200%"
+                height="200%"
+              >
+                <feGaussianBlur in="SourceGraphic" stdDeviation="8" />
+              </filter>
+            </defs>
+
+            <!-- Base outline text -->
+            <text
+              x="50%"
+              y="50%"
+              dominant-baseline="middle"
+              text-anchor="middle"
+            >
+              Instagram
+            </text>
+
+            <!-- Animated glow sweeps clipped to text (left and right converge to center) -->
+            <g clip-path="url(#clip-instagram-text)">
+              <rect
+                class="glow-sweep glow-sweep-left"
+                x="0"
+                y="0"
+                width="800"
+                height="120"
+                fill="url(#glow-gradient)"
+                filter="url(#glow-blur)"
+              />
+              <rect
+                class="glow-sweep glow-sweep-right"
+                x="0"
+                y="0"
+                width="800"
+                height="120"
+                fill="url(#glow-gradient)"
+                filter="url(#glow-blur)"
+              />
+            </g>
+          </svg>
+        </a>
+      </section>
+
+      <audio id="audio1" preload="none" volume="1.0">
+        <source src="FKJ - Ylang Ylang.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audio2" preload="none" volume="1.0">
+        <source src="us.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audio3" preload="none" volume="1.0">
+        <source src="Moments (Part 1).mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audio4" preload="none" volume="1.0">
+        <source src="FKJ - Ylang Ylang.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audio5" preload="none" volume="1.0">
+        <source src="anthem.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="audio6" preload="none" volume="1.0">
+        <source src="lasthour.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      window.addEventListener("load", () => {
+        const overlay = document.getElementById("p2-transition");
+        const vid = document.getElementById("p2-video");
+        if (vid) {
+          try {
+            vid.currentTime = 0;
+            vid.play();
+          } catch (e) {}
+        }
+        setTimeout(() => {
+          overlay.style.opacity = "0";
+          setTimeout(() => {
+            overlay.style.display = "none";
+          }, 1000);
+        }, 1200);
+      });
+    </script>
+  </body>
+</html>

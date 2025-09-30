@@ -70,7 +70,17 @@
       loop
       playsinline
     ></video>
-    <!-- Transition overlay on page load -->
+    <!-- 
+    This transition video embodies what I call the "memory lapse" effect—a seamless 
+    bridge between my entry concept and main content. Initially, the navigation was 
+    too abrupt, so I implemented this subtle transition inspired by video editing 
+    techniques (cross-fade transitions). The looping video of swaying tree shadows 
+    plays briefly when you click the door, creating a natural, memory-like transition 
+    that smoothly guides users from the tangible world into FKJ's abstract universe. 
+    By adjusting the video's fade-out duration, I achieved that kongpai effect—the 
+    disorienting, dreamy quality where reality shifts and you find yourself somewhere 
+    else entirely.
+    -->
     <div
       id="p2-transition"
       style="
@@ -93,17 +103,24 @@
         style="width: 100%; height: 100%; object-fit: cover"
       ></video>
     </div>
-    <!-- Back button to index.html (parallax + entry) -->
     <a class="back-home" href="index.html" aria-label="Back to entry">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
       </svg>
     </a>
 
-    <!-- Musical Journey Page -->
     <div id="musical-journey" class="musical-journey" style="display: block">
       <header class="header">
         <div class="header-content">
+          <!-- 
+          The 360-degree spinning FKJ logo serves multiple purposes in my design. 
+          It's engaging and helps brand the artist's name effectively, but more importantly, 
+          it reflects the hypnotic, cyclical nature of FKJ's music. The constant rotation 
+          mirrors how his tracks loop in your consciousness—that sophisticated fusion 
+          of electronic rhythms and jazz harmonies that requires gradual immersion to 
+          fully appreciate. It's also a subtle nod to vinyl records spinning on turntables, 
+          bridging the physical and digital worlds while reinforcing the musical journey theme.
+          -->
           <h1 class="main-title">
             A Musical Journey with
             <img src="fkjrotate.png" alt="FKJ" class="main-title-artist" />
@@ -111,6 +128,19 @@
         </div>
       </header>
 
+      <!-- 
+      The main content page embodies my vision of a soft, non-obvious structure without 
+      clear directional icons or strict grids—inspired by FKJ's own website. I chose 
+      a warm, abstract background of looping tree shadows under sunlight, reflecting 
+      my color palette's gradual transition from dark, cool tones to natural, soft colors 
+      dominated by diffused light. The vinyl covers with their lid-opening effect are 
+      my tribute to the tactile experience of music, referencing my lecturer's design 
+      for a vinyl record player. The zigzag arrangement deliberately suggests a pathway, 
+      reinforcing the central theme of a "musical journey" through FKJ's discography. 
+      Each vinyl slides out in different directions, creating a dynamic, almost dancing 
+      quality that mirrors the rhythm in his diverse style—from highly rhythmic electronic 
+      tracks to quiet, piano-driven melodies.
+      -->
       <main class="main-container">
         <section class="album-section section-1">
           <div class="album-container">
@@ -304,13 +334,16 @@
         </section>
       </main>
 
-      <!-- Instagram CTA -->
-      <!--
-        Inspiration note:
-        I get the inspiration from LUNE website. I really like how the text
-        turns into fully filled text on hover, and I really like the text style.
-        The font size perfectly grabs the user's attention while maintaining
-        the aesthetic of the overall webpage.
+      <!-- 
+      This Instagram link represents the external interaction aspect of my design—inspired 
+      by Lune's website. I wanted to provide an optional path for users who wish to learn 
+      more about FKJ after listening, creating a way to connect with the artist beyond 
+      the site and continue the experience. The specific font style, size, and hover 
+      effect were directly inspired by Lune's clean, modern design—how their text transforms 
+      on hover from outline to filled, creating a beautiful moment of revelation. The large, 
+      bold typography demands attention without overwhelming the page's soft, non-obvious 
+      structure. It's my way of saying "this journey doesn't end here," offering a bridge 
+      from the abstract musical universe back to the tangible world of the artist.
       -->
       <section class="instagram-cta" aria-label="Instagram link section">
         <a
@@ -411,7 +444,6 @@
 
     <script src="script.js"></script>
     <script>
-      // Play transition video on load, then fade overlay out
       window.addEventListener("load", () => {
         const overlay = document.getElementById("p2-transition");
         const vid = document.getElementById("p2-video");
@@ -421,7 +453,6 @@
             vid.play();
           } catch (e) {}
         }
-        // Let it play ~1.2s then fade out quickly
         setTimeout(() => {
           overlay.style.opacity = "0";
           setTimeout(() => {

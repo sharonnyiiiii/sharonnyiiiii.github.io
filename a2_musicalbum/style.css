@@ -1,0 +1,920 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background: #000000;
+  color: #ffffff;
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Fullscreen background video */
+.bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+  filter: brightness(0.5) contrast(1.05);
+}
+
+/* Header Styles */
+.header {
+  background: transparent;
+  padding: 2rem 0;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.main-title {
+  font-family: "Dancing Script", cursive;
+  font-size: 3rem;
+  color: #4ecdc4;
+  text-shadow: 0 0 20px rgba(78, 205, 196, 0.8),
+    0 0 40px rgba(78, 205, 196, 0.6), 0 0 60px rgba(78, 205, 196, 0.4);
+  font-weight: 700;
+}
+
+/* 
+The spinning FKJ logo animation serves multiple purposes in my design philosophy. 
+I learned the technical implementation from W3Schools, but the choice to make it 
+spin continuously was intentional—it reflects how FKJ's tracks loop in your consciousness, 
+that sophisticated fusion of electronic rhythms and jazz harmonies that requires 
+gradual immersion to fully appreciate. The constant rotation mirrors the hypnotic, 
+cyclical nature of his music while serving as an engaging branding element. It's 
+also a subtle nod to vinyl records spinning on turntables, bridging the physical 
+and digital worlds and reinforcing my central theme of a "musical journey."
+*/
+.main-title-artist {
+  font-family: "Space Grotesk", sans-serif;
+  color: #000000;
+  text-shadow: none;
+  display: inline-block;
+  animation: spinFKJ 3s linear infinite;
+}
+
+@keyframes spinFKJ {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Main Container */
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Album Sections */
+.album-section {
+  margin-bottom: 4rem;
+  padding: 3rem;
+}
+
+.album-container {
+  display: flex;
+  flex-direction: column; /* single column stack */
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 8rem; /* increased vertical spacing between vinyls */
+  margin: 0 auto 4rem; /* center container and add spacing below */
+  position: relative;
+  max-width: 1100px; /* keep gallery width contained and centered */
+}
+
+.album-item {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex: none; /* ensure each is its own row */
+  position: relative;
+  width: max-content; /* shrink to content for left/right alignment */
+  margin-bottom: 0; /* spacing handled by container gap */
+}
+
+/* Alternating columns: clean left/right without positional shifts */
+.album-item:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+/* Single-column zigzag alignment */
+.album-item:nth-child(odd) {
+  margin-right: auto; /* left aligned */
+}
+
+.album-item:nth-child(even) {
+  margin-left: auto; /* right aligned */
+}
+
+/* Adjust song info positioning to avoid vinyl overlap */
+.section-1 .album-item:nth-child(1) .album-info {
+  margin-left: 4rem; /* move vinyl 1 song info more to the right */
+}
+
+.section-1 .album-item:nth-child(2) .album-info {
+  margin-right: 2rem; /* move vinyl 2 song info more to the right */
+}
+
+/* Prevent overlap for section 2 (vinyls 3 & 4) when vinyl slides out */
+.section-2 .album-item:nth-child(1) .album-info {
+  margin-left: 4rem;
+}
+.section-2 .album-item:nth-child(2) .album-info {
+  margin-right: 4rem;
+}
+
+/* Prevent overlap for section 3 (vinyls 5 & 6) when vinyl slides out */
+.section-3 .album-item:nth-child(1) .album-info {
+  margin-left: 4rem;
+}
+.section-3 .album-item:nth-child(2) .album-info {
+  margin-right: 8rem;
+}
+
+/* Move vinyl 6 container further to the right */
+.section-3 .album-item:nth-child(2) {
+  margin-left: 6rem;
+}
+
+/* Remove previous transform-based zigzag to keep equal page margins */
+
+/* Album Number */
+.album-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.2);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ff6b6b;
+}
+
+/* Vinyl Player Styles */
+.outer {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  box-shadow: 2px 2px rgba(133, 144, 147, 0.269);
+  margin-bottom: 1.5rem; /* additional spacing directly on each vinyl cover */
+}
+
+/* Play/Pause overlay icon positioned just above each vinyl cover */
+.play-pause-overlay {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% - 70px); /* overlap half of 140px icon height */
+  transform: translateX(-50%);
+  width: 140px; /* slightly reduced */
+  height: 140px; /* slightly reduced */
+  opacity: 0.65; /* reduced transparency as requested */
+  pointer-events: auto;
+  z-index: 3;
+  user-select: none;
+}
+
+.vinyl {
+  position: absolute;
+  transition: translate 0.6s ease;
+}
+
+.openrecord {
+  translate: 100px 0px;
+}
+
+/* Second vinyl slides out to the left */
+#vinyl-2.openrecord {
+  translate: -100px 0px;
+}
+
+/* Fourth vinyl slides out to the left with ease-out */
+#vinyl-4 {
+  transition: translate 0.6s ease-out;
+}
+#vinyl-4.openrecord {
+  translate: -100px 0px;
+}
+
+@keyframes rotateAnimation {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
+
+.playrecord {
+  animation-name: rotateAnimation;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-duration: 0.8s;
+}
+
+.cover {
+  min-width: 100%;
+  min-height: 100%;
+  background-color: antiquewhite;
+  z-index: 1;
+  position: relative;
+  cursor: pointer;
+  border: 3px solid rgba(255, 255, 255, 0.55);
+  border-radius: 8px;
+}
+
+/*
+  The lid interaction was one of my favorite discoveries while working with ChatGPT. 
+  Since no tutorials were available for this specific effect, I used ChatGPT to guide 
+  the implementation. It creates this beautiful 3D effect where each album cover has 
+  an invisible "lid" that flips open when you click—like unwrapping a gift or opening 
+  a treasure chest. This represents my tribute to the tactile experience of music, 
+  referencing my lecturer's design for a vinyl record player. The technical implementation 
+  uses CSS transforms and perspective, but the feeling it creates is pure magic—that 
+  moment of anticipation and revelation that mirrors the gradual immersion required 
+  to appreciate FKJ's sophisticated musical fusion.
+*/
+/* Lid overlay on album cover */
+.cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.06) 35%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  backdrop-filter: blur(2px);
+  transform-origin: top center;
+  transform: perspective(800px) rotateX(0deg) translateZ(0);
+  transition: transform 0.8s ease-in-out;
+  pointer-events: none; /* clicks pass to cover */
+  z-index: 2;
+}
+
+/* When lid is opened */
+.cover.lid-open::before {
+  transform: perspective(800px) rotateX(-75deg) translateZ(8px);
+}
+
+/*
+  These drop shadows under each album cover add depth and dimension to my soft, 
+  non-obvious structure. I worked with ChatGPT to create this soft elliptical shadow 
+  effect using radial gradients—it makes the covers feel like they're floating above 
+  the page, like physical objects you could reach out and touch. This tactile quality 
+  reinforces my vision of guiding users from the tangible world into FKJ's abstract 
+  universe. The subtle blur and positioning creates that perfect illusion of depth 
+  without overwhelming the page's gentle, diffused light aesthetic that reflects 
+  my color palette's gradual transition from dark, cool tones to natural, soft colors.
+*/
+.cover::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -16px;
+  transform: translateX(-55%);
+  width: 100%;
+  height: 26px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.42) 55%,
+    rgba(0, 0, 0, 0) 72%
+  );
+  filter: blur(4px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Wrapper Layer Styles */
+.wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wrapper img {
+  width: 150%;
+  height: 150%;
+  object-fit: cover;
+  object-position: center;
+  transition: opacity 0.3s ease;
+  transform: translate(-20%, -25%);
+  opacity: 1;
+}
+
+/* Unwrap Animation */
+.wrapper.unwrap img {
+  opacity: 0;
+}
+
+.wrapper.fade-in img {
+  opacity: 1;
+}
+
+/* Album Cover - keeping for compatibility */
+.album-cover {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cover-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+/* Vinyl Record */
+.vinyl-record {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, #333 0%, #222 30%, #111 60%, #000 100%);
+  border-radius: 50%;
+  border: 3px solid #444;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  transition: all 0.3s ease;
+  opacity: 0;
+  z-index: 2;
+}
+
+.vinyl-record.large-vinyl {
+  width: 220px;
+  height: 220px;
+}
+
+.vinyl-grooves {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140px;
+  height: 140px;
+  border: 1px solid #555;
+  border-radius: 50%;
+  background: repeating-concentric-circles(#333, #222, 10px);
+}
+
+.vinyl-record.large-vinyl .vinyl-grooves {
+  width: 170px;
+  height: 170px;
+}
+
+.vinyl-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background: #000;
+  border-radius: 50%;
+  border: 2px solid #333;
+}
+
+.vinyl-record.large-vinyl .vinyl-center {
+  width: 50px;
+  height: 50px;
+}
+
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 107, 107, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 3;
+}
+
+/* Hover Effects */
+.album-cover:hover .vinyl-record {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.album-cover:hover .play-button {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.album-cover:hover .cover-image {
+  transform: scale(0.9);
+  opacity: 0.7;
+}
+
+.vinyl-record:hover {
+  animation: spin 2s linear infinite;
+}
+
+.vinyl-record:hover .play-button {
+  background: rgba(255, 107, 107, 1);
+}
+
+/* Album Info */
+.album-info {
+  flex: 1;
+}
+
+.info-lines {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.3);
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+.info-lines:nth-child(1) {
+  width: 80%;
+  animation-delay: 0s;
+}
+
+.info-lines:nth-child(2) {
+  width: 60%;
+  animation-delay: 0.5s;
+}
+
+.info-lines:nth-child(3) {
+  width: 70%;
+  animation-delay: 1s;
+}
+
+/* Song Info */
+.song-info {
+  margin-bottom: 1.5rem;
+}
+
+.song-info h3 {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+}
+
+.song-info p {
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  opacity: 0;
+}
+
+.release-info {
+  opacity: 0;
+}
+
+/* Animate song details only when the album item enters viewport */
+.album-item.in-view .song-info h3 {
+  animation: fadeInUp 0.8s ease-out 0.1s forwards;
+}
+.album-item.in-view .song-info p:not(.release-info) {
+  animation: fadeInUp 0.8s ease-out 0.25s forwards;
+}
+.album-item.in-view .song-info .release-info {
+  animation: fadeInUp 0.8s ease-out 0.4s forwards;
+}
+
+.release-info {
+  font-size: 0.75rem;
+  color: #999;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+/* Artist Avatar */
+.artist-avatar {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border: 2px solid #ff6b6b;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  text-align: center;
+  font-size: 2rem;
+  color: #ff6b6b;
+  animation: bounce 2s infinite;
+}
+
+/* Animations */
+@keyframes spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typewriter {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .main-title {
+    font-size: 2.5rem;
+  }
+
+  .album-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .album-item {
+    flex-direction: row !important;
+  }
+
+  /* Maintain zigzag on tablets with reduced offset */
+  .section-1 .album-item:nth-child(1) {
+    transform: translateY(-15px) translateX(-10px);
+  }
+
+  .section-1 .album-item:nth-child(2) {
+    transform: translateY(15px) translateX(10px);
+  }
+
+  .section-2 .album-item:nth-child(1) {
+    transform: translateY(20px) translateX(-15px);
+  }
+
+  .section-2 .album-item:nth-child(2) {
+    transform: translateY(-10px) translateX(15px);
+  }
+
+  .section-3 .album-item:nth-child(1) {
+    transform: translateY(-12px) translateX(-12px);
+  }
+
+  .section-3 .album-item:nth-child(2) {
+    transform: translateY(17px) translateX(12px);
+  }
+
+  .album-cover {
+    width: 150px;
+    height: 150px;
+  }
+
+  .vinyl-record {
+    width: 130px;
+    height: 130px;
+  }
+
+  .vinyl-record.large-vinyl {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .main-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .album-section {
+    padding: 2rem;
+  }
+
+  .album-item {
+    flex-direction: column !important;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  /* Subtle zigzag on mobile */
+  .section-1 .album-item:nth-child(1) {
+    transform: translateY(-8px) translateX(-5px);
+  }
+
+  .section-1 .album-item:nth-child(2) {
+    transform: translateY(8px) translateX(5px);
+  }
+
+  .section-2 .album-item:nth-child(1) {
+    transform: translateY(10px) translateX(-8px);
+  }
+
+  .section-2 .album-item:nth-child(2) {
+    transform: translateY(-5px) translateX(8px);
+  }
+
+  .section-3 .album-item:nth-child(1) {
+    transform: translateY(-6px) translateX(-6px);
+  }
+
+  .section-3 .album-item:nth-child(2) {
+    transform: translateY(9px) translateX(6px);
+  }
+
+  .album-cover {
+    width: 120px;
+    height: 120px;
+  }
+
+  .vinyl-record {
+    width: 100px;
+    height: 100px;
+  }
+
+  .vinyl-record.large-vinyl {
+    width: 120px;
+    height: 120px;
+  }
+
+  .album-number {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-container {
+    padding: 1rem;
+  }
+
+  .album-section {
+    padding: 1.5rem;
+  }
+
+  .main-title {
+    font-size: 1.5rem;
+  }
+
+  .album-cover {
+    width: 100px;
+    height: 100px;
+  }
+
+  .vinyl-record {
+    width: 80px;
+    height: 80px;
+  }
+
+  .vinyl-record.large-vinyl {
+    width: 100px;
+    height: 100px;
+  }
+
+  .play-button {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
+
+/* Section-specific styles */
+
+/* Enhanced hover effects with zigzag consideration */
+.section-1 .album-item:nth-child(1):hover {
+  transform: translateY(-35px) translateX(-20px);
+}
+
+.section-1 .album-item:nth-child(2):hover {
+  transform: translateY(25px) translateX(20px);
+}
+
+.section-2 .album-item:nth-child(1):hover {
+  transform: translateY(35px) translateX(-30px);
+}
+
+.section-2 .album-item:nth-child(2):hover {
+  transform: translateY(-25px) translateX(30px);
+}
+
+.section-3 .album-item:nth-child(1):hover {
+  transform: translateY(-30px) translateX(-25px);
+}
+
+.section-3 .album-item:nth-child(2):hover {
+  transform: translateY(30px) translateX(25px);
+}
+
+.album-item:hover .info-lines {
+  background: rgba(255, 107, 107, 0.5);
+}
+
+/* Loading animation for vinyl records */
+.vinyl-record {
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.album-cover:hover .vinyl-record {
+  opacity: 1;
+}
+
+/* Pulse effect for play button */
+.play-button {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 107, 107, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 107, 107, 0);
+  }
+}
+
+/* Instagram CTA (inspired by Lune style) */
+.instagram-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem 6rem;
+}
+
+.instagram-link {
+  text-decoration: none;
+}
+
+.c-instagram-svg {
+  width: min(80vw, 800px);
+  height: 140px;
+}
+
+.c-instagram-svg text {
+  font-family: "Arial", sans-serif;
+  font-size: 96px;
+  letter-spacing: 2px;
+  fill: transparent;
+  stroke: #ffffff;
+  stroke-width: 1px;
+  paint-order: stroke fill;
+  transition: transform 300ms ease, letter-spacing 300ms ease, fill 300ms ease,
+    stroke 300ms ease;
+}
+
+.instagram-link:hover .c-instagram-svg text {
+  transform: translateY(-4px);
+  letter-spacing: 6px;
+  fill: #ffffff;
+  stroke: #ffffff;
+}
+
+.instagram-link:active .c-instagram-svg text {
+  transform: translateY(0);
+  letter-spacing: 4px;
+  filter: brightness(1.1);
+}
+
+/* Layout overrides to ensure equal page margins and remove any residual offsets */
+.section-1 .album-item:nth-child(1),
+.section-1 .album-item:nth-child(2),
+.section-2 .album-item:nth-child(1),
+.section-2 .album-item:nth-child(2),
+.section-3 .album-item:nth-child(1),
+.section-3 .album-item:nth-child(2),
+.section-1 .album-item:nth-child(1):hover,
+.section-1 .album-item:nth-child(2):hover,
+.section-2 .album-item:nth-child(1):hover,
+.section-2 .album-item:nth-child(2):hover,
+.section-3 .album-item:nth-child(1):hover,
+.section-3 .album-item:nth-child(2):hover {
+  transform: none !important;
+}
+
+/* Glow sweep animation */
+.glow-sweep {
+  opacity: 0;
+  transform-origin: 50% 50%;
+  transition: opacity 700ms ease,
+    transform 1100ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.glow-sweep-left {
+  transform: translateX(-60%) scale(0.9);
+}
+
+.glow-sweep-right {
+  transform: translateX(60%) scale(0.9);
+}
+
+.instagram-link:hover .glow-sweep {
+  opacity: 1;
+  transform: translateX(0%) scale(1);
+}
+
+.instagram-link:active .glow-sweep {
+  opacity: 0.9;
+  transform: translateX(0%) scale(0.98);
+}

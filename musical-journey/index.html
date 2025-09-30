@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Background video -->
     <video
       class="bg-video"
       src="bg.mp4?v=2"
@@ -31,7 +30,16 @@
       playsinline
     ></video>
 
-    <!-- Parallax Hero -->
+    <!-- 
+    This parallax entry represents my core concept: guiding users from the tangible, 
+    real world into FKJ's abstract, internal universe. FKJ's music feels distant, 
+    like listening from outside a small room—hazy and requiring slow, gradual immersion. 
+    I chose natural elements from his music videos (road, mountains, moon) that fade 
+    into nightfall as you scroll, creating that sense of descending into darkness. 
+    The technical implementation came from a YouTube tutorial, but the choice was 
+    poetic: mirroring how his instrumental music draws you deeper into its sophisticated 
+    fusion of electronic rhythms and jazz harmonies.
+    -->
     <section class="parallax-hero" aria-label="Moon Light Parallax">
       <img src="bg.jpg" id="bg" alt="Background" />
       <img src="moon.png" id="moon" alt="Moon" />
@@ -40,9 +48,7 @@
       <h2 id="text">FKJ</h2>
     </section>
 
-    <!-- Entry Page -->
     <div id="entry-page" class="entry-page">
-      <!-- Floating vinyl records background -->
       <div class="vinyl-bg">
         <div class="floating-vinyl"></div>
         <div class="floating-vinyl"></div>
@@ -52,6 +58,16 @@
         <div class="floating-vinyl"></div>
       </div>
 
+      <!-- 
+      This glowing door button is the culmination of my parallax journey—the gateway 
+      from the real world into FKJ's abstract universe. I adapted a YouTube tutorial's 
+      hover-to-brighten effect and modified the button's height to visually represent 
+      a door. The scrolling sequence leads users to this threshold, where the glowing 
+      hover effect simulates entering an unknown, new world. It's designed to feel 
+      both magical and inviting, representing that pivotal moment before you press 
+      play and everything changes—the transition from external listening to deep 
+      immersion in his sophisticated musical fusion.
+      -->
       <div class="container">
         <div class="door" onclick="enterMusicalJourney()">
           <div class="door-panel"></div>
@@ -60,7 +76,6 @@
       </div>
     </div>
 
-    <!-- Entry Page Styles -->
     <style>
       .entry-page {
         min-height: 100vh;
@@ -88,7 +103,6 @@
         align-items: center;
       }
 
-      /* Parallax hero styles */
       .parallax-hero {
         position: relative;
         width: 100%;
@@ -139,7 +153,6 @@
         filter: brightness(0.75) contrast(1.2) saturate(0.9);
       }
 
-      /* Centered glowing FKJ title */
       #text {
         position: absolute;
         top: 50%;
@@ -156,7 +169,6 @@
         white-space: nowrap;
       }
 
-      /* Moon glow enhancement */
       #moon {
         filter: brightness(1.2) contrast(1.4) saturate(1.05)
           drop-shadow(0 0 22px rgba(235, 250, 255, 1))
@@ -164,7 +176,6 @@
           drop-shadow(0 0 140px rgba(50, 110, 230, 0.85));
       }
 
-      /* Cool blue tint for background layers */
       #bg,
       #mountain,
       #road {
@@ -245,7 +256,6 @@
         text-shadow: 0 0 0.5em var(--door-color);
       }
 
-      /* Floating vinyl records background */
       .vinyl-bg {
         position: absolute;
         width: 100%;
@@ -319,7 +329,6 @@
         }
       }
 
-      /* Responsive design */
       @media (max-width: 768px) {
         .door-label {
           font-size: 1.5rem;
@@ -327,7 +336,6 @@
       }
     </style>
 
-    <!-- Entry Page JavaScript -->
     <script>
       function enterMusicalJourney() {
         window.location.href = "page2.html";

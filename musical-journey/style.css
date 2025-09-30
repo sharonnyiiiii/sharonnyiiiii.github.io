@@ -1,4 +1,3 @@
-/* Reset and Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -50,7 +49,16 @@ body {
   font-weight: 700;
 }
 
-/* Spinning animation for FKJ text (learned from W3Schools tutorial) */
+/* 
+The spinning FKJ logo animation serves multiple purposes in my design philosophy. 
+I learned the technical implementation from W3Schools, but the choice to make it 
+spin continuously was intentional—it reflects how FKJ's tracks loop in your consciousness, 
+that sophisticated fusion of electronic rhythms and jazz harmonies that requires 
+gradual immersion to fully appreciate. The constant rotation mirrors the hypnotic, 
+cyclical nature of his music while serving as an engaging branding element. It's 
+also a subtle nod to vinyl records spinning on turntables, bridging the physical 
+and digital worlds and reinforcing my central theme of a "musical journey."
+*/
 .main-title-artist {
   font-family: "Space Grotesk", sans-serif;
   color: #000000;
@@ -192,10 +200,8 @@ body {
 }
 
 .vinyl {
-  /* z-index: -10; */
   position: absolute;
   transition: translate 0.6s ease;
-  /* translate: 200px 0px; */
 }
 
 .openrecord {
@@ -238,13 +244,20 @@ body {
   z-index: 1;
   position: relative;
   cursor: pointer;
-  border: 3px solid rgba(255, 255, 255, 0.55); /* brighter half-transparent border */
+  border: 3px solid rgba(255, 255, 255, 0.55);
   border-radius: 8px;
 }
 
 /*
-  Lid Interaction (learned with ChatGPT guidance)
-  Adds a 3D "lid" overlay that flips open on click.
+  The lid interaction was one of my favorite discoveries while working with ChatGPT. 
+  Since no tutorials were available for this specific effect, I used ChatGPT to guide 
+  the implementation. It creates this beautiful 3D effect where each album cover has 
+  an invisible "lid" that flips open when you click—like unwrapping a gift or opening 
+  a treasure chest. This represents my tribute to the tactile experience of music, 
+  referencing my lecturer's design for a vinyl record player. The technical implementation 
+  uses CSS transforms and perspective, but the feeling it creates is pure magic—that 
+  moment of anticipation and revelation that mirrors the gradual immersion required 
+  to appreciate FKJ's sophisticated musical fusion.
 */
 /* Lid overlay on album cover */
 .cover::before {
@@ -272,15 +285,20 @@ body {
 }
 
 /*
-  Drop shadow under every album cover (learned with ChatGPT guidance)
-  Creates a soft elliptical shadow under the square cover using a radial gradient.
+  These drop shadows under each album cover add depth and dimension to my soft, 
+  non-obvious structure. I worked with ChatGPT to create this soft elliptical shadow 
+  effect using radial gradients—it makes the covers feel like they're floating above 
+  the page, like physical objects you could reach out and touch. This tactile quality 
+  reinforces my vision of guiding users from the tangible world into FKJ's abstract 
+  universe. The subtle blur and positioning creates that perfect illusion of depth 
+  without overwhelming the page's gentle, diffused light aesthetic that reflects 
+  my color palette's gradual transition from dark, cool tones to natural, soft colors.
 */
 .cover::after {
   content: "";
   position: absolute;
   left: 50%;
   bottom: -16px;
-  /* shift shadow further towards the left */
   transform: translateX(-55%);
   width: 100%;
   height: 26px;

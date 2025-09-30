@@ -1,6 +1,4 @@
 // Simple Vinyl Player Implementation with Unwrap Effect
-// Lid interaction for covers (learned with ChatGPT guidance):
-// toggles a 3D overlay lid on each cover when clicked.
 const cover1 = document.querySelector("#cover-1");
 const vinyl1 = document.querySelector("#vinyl-1");
 const song1 = document.querySelector("#song-1");
@@ -90,9 +88,8 @@ function closeRecord(vinyl) {
 function playRecord(vinyl, song, wrapper) {
   vinyl.classList.toggle("playrecord");
 
-  // Play/pause audio without wrapper effects
   if (song.paused || song.ended) {
-    song.volume = 1.0; // Set volume to 100%
+    song.volume = 1.0;
     song.play();
   } else {
     song.pause();
@@ -117,16 +114,14 @@ window.addEventListener("scroll", () => {
   if (moon) moon.style.left = -value * 0.5 + "px";
   if (mountain) mountain.style.top = -value * 0.15 + "px";
   if (road) road.style.top = value * 0.15 + "px";
-  // Parallax for centered hero title: nudge vertically while staying centered
   if (text) {
-    const offset = value * 0.35; // tune intensity
+    const offset = value * 0.35;
     text.style.transform = `translate(-50%, calc(-50% + ${offset}px))`;
   }
 });
 
 // Initialize all audio elements with increased volume
 document.addEventListener("DOMContentLoaded", () => {
-  // Set volume for all song elements
   for (let i = 1; i <= 6; i++) {
     const songElement = document.querySelector(`#song-${i}`);
     if (songElement) {
@@ -134,7 +129,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Set volume for all audio elements
   for (let i = 1; i <= 6; i++) {
     const audioElement = document.querySelector(`#audio${i}`);
     if (audioElement) {
@@ -142,7 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Inject play/pause overlays above each vinyl cover and sync with audio state
   const items = [
     { outer: document.querySelector("#cover-1")?.parentElement, audio: song1 },
     { outer: document.querySelector("#cover-2")?.parentElement, audio: song2 },
@@ -158,10 +151,8 @@ document.addEventListener("DOMContentLoaded", () => {
     overlay.className = "play-pause-overlay";
     overlay.alt = "Play/Pause";
     overlay.src = "play.png";
-    // ensure overlay is clickable without affecting other UI
     overlay.addEventListener("click", (e) => {
       e.stopPropagation();
-      // Simulate clicking the cover to reuse existing logic
       const coverEl = document.querySelector(`#cover-${idx + 1}`);
       if (coverEl) coverEl.click();
     });
@@ -171,10 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
       overlay.src = item.audio.paused ? "play.png" : "pause.png";
     };
 
-    // Initial icon state
     updateIcon();
-
-    // Sync on audio events
     item.audio.addEventListener("play", updateIcon);
     item.audio.addEventListener("pause", updateIcon);
     item.audio.addEventListener("ended", () => {
@@ -183,18 +171,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Trigger text animations for song details
   const triggerTextAnimations = () => {
     const songInfos = document.querySelectorAll(".song-info");
     songInfos.forEach((songInfo, index) => {
-      // Reset animations
       const h3 = songInfo.querySelector("h3");
       const paragraphs = songInfo.querySelectorAll("p");
       const releaseInfo = songInfo.querySelector(".release-info");
 
       if (h3) {
         h3.style.animation = "none";
-        h3.offsetHeight; // Trigger reflow
+        h3.offsetHeight;
         h3.style.animation = `fadeInUp 0.8s ease-out ${
           0.2 + index * 0.3
         }s forwards`;
@@ -203,7 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
       paragraphs.forEach((p, pIndex) => {
         if (p !== releaseInfo) {
           p.style.animation = "none";
-          p.offsetHeight; // Trigger reflow
+          p.offsetHeight;
           p.style.animation = `fadeInUp 0.8s ease-out ${
             0.4 + index * 0.3 + pIndex * 0.2
           }s forwards`;
@@ -212,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (releaseInfo) {
         releaseInfo.style.animation = "none";
-        releaseInfo.offsetHeight; // Trigger reflow
+        releaseInfo.offsetHeight;
         releaseInfo.style.animation = `fadeInUp 0.8s ease-out ${
           0.6 + index * 0.3
         }s forwards`;
@@ -220,10 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  // Trigger animations after a short delay to ensure page is loaded
   // setTimeout(triggerTextAnimations, 500);
-
-  // IntersectionObserver to trigger text animations only when section is in view
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
