@@ -15,3 +15,12 @@ dragdropButton.addEventListener("click", gotoFlip);
 function gotoFlip() {
   window.location.href = "dragdrop.html";
 }
+
+const findQueenButton = document.querySelector("#findQueen-button");
+console.log(findQueenButton);
+
+findQueenButton.addEventListener("click", function;
+
+  window.location.href = "queen.html";
+})
+
