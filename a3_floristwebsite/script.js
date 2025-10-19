@@ -3,7 +3,6 @@ const boxes = document.querySelectorAll(".inner");
 const orangeFlowers = document.querySelectorAll(".orange");
 let bgColor = null;
 
-
 //  ===== FLORIST.MP3 =====
 //
 // This is my favourite song from a musician called Youzee, and I wanted the experience to be
@@ -74,7 +73,7 @@ orangeFlowers.forEach((flower) => {
   });
 });
 
-//  DRAG AND DROP FOR E04819 PATHS 
+//  DRAG AND DROP FOR E04819 PATHS
 //
 // Add drag and drop functionality for the two paths with fill #e04819
 // This allows users to drag color boxes onto these specific paths to change their color
@@ -109,7 +108,7 @@ e04819Paths.forEach((path) => {
   });
 });
 
-// DRAG AND DROP FOR F16691 PATHS 
+// DRAG AND DROP FOR F16691 PATHS
 //
 // Add drag and drop functionality for the two paths with fill #f16691
 // This allows users to drag color boxes onto these specific paths to change their color
@@ -137,7 +136,6 @@ f16691Paths.forEach((path) => {
     document.body.classList.remove("brush-cursor");
   });
 });
-
 
 // Add drag and drop functionality for the seven paths with fill #f7df52
 // This allows users to drag color boxes onto these specific paths to change their color
@@ -168,7 +166,6 @@ f7df52Paths.forEach((path) => {
   });
 });
 
-
 //
 // Add drag and drop functionality for the path with fill #f79c53
 // This allows users to drag color boxes onto this specific path to change its color
@@ -197,8 +194,6 @@ f79c53Paths.forEach((path) => {
   });
 });
 
-
-
 const ffa58bPaths = document.querySelectorAll(
   "#path-ffa58b-1, #path-ffa58b-2, #path-ffa58b-3"
 );
@@ -225,7 +220,6 @@ ffa58bPaths.forEach((path) => {
   });
 });
 
-
 //
 // This interaction represents the symbolic "opening" of my flower shop. As the user scrolls, the door gradually opens to reveal a bouquet image behind it. The rotation is directly controlled by scroll progress where more scroll equals more rotation, creating a direct connection between user action and door opening.
 
@@ -246,10 +240,7 @@ const background = document.getElementById("background");
 // The bell.wav sound represents the traditional shop door bell that rings when customers enter AND leave a flower shop.
 // This creates a synchronized audio-visual experience where the bell sound accompanies both door opening and closing animations,
 // mimicking the complete real-world interaction of walking into and out of a physical flower shop.
-//
 
-//
-/
 // Create audio element for bell sound
 const bellSound = new Audio("bell.wav");
 bellSound.volume = 0.7; // Set volume to 70% for pleasant experience
@@ -258,7 +249,6 @@ bellSound.volume = 0.7; // Set volume to 70% for pleasant experience
 let bellHasPlayedForOpening = false;
 let bellHasPlayedForClosing = false;
 let wasAtTop = true; // Track if we were at the top previously
-
 
 //
 // The scroll motion now creates a real-time following effect where doors and background move with the scroll position while simultaneously rotating to reveal the background. This creates the illusion that the user's scroll action is physically moving the door elements while triggering the door opening animation. The doors and background follow the scroll in real-time until they reach 90 degrees, then normal scrolling continues to the next section.
@@ -271,7 +261,6 @@ let wasAtTop = true; // Track if we were at the top previously
 
 // I implemented a smart stopping mechanism where after doors reach 90 degrees, they stop following scroll but remain in final positions. This allows users to continue scrolling to the SVG section while maintaining the visual state of fully opened doors revealing the background.
 
-
 // I used several W3Schools base tutorials including JavaScript Window Object with scrollY property, JavaScript Window Object with innerHeight property, JavaScript Math with min() method, and CSS Transform with rotateY() and translateY() functions.
 
 // My modifications to achieve scroll-following effect started with the original W3Schools scroll example which was simply "window.onscroll = function() { var scrollTop = window.pageYOffset; // Basic scroll handling };". I enhanced this version by combining multiple W3Schools techniques to create a dual-effect where doors rotate based on scroll progress and elements move with scroll, creating the illusion that scrolling physically moves the door elements while simultaneously triggering the door opening animation.
@@ -282,7 +271,6 @@ function updateDoorRotation() {
   // MODIFICATION: Using scrollY instead of pageYOffset for modern compatibility
   const scrollY = window.scrollY; // Current scroll position
 
-  
   // Play bell sound when user first starts scrolling
   playBellOnScrollStart();
 
@@ -313,7 +301,7 @@ function updateDoorRotation() {
   if (rotationProgress > 0.05 && !bellHasPlayedForOpening) {
     bellSound.play().catch((error) => {
       console.log("Bell sound play failed:", error);
-      
+    });
     bellHasPlayedForOpening = true; // Prevent multiple bell plays during door opening
   }
 
@@ -329,16 +317,16 @@ function updateDoorRotation() {
     bellSound.play().catch((error) => {
       console.log("Bell sound play failed:", error);
     });
-    bellHasPlayedForClosing = true; 
+    bellHasPlayedForClosing = true;
     // Prevent multiple closing bell plays
-    bellHasPlayedForOpening = false; 
+    bellHasPlayedForOpening = false;
     // Reset opening bell so it can play again
   } else if (!isAtTop && wasAtTop) {
     // User just left the top - reset closing bell flag
     bellHasPlayedForClosing = false;
   }
 
-  wasAtTop = isAtTop; 
+  wasAtTop = isAtTop;
 
   // scroll to trigger door rotation but with fixed position=====
   //
@@ -346,7 +334,7 @@ function updateDoorRotation() {
   // As the user scrolls, the doors rotate to reveal the background image underneath.
   // The doors stay fixed on top of the scrolling content until fully opened.
 
-  // Apply rotation to doors using CSS transform 
+  // Apply rotation to doors using CSS transform
   if (door1) {
     // Left door rotates clockwise from its left edge
     door1.style.transform = `rotateY(${rotationDegrees}deg)`;
@@ -401,7 +389,6 @@ function updateDoorRotation() {
 // Listen for scroll events using W3Schools onscroll method
 window.onscroll = updateDoorRotation;
 
-
 //
 // When the page is refreshed or loaded, automatically scroll to the top
 // This ensures users always start at the beginning of the flower shop experience
@@ -418,7 +405,6 @@ window.addEventListener("beforeunload", function () {
   window.scrollTo(0, 0);
 });
 
-
 let hasScrolled = false; // Track if user has started scrolling
 
 function playBellOnScrollStart() {
@@ -431,6 +417,4 @@ function playBellOnScrollStart() {
   }
 }
 
-
 // The scroll motion now creates a sophisticated real-time interaction where doors and background follow the scroll position in real-time, creating the illusion that the user's scroll action is physically moving the door elements. Simultaneously, doors rotate to reveal the background, symbolizing the entry ritual into the flower shop. The synchronized dual bell sound system enhances this experience by providing authentic audio feedback that mimics the traditional shop door bell for both entering and leaving, creating a complete immersive multi-sensory interaction that makes users feel like they are physically walking into and out of a real flower shop. The doors and background move with the scroll until they reach 90 degrees, then they stop following scroll but remain in their final positions, allowing users to continue scrolling to the SVG section while maintaining the visual state of fully opened doors.
-
