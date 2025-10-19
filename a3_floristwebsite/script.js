@@ -27,6 +27,57 @@ let bgColor = null;
 const floristSound = new Audio("florist.mp3");
 floristSound.volume = 0.5; // Set volume to 50% for pleasant experience
 
+// ===== AUDIO CONTROL FUNCTIONALITY =====
+//
+// Audio control button that appears when florist.mp3 starts playing
+// Users can click to mute/unmute the audio
+// Button switches between audio.png (unmuted) and mute.png (muted) states
+
+// Get the audio control button
+const audioControl = document.getElementById("audioControl");
+
+// Track audio state
+let isAudioMuted = false;
+let audioControlVisible = false;
+
+// Function to show audio control button
+function showAudioControl() {
+  if (!audioControlVisible) {
+    audioControl.style.display = "block";
+    audioControlVisible = true;
+  }
+}
+
+// Function to hide audio control button
+function hideAudioControl() {
+  if (audioControlVisible) {
+    audioControl.style.display = "none";
+    audioControlVisible = false;
+  }
+}
+
+// Function to toggle mute/unmute
+function toggleAudioMute() {
+  if (isAudioMuted) {
+    // Unmute: resume audio and switch to audio.png
+    floristSound.play().catch((error) => {
+      console.log("Florist sound resume failed:", error);
+    });
+    audioControl.src = "audio.png";
+    isAudioMuted = false;
+  } else {
+    // Mute: pause audio and switch to mute.png
+    floristSound.pause();
+    audioControl.src = "mute.png";
+    isAudioMuted = true;
+  }
+}
+
+// Add click event listener to audio control button
+audioControl.addEventListener("click", toggleAudioMute);
+
+// ===== END AUDIO CONTROL FUNCTIONALITY =====
+
 // Capture dragged color for painting
 boxes.forEach((colorBlock) => {
   colorBlock.addEventListener("dragstart", (event) => {
@@ -42,6 +93,9 @@ boxes.forEach((colorBlock) => {
       console.log("Florist sound play failed:", error);
       // Some browsers require user interaction before playing audio
     });
+
+    // Show audio control button when audio starts playing
+    showAudioControl();
   });
 
   colorBlock.addEventListener("dragend", (event) => {
