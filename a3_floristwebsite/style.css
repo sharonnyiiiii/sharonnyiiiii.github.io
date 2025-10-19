@@ -1,0 +1,421 @@
+/* https://colorhunt.co/palette/1a120b3c2a21d5cea3e5e5cb */
+
+/* ===== W3SCHOOLS TECHNIQUES MODIFIED FOR SCROLL-FOLLOWING DOOR EFFECT ===== */
+/* 
+I have been trying to create a door-sliding effect by using the technique of rotation of image until a certain degree, and trying to make the door image and background image to overlap so that I am able to apply scrolling animation on it. I experimented with different code and parameters, and I found out that this is the most suitable and most fit to my intention and aesthetic, and I adjusted some of the parameters.
+
+The main challenge was creating doors that both rotate AND follow scroll position. I used several W3Schools base tutorials including CSS Transform with rotateY() and translateY(), CSS Transform-origin property, CSS Position with absolute positioning, CSS Z-index property, and CSS Margin with negative values.
+
+My modifications to achieve scroll-following started with the original W3Schools transform example which was simply "transform: rotateY(45deg);". I enhanced this version to "transform: rotateY(45deg) translateY(100px);" which combines rotation AND vertical movement for scroll-following effect.
+
+During my experimentation process using W3Schools techniques, I first tried simple side-by-side doors but they looked like separate panels and not realistic because there was no overlap which made it feel artificial. Then I attempted scaling doors but scale() made doors grow and shrink unnaturally and didn't mimic real door opening mechanics. My third attempt was basic rotation but the doors rotated from center instead of edges, making them look like spinning panels rather than opening doors.
+
+The breakthrough came with the transform-origin technique where I used transform-origin: left/right center. This made the doors rotate from their edges like real doors. Then I experimented with overlap by using negative margin-left: -25% on the right door, which created realistic door overlap in the center. I also applied z-index layering with Door 1 having z-index: 2 and Door 2 having z-index: 1 for proper front/back door hierarchy.
+
+My final innovation was combining rotateY() and translateY() transforms so that doors rotate AND follow scroll position simultaneously. The final W3Schools technique combination includes transform-origin: left/right center, rotateY() for 3D rotation effect, translateY() for scroll-following movement, negative margins for overlap, z-index for layering, and semi-transparent opacity for fridge door effect.
+*/
+/* Door section container */
+.door-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh; /* Full viewport height for proper scroll interaction */
+  overflow: hidden;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* High z-index to stay on top of scrolling content */
+  transition: opacity 1.5s ease-out; /* Faster fade transition */
+}
+
+/* ===== DOOR IMAGES - THE TWIN DOORS EXPERIMENT ===== */
+/* 
+I experimented with different opacity values for the door images to create the right visual effect. Initially I tried opacity: 1 for solid doors but it was too opaque and I couldn't see the background behind it. Then I tried opacity: 0.3 but it was too transparent and I lost the door presence. I settled on opacity: 0.5 which provides the perfect balance for what I call the "fridge door effect".
+
+The semi-transparent doors mimic flowers kept in a fridge to maintain freshness. This half-transparency evokes curiosity as users can glimpse what's behind while creating anticipation, just like peering through a misted glass door to see the beautiful blooms inside.
+
+I used W3Schools techniques including position: absolute for CSS positioning, object-fit: cover for proper image fitting, and opacity property for the transparency effect. I removed the will-change property because it's not covered in W3Schools tutorials and I'm using only W3Schools CSS properties for scroll-following animations. There's no transition because the rotation is directly controlled by scroll position.
+*/
+#doorImage1,
+#doorImage2 {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5; /* Half transparency for the fridge door effect */
+  /* MODIFICATION: Removed will-change property - not covered in W3Schools tutorials */
+  /* Using only W3Schools CSS properties for scroll-following animations */
+  /* No transition - rotation is directly controlled by scroll position */
+}
+
+/* ===== DOOR 1 - THE LEFTY EXPERIMENT ===== */
+/* 
+I experimented with different transform-origin values to make the left door swing realistically. First I tried transform-origin: center center but the door spun around its center like a record which didn't look natural. Then I tried transform-origin: left top but the door rotated from the top-left corner which looked weird and unnatural.
+
+The breakthrough came when I used transform-origin: left center. This made the door swing from the left edge like a real door, mimicking real door hinge behavior. I used the W3Schools transform-origin property technique and positioned the door at left: 0 and top: 0 with z-index: 2 so it sits on top as the front door.
+*/
+#doorImage1 {
+  left: 0;
+  top: 0;
+  z-index: 2; /* Front door - sits on top */
+  transform-origin: left center; /* Hinge on the left, just like home! */
+}
+
+/* ===== DOOR 2 - THE RIGHTY EXPERIMENT ===== */
+/* 
+I experimented with different overlap techniques to make the doors look realistic. First I tried no overlap with doors side-by-side but they looked like two separate panels and not realistic. Then I tried margin-left: -10% but there was too little overlap and it still looked artificial.
+
+The breakthrough came when I used margin-left: -25% which created perfect overlap and a realistic door center seam. I also used transform-origin: right center so the door swings from the right edge, mirroring door 1. I used W3Schools techniques including negative margin values, transform-origin property, and z-index layering with z-index: 1 so it sits behind door 1 as the back door.
+
+This creates realistic door overlap and proper swing mechanics where both doors appear to be part of a single door system rather than separate panels.
+*/
+#doorImage2 {
+  right: 0;
+  top: 0;
+  z-index: 1; /* Back door - sits behind door 1 */
+  margin-left: -25%; /* The magic overlap trick! */
+  transform-origin: right center; /* Hinge on the right, mirroring door 1 */
+}
+
+/* Background image */
+#background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  /* MODIFICATION: Removed will-change property - not covered in W3Schools tutorials */
+  /* Using only W3Schools CSS properties for scroll-following animations */
+}
+
+body {
+  display: flex;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  min-height: 400vh; /* Significantly increased height to create longer scroll distance to SVG section */
+  justify-content: center;
+  align-items: flex-start; /* Changed from center to flex-start for proper scrolling */
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #f4e4bc; /* More saturated cream light yellow */
+  /* color: #e5e5cb; */
+  color: #3c2a21;
+  font-size: 1.1rem;
+  flex-direction: column;
+  /* Content starts after door opening animation completes */
+  padding-top: 200vh; /* Extended padding to match longer scroll distance (200vh) */
+}
+
+/* Removed unused .outer class - layout is now handled by .svg-and-colors-container */
+
+/* ===== CLEAN GRID-LIKE STRUCTURE WITH BALANCED LAYOUT ===== */
+/* 
+The page should have a clean, grid-like structure with two aligned sections: 
+one large visual area for the main image (left) and a smaller supporting element (right). 
+Both should align horizontally with consistent spacing, creating a balanced and systematic layout.
+*/
+.svg-and-colors-container {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* SVG container - Large visual area (left side) */
+.svg-container {
+  background-color: #ffffff5f;
+  padding: 1px;
+  border-radius: 1px;
+  width: 500px; /* Larger SVG container for main visual area */
+  flex: 1; /* Allow it to grow and take more space */
+  position: relative; /* Enable absolute positioning for canvas background */
+}
+
+/* ===== SPIRAL PAINT PALETTE SYSTEM ===== */
+/* 
+This creates a realistic paint palette effect where paint dots are positioned in a spiral pattern
+around a fixed palette image, mimicking how real paint sits on a spiral-shaped palette.
+
+KEY CONCEPTS:
+- Palette image stays completely fixed and centered
+- Paint dots use absolute positioning with mathematical spiral coordinates
+- No flexbox or grid to prevent unwanted resizing or spacing changes
+- Each paint dot positioned using trigonometry (cos/sin) for precise spiral placement
+- Spiral formula: r = increasing radius, θ = angle in degrees
+- Paint dots positioned at 72° intervals (360°/5 dots = 72°) with increasing radius
+
+SPIRAL MATHEMATICS:
+- Each dot placed at angles: 0°, 72°, 144°, 216°, 288°
+- Radius increases by 20px per dot: 60px, 80px, 100px, 120px, 140px
+- Position calculation: x = center + radius * cos(angle), y = center + radius * sin(angle)
+- CSS calc() used for precise positioning: calc(50% + radius * trig_value - half_dot_size)
+
+EFFICIENCY ADVANTAGES OVER MANUAL FLEXBOX:
+- MATHEMATICAL PRECISION: Spiral positioning uses exact trigonometric calculations instead of trial-and-error manual adjustments
+- SCALABLE SYSTEM: Easy to add more paint dots by simply calculating new angles (e.g., 6 dots = 60° intervals)
+- CONSISTENT SPACING: Mathematical progression ensures perfect spacing without manual tweaking
+- RESPONSIVE DESIGN: All positions calculated relative to center, making it naturally responsive
+- MAINTENANCE EFFICIENCY: One formula handles all positioning instead of individual CSS rules per dot
+- VISUAL REALISM: Spiral pattern mimics real paint palette layout better than rigid grid/flexbox arrangements
+- PERFORMANCE: No complex flexbox calculations or layout reflows - just simple absolute positioning
+- CODE REUSABILITY: The spiral formula can be reused for different palette sizes or dot counts
+
+This creates a natural spiral pattern that looks like real paint dots placed on a spiral palette.
+*/
+
+/* Color container - Smaller supporting element (right side) */
+.color-boxes-container {
+  background-image: url("palette.png");
+  background-size: 200%; /* Increased from 150% to 200% for even better visual coverage */
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 10px;
+  border-radius: 30px;
+  width: 400px;
+  height: 400px; /* Fixed height to maintain aspect ratio */
+  position: relative; /* Enable absolute positioning for paint dots */
+  flex-shrink: 0; /* Prevent shrinking to maintain consistent size */
+  /* Removed flexbox to prevent image resizing and spacing issues */
+  transform: translate(50px, 40px); /* Move right by 50px and down by 40px */
+}
+
+/* ===== PAINT DOTS STYLING ===== */
+/* 
+These are the individual paint dots that sit on the spiral palette.
+Each dot is styled to look realistic with shadows, highlights, and smooth interactions.
+
+VISUAL EFFECTS:
+- Circular shape (border-radius: 50%) to mimic real paint drops
+- Drop shadows for depth and realism
+- Inner highlights to simulate paint shine/reflection
+- Subtle borders for definition
+- Smooth hover animations for interactivity
+- Scale effect on hover to provide visual feedback
+
+POSITIONING:
+- Uses absolute positioning for precise spiral placement
+- No margins or auto-centering (handled by spiral math)
+- Each dot positioned individually using spiral coordinates
+*/
+
+.inner {
+  background-color: #d5cea3;
+  width: 60px; /* Increased paint dot size */
+  height: 60px; /* Increased paint dot size */
+  border-radius: 50%; /* Circular paint dots */
+  padding: 8px;
+  position: absolute; /* Absolute positioning for spiral placement */
+  /* Remove margin and auto centering - positioning handled by spiral math */
+
+  /* Realistic paint dot effects */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
+    /* Subtle drop shadow */ inset 0 1px 2px rgba(255, 255, 255, 0.3); /* Inner highlight */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth interactions */
+}
+
+/* Hover effect for paint dots */
+.inner:hover {
+  transform: scale(1.05); /* Slight scale on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15),
+    /* Enhanced shadow on hover */ inset 0 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+/* ===== INDIVIDUAL PAINT DOT POSITIONING ===== */
+/* 
+Each paint dot is positioned using precise spiral mathematics to create a realistic
+spiral pattern on the palette. The positioning uses trigonometric calculations
+to place each dot at specific angles and radii from the center.
+
+SPIRAL FORMULA:
+- Angle spacing: 72° between each dot (360° ÷ 5 dots = 72°)
+- Radius progression: Each dot 20px further from center
+- Position calculation: x = center + radius × cos(angle), y = center + radius × sin(angle)
+
+TRIGONOMETRIC VALUES USED:
+- cos(0°) = 1.000, sin(0°) = 0.000
+- cos(72°) = 0.309, sin(72°) = 0.951  
+- cos(144°) = -0.809, sin(144°) = 0.588
+- cos(216°) = -0.809, sin(216°) = -0.588
+- cos(288°) = 0.309, sin(288°) = -0.951
+
+CSS CALC() POSITIONING:
+- left: calc(50% + radius × cos_value - 25px) [25px = half dot width]
+- top: calc(50% - radius × sin_value - 25px) [25px = half dot height]
+- The negative sin_value accounts for CSS coordinate system (Y increases downward)
+
+WHY SPIRAL POSITIONING IS MORE EFFICIENT THAN MANUAL FLEXBOX:
+
+❌ MANUAL FLEXBOX APPROACH PROBLEMS:
+- Requires individual margin/padding adjustments for each dot
+- Trial-and-error positioning with pixel-by-pixel tweaking
+- Difficult to maintain consistent spacing
+- Hard to add/remove dots without affecting others
+- Complex responsive behavior requiring media queries
+- Visual inconsistencies due to manual adjustments
+- Time-consuming maintenance and updates
+
+✅ SPIRAL MATHEMATICAL APPROACH BENEFITS:
+- Single formula calculates all positions automatically
+- Perfect spacing guaranteed by mathematical progression
+- Easy to scale: add dots by calculating new angles
+- Naturally responsive: all positions relative to center
+- Consistent visual appearance across all screen sizes
+- Minimal code maintenance required
+- Professional, precise positioning every time
+- Reusable system for different palette configurations
+
+DEVELOPMENT EFFICIENCY COMPARISON:
+Manual Flexbox: 5+ individual CSS rules + multiple adjustments + testing + debugging
+Spiral System: 1 mathematical formula + 5 simple calc() expressions = Perfect positioning
+
+This mathematical approach eliminates the need for manual fine-tuning and ensures
+consistent, professional results with minimal maintenance overhead.
+*/
+
+#box1 {
+  background-color: #ffb3d1; /* Less saturated pink */
+  /* Spiral position 1: angle 0°, radius 60px from center - moved further left */
+  left: calc(
+    50% + 10px - 30px
+  ); /* Reduced radius from 30px to 10px to move left */
+  top: calc(50% - 30px); /* 50% center - half dot height */
+}
+
+#box2 {
+  background-color: #87ceeb; /* Less saturated blue (sky blue) */
+  /* Spiral position 2: angle 72°, radius 80px from center */
+  left: calc(50% + 200px * 0.309 - 30px); /* cos(72°) ≈ 0.309 */
+  top: calc(50% - 100px * 0.951 - 30px); /* sin(72°) ≈ 0.951 */
+}
+
+#box3 {
+  background-color: #dda0dd; /* Less saturated purple (plum) */
+  /* Spiral position 3: angle 144°, radius 100px from center */
+  left: calc(50% + 100px * -0.809 - 30px); /* cos(144°) ≈ -0.809 */
+  top: calc(50% - 100px * 0.588 - 30px); /* sin(144°) ≈ 0.588 */
+}
+
+#box4 {
+  background-color: #f5f5dc; /* Cream - already desaturated */
+  /* Spiral position 4: angle 216°, radius 120px from center */
+  left: calc(50% + 120px * -0.809 - 30px); /* cos(216°) ≈ -0.809 */
+  top: calc(50% - 120px * -0.588 - 30px); /* sin(216°) ≈ -0.588 */
+}
+
+#box5 {
+  background-color: #f19672; /* Less saturated red (light salmon) */
+  /* Spiral position 5: angle 288°, radius 140px from center */
+  left: calc(
+    50% + 10px * 0.309 - 30px
+  ); /* cos(288°) ≈ 0.309 - moved left by reducing radius */
+  top: calc(
+    50% - 100px * -0.951 - 30px
+  ); /* sin(288°) ≈ -0.951 - moved up by reducing radius */
+}
+
+#box6 {
+  background-color: #f0e68c; /* Less saturated yellow (khaki) */
+  /* Spiral position 6: angle 360°, radius 160px from center - moved further left */
+  left: calc(
+    50% - 110px * 1 - 30px
+  ); /* Further reduced radius to move more left */
+  top: calc(50% - 160px * 0 - 30px); /* sin(360°) = 0.000 */
+}
+
+#box7 {
+  background-color: #ffb366; /* Less saturated orange (peach) */
+  /* Spiral position 7: angle 432°, radius 180px from center - moved left and down */
+  left: calc(50% + 1px * 0.309 - 30px); /* cos(432°) = cos(72°) ≈ 0.309 */
+  top: calc(50% - 150px * 0.951 - 30px); /* Increased radius to move down */
+}
+
+a {
+  margin-right: 10px;
+  display: block;
+}
+
+#grid-container {
+  border: 2px dashed #e5e5cb;
+  margin: 50px 0;
+  width: 500px;
+  min-height: 500px;
+  padding: 10px;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  /* grid-template-rows: 1fr 1fr 1fr 1fr; */
+  grid-template-rows: repeat(4, 1fr);
+}
+
+#grid-container > * {
+  width: 100%;
+  height: 100%;
+  /* width: 50px;
+  height: 50px;
+  justify-content: start; */
+  /* align-self: center;
+  justify-self: center; */
+}
+/* Old grid-based box styling removed - now using spiral positioning above */
+
+/* Word animation styling */
+.word-animation {
+  margin-top: 50px; /* Move the gif lower */
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Scroll gif styling */
+.scroll-gif {
+  position: absolute;
+  width: 200px; /* Increased size */
+  height: auto;
+  z-index: 1001; /* Above doors */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.scroll-gif-top {
+  top: 20%; /* Position at top center */
+}
+
+.scroll-gif-bottom {
+  bottom: 20%; /* Position at bottom center */
+}
+
+/* SVG Section - positioned after door opening animation */
+.svg-and-colors-container {
+  margin-top: 100vh; /* Reduced margin since body now has 200vh padding */
+  margin-bottom: 50px; /* Add bottom margin for spacing */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .svg-and-colors-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .svg-container {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .color-boxes-container {
+    width: 100%;
+    max-width: 400px;
+  }
+}
