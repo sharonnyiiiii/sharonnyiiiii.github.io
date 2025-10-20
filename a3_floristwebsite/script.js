@@ -37,7 +37,7 @@ floristSound.volume = 0.5; // Set volume to 50% for pleasant experience
 const audioControl = document.getElementById("audioControl");
 
 // Track audio state
-let isAudioMuted = false;
+let isAudioPlaying = false;
 let audioControlVisible = false;
 
 // Function to show audio control button
@@ -56,53 +56,125 @@ function hideAudioControl() {
   }
 }
 
-// Function to toggle mute/unmute
-function toggleAudioMute() {
-  if (isAudioMuted) {
-    // Unmute: resume audio and switch to audio.png
-    floristSound.play().catch((error) => {
-      console.log("Florist sound resume failed:", error);
-    });
-    audioControl.src = "audio.png";
-    isAudioMuted = false;
+// Function to toggle play/pause
+function toggleAudioPlayPause() {
+  if (floristSound.paused) {
+    floristSound
+      .play()
+      .then(() => {
+        audioControl.src = "audio.png"; // playing icon
+        isAudioPlaying = true;
+      })
+      .catch((error) => {
+        console.log("Florist sound play failed:", error);
+      });
   } else {
-    // Mute: pause audio and switch to mute.png
     floristSound.pause();
-    audioControl.src = "mute.png";
-    isAudioMuted = true;
+    audioControl.src = "mute.png"; // paused icon
+    isAudioPlaying = false;
   }
 }
 
 // Add click event listener to audio control button
-audioControl.addEventListener("click", toggleAudioMute);
+audioControl.addEventListener("click", toggleAudioPlayPause);
 
 // ===== END AUDIO CONTROL FUNCTIONALITY =====
 
-// Capture dragged color for painting
+// ===== PAINT BRUSH CURSOR SYSTEM - ARTISTIC INTERACTION HINTS =====
+//
+// You know how when you're in an art studio and you pick up a paintbrush, your hand naturally
+// transforms into that of an artist? That's exactly what happens here! When users start dragging
+// a color from our beautiful spiral palette, their cursor magically becomes a paint brush.
+//
+// This isn't just a visual gimmick - it's a psychological cue that transforms the user from
+// a passive observer into an active artist. The brush cursor whispers to them: "You're not
+// just clicking around, you're creating art. You're painting your own bouquet."
+//
+// The brush cursor appears the moment they start dragging, giving them that satisfying
+// "I'm holding a real paintbrush" feeling, and disappears when they're done, returning them
+// to normal browsing mode. It's like putting down your brush after finishing a masterpiece.
+
+// ===== INTERACTION AREA LIMITATION - FOCUSED ARTISTIC EXPERIENCE =====
+//
+// Just like how a real artist works within the boundaries of their canvas, we want to guide
+// users to focus their creative energy within our designated artistic workspace. The svg-and-colors-container
+// becomes their creative canvas - this is where the magic happens, where colors meet flowers,
+// where art is born.
+//
+// By limiting the brush cursor to only appear within this container, we're essentially saying:
+// "This is your studio, your creative space. Here, you're an artist. Outside of here, you're
+// just browsing the web." It's a subtle but powerful way to create focus and intention.
+//
+// The brush cursor will only appear when users are actively working within their artistic
+// workspace, making the interaction feel more purposeful and immersive.
+
+// Get the main interaction container - this is our artistic workspace
+const svgAndColorsContainer = document.querySelector(
+  ".svg-and-colors-container"
+);
+
+// Function to check if mouse is within the artistic workspace
+function isWithinArtisticWorkspace(event) {
+  if (!svgAndColorsContainer) return false;
+
+  const rect = svgAndColorsContainer.getBoundingClientRect();
+  const x = event.clientX;
+  const y = event.clientY;
+
+  return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+}
+
+// Enhanced drag start with workspace awareness
 boxes.forEach((colorBlock) => {
   colorBlock.addEventListener("dragstart", (event) => {
     bgColor = window.getComputedStyle(event.target).backgroundColor;
     console.log("Dragging color:", bgColor); // Debug log
 
-    // Add brush cursor class to body during drag
-    document.body.classList.add("brush-cursor");
-    colorBlock.classList.add("dragging");
+    // Only transform into artist mode if we're in the artistic workspace
+    if (isWithinArtisticWorkspace(event)) {
+      // Transform the user into an artist! Add brush cursor class during drag
+      // This magical moment when their cursor becomes a paintbrush
+      document.body.classList.add("brush-cursor");
+      colorBlock.classList.add("dragging");
+    }
 
     // Play florist.mp3 when drag interaction starts - the soundtrack of artistic creation
-    floristSound.play().catch((error) => {
-      console.log("Florist sound play failed:", error);
-      // Some browsers require user interaction before playing audio
-    });
-
-    // Show audio control button when audio starts playing
-    showAudioControl();
+    floristSound
+      .play()
+      .then(() => {
+        audioControl.src = "audio.png";
+        isAudioPlaying = true;
+        // Show audio control button when audio starts playing
+        showAudioControl();
+      })
+      .catch((error) => {
+        console.log("Florist sound play failed:", error);
+        // Some browsers require user interaction before playing audio
+      });
   });
 
+  // Enhanced drag end with workspace cleanup
   colorBlock.addEventListener("dragend", (event) => {
-    // Remove brush cursor class when drag ends
+    // The artistic moment is over - return to normal cursor
+    // Like putting down your paintbrush after finishing your masterpiece
     document.body.classList.remove("brush-cursor");
     colorBlock.classList.remove("dragging");
   });
+});
+
+// Add mouse movement tracking to dynamically manage brush cursor visibility
+// This ensures the brush cursor only appears when users are actively working in their artistic space
+document.addEventListener("mousemove", (event) => {
+  // Only apply workspace logic if we're currently in brush mode (dragging)
+  if (document.body.classList.contains("brush-cursor")) {
+    if (!isWithinArtisticWorkspace(event)) {
+      // User moved outside their artistic workspace - remove brush cursor
+      document.body.classList.remove("brush-cursor");
+    } else {
+      // User is back in their artistic workspace - restore brush cursor
+      document.body.classList.add("brush-cursor");
+    }
+  }
 });
 
 orangeFlowers.forEach((flower) => {

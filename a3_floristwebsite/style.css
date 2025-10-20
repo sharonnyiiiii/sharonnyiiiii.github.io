@@ -2,10 +2,10 @@
 /* Audio control button positioned at top right of the screen */
 .audio-control {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: -45px;
+  right: -73px;
   width: 210px;
-  height: 210px;
+  height: 185px;
   z-index: 1002; /* Above doors and other elements */
   cursor: pointer;
   transition: transform 0.2s ease, opacity 0.3s ease;
@@ -181,6 +181,10 @@ body {
   /* Extended padding to match longer scroll distance (200vh) */
   overflow-x: hidden;
   box-sizing: border-box;
+  background-image: url("bgcolor.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* Removed unused .outer class - layout is now handled by .svg-and-colors-container */
@@ -201,6 +205,19 @@ Both should align horizontally with consistent spacing, creating a balanced and 
   margin: 0 auto;
   padding: 0 1rem;
   box-sizing: border-box;
+  position: relative; /* create stacking context for backdrop */
+  z-index: 1; /* keep content above backdrop */
+}
+
+/* Intrinsic-size backdrop image centered behind the container */
+.svg-and-colors-container::before {
+  content: url("bgcolor.png");
+  position: absolute;
+  top: 0; /* starts at container top (below word animations in DOM) */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0; /* behind container content */
+  pointer-events: none;
 }
 
 /* SVG container - bouquet */
@@ -463,6 +480,18 @@ a {
   box-sizing: border-box;
 }
 
+/* Butterfly gif fixed at bottom center */
+.butterfly-bottom {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  z-index: 1001;
+  pointer-events: none;
+  width: min(550px, 70vw);
+  height: auto;
+}
+
 /* Scroll gif styling */
 .scroll-gif {
   position: absolute;
@@ -482,24 +511,80 @@ a {
   bottom: 20%; /* Position at bottom center */
 }
 
+/* ===== PAINT BRUSH CURSOR SYSTEM - ARTISTIC WORKSPACE FOCUS ===== */
+/* 
+You know that feeling when you walk into an art studio and everything just feels... creative?
+That's exactly what we're creating here! The brush cursor isn't just a visual effect - it's a
+psychological transformation that happens the moment users enter their artistic workspace.
+
+Think of it like this: when you're outside the svg-and-colors-container, you're just browsing
+the web like any other day. But the moment you step into that container with a color in hand,
+you become an artist. Your cursor transforms into a paintbrush, and suddenly you're not just
+dragging pixels around - you're painting flowers, creating beauty, making art.
+
+This scoped approach ensures that the magical transformation only happens where it should -
+within the boundaries of the creative workspace. It's like having a designated art studio
+where the brush cursor appears, and everywhere else remains normal browsing territory.
+
+The cursor.cur file contains our custom paintbrush cursor that makes users feel like they're
+holding a real brush, complete with the perfect angle and visual weight that says "artist at work."
+*/
+
 /* SVG Section - positioned after door opening animation */
 .svg-and-colors-container {
   margin-top: 100vh; /* Reduced margin since body now has 200vh padding */
   margin-bottom: 50px; /* Add bottom margin for spacing */
+  cursor: url("cursor.cur"), auto; /* Custom brush cursor for this container area */
 }
 
-/* ===== BRUSH CURSOR STYLING ===== */
-/* Custom brush cursor for dragging paint dots */
+/* ===== BRUSH CURSOR STATES - THE ARTISTIC TRANSFORMATION ===== */
+/* 
+This is where the magic happens! When users are actively creating art within their workspace,
+their cursor transforms into a paintbrush. It's not just a visual change - it's a complete
+psychological shift from "web browser" to "digital artist."
+
+The brush cursor only appears when:
+1. User is dragging a color (active artistic state)
+2. User is within the svg-and-colors-container (artistic workspace)
+3. User is actively engaged in the creative process
+
+This creates a focused, intentional artistic experience where the brush cursor becomes a symbol
+of creative power and artistic agency.
+*/
+
+/* Custom brush cursor for dragging paint dots - overrides no-drop cursor */
+/* This only applies when users are actively dragging within the artistic workspace */
 .brush-cursor {
-  cursor: url("cursor.cur"), crosshair, auto !important;
+  cursor: url("cursor.cur") 0 0, crosshair, auto !important;
 }
 
-/* Dragging state for paint dots */
+/* Apply brush cursor to body when dragging - but only within artistic workspace */
+/* The !important ensures it overrides any other cursor styles during active creation */
+body.brush-cursor {
+  cursor: url("cursor.cur") 0 0, crosshair, auto !important;
+}
+
+/* Test cursor - for debugging cursor mechanism */
+.brush-cursor-test {
+  cursor: crosshair !important;
+}
+
+/* ===== DRAGGING STATE - THE ACTIVE ARTISTIC MOMENT ===== */
+/* 
+When users are actively dragging a color, they're in their most creative state. The paint dot
+becomes slightly transparent (opacity: 0.7) to show they're "lifting" it off the palette,
+scales up slightly (scale(1.1)) to emphasize the active selection, and gets a higher z-index
+to ensure it stays on top during the drag operation.
+
+The brush cursor on the dragging element reinforces that this specific color is "in hand"
+and ready to be applied to the flowers. It's like holding a real paintbrush with wet paint
+on the tip - you can see the color, feel the weight, and know exactly what you're about to create.
+*/
 .inner.dragging {
-  cursor: url("cursor.cur"), crosshair, auto !important;
-  opacity: 0.7;
-  transform: scale(1.1);
-  z-index: 1000;
+  cursor: url("cursor.cur") 0 0, crosshair, auto !important;
+  opacity: 0.7; /* Slightly transparent to show "lifting" effect */
+  transform: scale(1.1); /* Slightly larger to emphasize active selection */
+  z-index: 1000; /* Stay on top during drag operation */
 }
 
 /* Drop zone highlighting */
@@ -517,6 +602,30 @@ path.drag-over {
   fill-opacity: 0.8 !important;
   filter: brightness(1.2);
   transition: all 0.3s ease;
+}
+
+/* ===== SVG INTERACTION CURSORS - CANVAS-SPECIFIC ARTISTIC STATES ===== */
+/* 
+When users are actively painting within their artistic workspace, every element they interact with
+should reinforce their role as an artist. The SVG paths (the flowers) and the SVG container (the canvas)
+both adopt the brush cursor to create a cohesive artistic experience.
+
+This ensures that whether users are hovering over a flower petal or moving across the canvas,
+they always see the brush cursor - maintaining that magical "I'm an artist" feeling throughout
+their entire creative process.
+
+The cursor consistency is crucial for immersion. It's like having a real art studio where
+everything you touch reminds you that you're creating something beautiful.
+*/
+
+/* Ensure SVG paths (flowers) use brush cursor during active artistic creation */
+.brush-cursor path {
+  cursor: url("cursor.cur") 0 0, crosshair, auto !important;
+}
+
+/* Ensure SVG container (canvas) uses brush cursor during active artistic creation */
+.brush-cursor .svg-container {
+  cursor: url("cursor.cur") 0 0, crosshair, auto !important;
 }
 
 /* Responsive design for smaller screens */
