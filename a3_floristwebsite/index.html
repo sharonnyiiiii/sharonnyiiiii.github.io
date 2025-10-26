@@ -8,6 +8,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="icon" href="paint.png" type="image/png" />
+
     <title>Florist.syii</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -98,9 +100,20 @@
 
     <img src="window.gif" alt="Window Animation" class="word-animation">
     <img src="instruction.gif" alt="Instruction Animation" class="word-animation">
+    
+    <!-- Have Fun Container with Draggable Flowers -->
+    <div class="have-fun-container">
+      <img src="havefun.png" alt="Have Fun" class="have-fun-image">
+      <img src="f1.png" alt="Flower 1" class="draggable-flower">
+      <img src="f2.png" alt="Flower 2" class="draggable-flower">
+      <img src="f3.png" alt="Flower 3" class="draggable-flower">
+      <img src="f4.png" alt="Flower 4" class="draggable-flower">
+      <img src="f5.png" alt="Flower 5" class="draggable-flower">
+    </div>
 
     <div class="svg-and-colors-container">
       
+      <div class="left-column">
       <div class="svg-container">
         <svg
 
@@ -10321,6 +10334,30 @@
         />
 
         </svg>
+        
+        <!-- Reset Colors Button -->
+        <button id="resetColorsBtn" class="reset-colors-btn" title="Reset all colors to default">
+          <img src="reset.png" alt="Reset Colors">
+        </button>
+      </div>
+
+      <!-- Save Button -->
+      <button id="saveButton" class="save-btn" title="Save your bouquet as an image">
+        <img src="savebutton.png" alt="Save Bouquet">
+      </button>
+
+      </div>
+
+      <!-- Card Message Overlay -->
+      <div id="cardMessageOverlay" class="card-message-overlay" style="display: none;">
+        <div class="card-message-wrapper">
+          <img src="ribbon.gif" alt="Ribbon Decoration" class="ribbon-decoration">
+          <img src="letter.png" alt="Letter Background" class="letter-background">
+          <img src="cardmessage.gif" alt="Card Message" class="card-message-gif">
+          <button id="closeCardMessage" class="close-card-message-btn" title="Close message">
+            <img src="close icon.png" alt="Close">
+          </button>
+        </div>
       </div>
 
       <!-- Color Palette Section -->
@@ -10330,6 +10367,8 @@
       <!-- I picked these colors because they look nice together -->
 
       <!-- drag any of these circles onto the flowers above to paint them -->
+
+      <div class="color-palette-wrapper">
 
       <div class="color-boxes-container">
 
@@ -10368,6 +10407,13 @@
       <!-- orange - autumn vibes -->
 
       <div class="inner" id="box7" draggable="true"></div>
+
+      </div>
+
+      <!-- Finish Button -->
+      <button id="finishButton" class="finish-btn" title="Finish and view message">
+        <img src="finishbutton.png" alt="Finish">
+      </button>
 
       </div>
 

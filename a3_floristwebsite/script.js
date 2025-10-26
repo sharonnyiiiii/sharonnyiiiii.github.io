@@ -40,20 +40,10 @@ const audioControl = document.getElementById("audioControl");
 let isAudioPlaying = false;
 let audioControlVisible = false;
 
-// Function to show audio control button
-function showAudioControl() {
-  if (!audioControlVisible) {
-    audioControl.style.display = "block";
-    audioControlVisible = true;
-  }
-}
-
-// Function to hide audio control button
-function hideAudioControl() {
-  if (audioControlVisible) {
-    audioControl.style.display = "none";
-    audioControlVisible = false;
-  }
+// Function to show/hide audio control button
+function setAudioControlVisibility(visible) {
+  audioControl.style.display = visible ? "block" : "none";
+  audioControlVisible = visible;
 }
 
 // Function to toggle play/pause
@@ -62,15 +52,13 @@ function toggleAudioPlayPause() {
     floristSound
       .play()
       .then(() => {
-        audioControl.src = "audio.png"; // playing icon
+        audioControl.src = "audio.png";
         isAudioPlaying = true;
       })
-      .catch((error) => {
-        console.log("Florist sound play failed:", error);
-      });
+      .catch(() => console.log("Florist sound play failed"));
   } else {
     floristSound.pause();
-    audioControl.src = "mute.png"; // paused icon
+    audioControl.src = "mute.png";
     isAudioPlaying = false;
   }
 }
@@ -144,13 +132,9 @@ boxes.forEach((colorBlock) => {
       .then(() => {
         audioControl.src = "audio.png";
         isAudioPlaying = true;
-        // Show audio control button when audio starts playing
-        showAudioControl();
+        setAudioControlVisibility(true);
       })
-      .catch((error) => {
-        console.log("Florist sound play failed:", error);
-        // Some browsers require user interaction before playing audio
-      });
+      .catch(() => console.log("Florist sound play failed"));
   });
 
   // Enhanced drag end with workspace cleanup
@@ -177,27 +161,29 @@ document.addEventListener("mousemove", (event) => {
   }
 });
 
-orangeFlowers.forEach((flower) => {
-  flower.addEventListener("dragover", (event) => {
-    event.preventDefault();
-    flower.classList.add("drag-over");
-  });
+// Helper function to setup drag-and-drop for elements
+function setupDragAndDrop(elements) {
+  elements.forEach((element) => {
+    element.addEventListener("dragover", (event) => {
+      event.preventDefault();
+      element.classList.add("drag-over");
+    });
 
-  flower.addEventListener("dragleave", (event) => {
-    flower.classList.remove("drag-over");
-  });
+    element.addEventListener("dragleave", () => {
+      element.classList.remove("drag-over");
+    });
 
-  flower.addEventListener("drop", (event) => {
-    event.preventDefault();
-    //   // Set the background color of the body to the dropped color
-    //   //   target.style.backgroundColor = bgColor;
-    flower.style.fill = bgColor;
-
-    // Remove highlight and restore normal cursor when color is dropped
-    flower.classList.remove("drag-over");
-    document.body.classList.remove("brush-cursor");
+    element.addEventListener("drop", (event) => {
+      event.preventDefault();
+      element.style.fill = bgColor;
+      element.classList.remove("drag-over");
+      document.body.classList.remove("brush-cursor");
+    });
   });
-});
+}
+
+// Setup drag-and-drop for orange flowers
+setupDragAndDrop(orangeFlowers);
 
 //  DRAG AND DROP FOR E04819 PATHS
 //
@@ -211,28 +197,7 @@ orangeFlowers.forEach((flower) => {
 // which areas can accept dropped colors and enhancing the overall user experience with clear visual cues.
 
 const e04819Paths = document.querySelectorAll("#path-e04819-1, #path-e04819-2");
-
-e04819Paths.forEach((path) => {
-  path.addEventListener("dragover", (event) => {
-    event.preventDefault();
-    path.classList.add("drag-over");
-  });
-
-  path.addEventListener("dragleave", (event) => {
-    path.classList.remove("drag-over");
-  });
-
-  path.addEventListener("drop", (event) => {
-    event.preventDefault();
-    // Set the fill color of the path to the dropped color
-    path.style.fill = bgColor;
-    console.log("Dropped color onto e04819 path:", bgColor); // Debug log
-
-    // Remove highlight and restore normal cursor when color is dropped
-    path.classList.remove("drag-over");
-    document.body.classList.remove("brush-cursor");
-  });
-});
+setupDragAndDrop(e04819Paths);
 
 // DRAG AND DROP FOR F16691 PATHS
 //
@@ -240,28 +205,7 @@ e04819Paths.forEach((path) => {
 // This allows users to drag color boxes onto these specific paths to change their color
 
 const f16691Paths = document.querySelectorAll("#path-f16691-1, #path-f16691-2");
-
-f16691Paths.forEach((path) => {
-  path.addEventListener("dragover", (event) => {
-    event.preventDefault();
-    path.classList.add("drag-over");
-  });
-
-  path.addEventListener("dragleave", (event) => {
-    path.classList.remove("drag-over");
-  });
-
-  path.addEventListener("drop", (event) => {
-    event.preventDefault();
-    // Set the fill color of the path to the dropped color
-    path.style.fill = bgColor;
-    console.log("Dropped color onto f16691 path:", bgColor); // Debug log
-
-    // Remove highlight and restore normal cursor when color is dropped
-    path.classList.remove("drag-over");
-    document.body.classList.remove("brush-cursor");
-  });
-});
+setupDragAndDrop(f16691Paths);
 
 // Add drag and drop functionality for the seven paths with fill #f7df52
 // This allows users to drag color boxes onto these specific paths to change their color
@@ -269,82 +213,19 @@ f16691Paths.forEach((path) => {
 const f7df52Paths = document.querySelectorAll(
   "#path-f7df52-1, #path-f7df52-2, #path-f7df52-3, #path-f7df52-4, #path-f7df52-5, #path-f7df52-6, #path-f7df52-7"
 );
-
-f7df52Paths.forEach((path) => {
-  path.addEventListener("dragover", (event) => {
-    event.preventDefault();
-    path.classList.add("drag-over");
-  });
-
-  path.addEventListener("dragleave", (event) => {
-    path.classList.remove("drag-over");
-  });
-
-  path.addEventListener("drop", (event) => {
-    event.preventDefault();
-    // Set the fill color of the path to the dropped color
-    path.style.fill = bgColor;
-    console.log("Dropped color onto f7df52 path:", bgColor); // Debug log
-
-    // Remove highlight and restore normal cursor when color is dropped
-    path.classList.remove("drag-over");
-    document.body.classList.remove("brush-cursor");
-  });
-});
+setupDragAndDrop(f7df52Paths);
 
 //
 // Add drag and drop functionality for the path with fill #f79c53
 // This allows users to drag color boxes onto this specific path to change its color
 
 const f79c53Paths = document.querySelectorAll("#path-f79c53-1");
-
-f79c53Paths.forEach((path) => {
-  path.addEventListener("dragover", (event) => {
-    event.preventDefault();
-    path.classList.add("drag-over");
-  });
-
-  path.addEventListener("dragleave", (event) => {
-    path.classList.remove("drag-over");
-  });
-
-  path.addEventListener("drop", (event) => {
-    event.preventDefault();
-    // Set the fill color of the path to the dropped color
-    path.style.fill = bgColor;
-    console.log("Dropped color onto f79c53 path:", bgColor); // Debug log
-
-    // Remove highlight and restore normal cursor when color is dropped
-    path.classList.remove("drag-over");
-    document.body.classList.remove("brush-cursor");
-  });
-});
+setupDragAndDrop(f79c53Paths);
 
 const ffa58bPaths = document.querySelectorAll(
   "#path-ffa58b-1, #path-ffa58b-2, #path-ffa58b-3"
 );
-
-ffa58bPaths.forEach((path) => {
-  path.addEventListener("dragover", (event) => {
-    event.preventDefault();
-    path.classList.add("drag-over");
-  });
-
-  path.addEventListener("dragleave", (event) => {
-    path.classList.remove("drag-over");
-  });
-
-  path.addEventListener("drop", (event) => {
-    event.preventDefault();
-    // Set the fill color of the path to the dropped color
-    path.style.fill = bgColor;
-    console.log("Dropped color onto ffa58b path:", bgColor); // Debug log
-
-    // Remove highlight and restore normal cursor when color is dropped
-    path.classList.remove("drag-over");
-    document.body.classList.remove("brush-cursor");
-  });
-});
+setupDragAndDrop(ffa58bPaths);
 
 //
 // This interaction represents the symbolic "opening" of my flower shop. As the user scrolls, the door gradually opens to reveal a bouquet image behind it. The rotation is directly controlled by scroll progress where more scroll equals more rotation, creating a direct connection between user action and door opening.
@@ -397,9 +278,6 @@ function updateDoorRotation() {
   // MODIFICATION: Using scrollY instead of pageYOffset for modern compatibility
   const scrollY = window.scrollY; // Current scroll position
 
-  // Play bell sound when user first starts scrolling
-  playBellOnScrollStart();
-
   //  W3SCHOOLS TECHNIQUE: window.innerHeight
   //  Reference: https://www.w3schools.com/jsref/prop_win_innerheight.asp
   // MODIFICATION: Using innerHeight to create responsive door opening distance
@@ -420,15 +298,13 @@ function updateDoorRotation() {
 
   // ===== BELL SOUND TRIGGER - SYNCHRONIZED SHOP ENTRANCE & EXIT EXPERIENCE =====
   //
-  // Play bell sound when user starts scrolling to rotate doors (opening), creating synchronized audio-visual feedback
+  // Play bell sound when scroll.gif starts being triggered by scroll movement (rotationProgress > 0.02)
   // This mimics the real-world experience of hearing a shop bell when opening a door to enter a flower shop
-  // The sound plays at the moment doors begin rotating, reinforcing the immersive shop entrance experience
-  // Only play once when rotation begins (progress > 0.05 to avoid accidental triggers)
-  if (rotationProgress > 0.05 && !bellHasPlayedForOpening) {
-    bellSound.play().catch((error) => {
-      console.log("Bell sound play failed:", error);
-    });
-    bellHasPlayedForOpening = true; // Prevent multiple bell plays during door opening
+  // The sound plays when doors start visibly rotating and scroll.gif begins its animation, reinforcing the immersive shop entrance experience
+  // Only play once when scroll movement becomes noticeable (about 2% door opening = ~4vh scroll)
+  if (rotationProgress > 0.02 && !bellHasPlayedForOpening) {
+    bellSound.play().catch(() => console.log("Bell sound play failed"));
+    bellHasPlayedForOpening = true;
   }
 
   // =====  DOOR CLOSING EXPERIENCE =====
@@ -439,16 +315,10 @@ function updateDoorRotation() {
   const isAtTop = scrollY <= 10; // Consider "at top" when within 10px of the very top
 
   if (isAtTop && !wasAtTop && !bellHasPlayedForClosing) {
-    // User just returned to the top - play closing bell
-    bellSound.play().catch((error) => {
-      console.log("Bell sound play failed:", error);
-    });
+    bellSound.play().catch(() => console.log("Bell sound play failed"));
     bellHasPlayedForClosing = true;
-    // Prevent multiple closing bell plays
-    bellHasPlayedForOpening = false;
-    // Reset opening bell so it can play again
+    bellHasPlayedForOpening = false; // Reset opening bell so it can play again
   } else if (!isAtTop && wasAtTop) {
-    // User just left the top - reset closing bell flag
     bellHasPlayedForClosing = false;
   }
 
@@ -461,18 +331,9 @@ function updateDoorRotation() {
   // The doors stay fixed on top of the scrolling content until fully opened.
 
   // Apply rotation to doors using CSS transform
-  if (door1) {
-    // Left door rotates clockwise from its left edge
-    door1.style.transform = `rotateY(${rotationDegrees}deg)`;
-  }
-  if (door2) {
-    // Right door rotates counter-clockwise from its right edge
-    door2.style.transform = `rotateY(-${rotationDegrees}deg)`;
-  }
-  if (background) {
-    // Background stays in place, no transform needed
-    background.style.transform = `none`;
-  }
+  if (door1) door1.style.transform = `rotateY(${rotationDegrees}deg)`;
+  if (door2) door2.style.transform = `rotateY(-${rotationDegrees}deg)`;
+  if (background) background.style.transform = `none`;
 
   // When doors reach 90 degrees (fully opened), hide the door section
   // to allow the background content to be fully visible
@@ -480,17 +341,14 @@ function updateDoorRotation() {
   const doorSection = document.querySelector(".door-section");
   if (doorSection) {
     if (rotationProgress >= 1) {
-      // Doors are fully opened, fade out the door section
       doorSection.style.opacity = "0";
       doorSection.style.pointerEvents = "none";
     } else if (rotationProgress >= 0.85) {
-      // Start gradual fade when doors are 85% opened for quicker transition
-      const fadeProgress = (rotationProgress - 0.85) / 0.15; // 0 to 1 as doors open from 85% to 100%
-      const opacity = 1 - fadeProgress; // Gradually fade from 1 to 0
+      // Gradually fade from 85% to 100% opening
+      const opacity = 1 - (rotationProgress - 0.85) / 0.15;
       doorSection.style.opacity = opacity.toString();
       doorSection.style.pointerEvents = "auto";
     } else {
-      // Doors are still opening, keep door section fully visible
       doorSection.style.opacity = "1";
       doorSection.style.pointerEvents = "auto";
     }
@@ -523,6 +381,10 @@ window.onscroll = updateDoorRotation;
 window.addEventListener("load", function () {
   // Scroll to the very top of the page when page loads/refreshes
   window.scrollTo(0, 0);
+  // Reset bell flags so bell sound plays on first scroll after refresh/load
+  bellHasPlayedForOpening = false;
+  bellHasPlayedForClosing = false;
+  wasAtTop = true;
 });
 
 // Also handle page refresh with beforeunload to ensure clean state
@@ -531,16 +393,316 @@ window.addEventListener("beforeunload", function () {
   window.scrollTo(0, 0);
 });
 
-let hasScrolled = false; // Track if user has started scrolling
+// The scroll motion now creates a sophisticated real-time interaction where doors and background follow the scroll position in real-time, creating the illusion that the user's scroll action is physically moving the door elements. Simultaneously, doors rotate to reveal the background, symbolizing the entry ritual into the flower shop. The synchronized dual bell sound system enhances this experience by providing authentic audio feedback that mimics the traditional shop door bell for both entering and leaving, creating a complete immersive multi-sensory interaction that makes users feel like they are physically walking into and out of a real flower shop. The doors and background move with the scroll until they reach 90 degrees, then they stop following scroll but remain in their final positions, allowing users to continue scrolling to the SVG section while maintaining the visual state of fully opened doors.
 
-function playBellOnScrollStart() {
-  // Play bell sound when user first starts scrolling
-  if (!hasScrolled) {
-    bellSound.play().catch((error) => {
-      console.log("Bell sound play failed:", error);
+// ===== RESET COLORS FUNCTIONALITY =====
+//
+// The reset button allows users to clear all applied paint colors from the flower bouquet
+// and return it to its default state. This provides a way to start fresh and explore
+// different color combinations without needing to reload the page.
+//
+// The reset function restores all SVG paths to their original fill colors, giving users
+// a clean canvas to work with. The hover effect provides visual feedback, making it clear
+// that the button is interactive and ready to restore the bouquet's original appearance.
+
+// Get the reset button
+const resetColorsBtn = document.getElementById("resetColorsBtn");
+
+// Default colors mapping for reset functionality
+const defaultColors = {
+  ".orange": "#e57b26",
+  "#path-e04819-1, #path-e04819-2": "#e04819",
+  "#path-f16691-1, #path-f16691-2": "#f16691",
+  "#path-f7df52-1, #path-f7df52-2, #path-f7df52-3, #path-f7df52-4, #path-f7df52-5, #path-f7df52-6, #path-f7df52-7":
+    "#f7df52",
+  "#path-f79c53-1": "#f79c53",
+  "#path-ffa58b-1, #path-ffa58b-2, #path-ffa58b-3": "#ffa58b",
+};
+
+// Function to reset all colors to their default state
+function resetColors() {
+  Object.entries(defaultColors).forEach(([selector, color]) => {
+    document.querySelectorAll(selector).forEach((element) => {
+      element.style.fill = color;
     });
-    hasScrolled = true; // Prevent multiple plays
-  }
+  });
+  console.log("All colors have been reset to default state");
 }
 
-// The scroll motion now creates a sophisticated real-time interaction where doors and background follow the scroll position in real-time, creating the illusion that the user's scroll action is physically moving the door elements. Simultaneously, doors rotate to reveal the background, symbolizing the entry ritual into the flower shop. The synchronized dual bell sound system enhances this experience by providing authentic audio feedback that mimics the traditional shop door bell for both entering and leaving, creating a complete immersive multi-sensory interaction that makes users feel like they are physically walking into and out of a real flower shop. The doors and background move with the scroll until they reach 90 degrees, then they stop following scroll but remain in their final positions, allowing users to continue scrolling to the SVG section while maintaining the visual state of fully opened doors.
+// Add click event listener to reset button
+resetColorsBtn.addEventListener("click", resetColors);
+
+// ===== SAVE IMAGE FUNCTIONALITY =====
+//
+// The save button allows users to download their customized bouquet as an image.
+// This saves the SVG content with all the applied colors, giving users a way to
+// preserve their artistic creation and share it with others.
+//
+// The save function converts the SVG to a PNG image for easy sharing and downloading.
+
+// Audio element for camera sound
+const cameraSound = new Audio("camera.wav");
+cameraSound.volume = 0.7; // Set volume to 70% for pleasant experience
+
+// Get the save button
+const saveButton = document.getElementById("saveButton");
+
+// Function to save the SVG as an image
+function saveSVGAsImage() {
+  cameraSound.play().catch(() => console.log("Camera sound play failed"));
+
+  // Get the SVG element
+  const svgElement = document.querySelector(".svg-container svg");
+
+  if (!svgElement) {
+    console.error("SVG element not found");
+    return;
+  }
+
+  // Clone the SVG to avoid modifying the original
+  const svgClone = svgElement.cloneNode(true);
+
+  // Get the current styles and dimensions
+  const styles = window.getComputedStyle(svgElement);
+  const width = parseInt(
+    svgElement.getAttribute("width") || svgElement.viewBox.baseVal.width || 1200
+  );
+  const height = parseInt(
+    svgElement.getAttribute("height") ||
+      svgElement.viewBox.baseVal.height ||
+      1200
+  );
+
+  // Set dimensions on the clone
+  svgClone.setAttribute("width", width);
+  svgClone.setAttribute("height", height);
+
+  // Serialize the SVG to string
+  const serializer = new XMLSerializer();
+  const svgString = serializer.serializeToString(svgClone);
+
+  // Create a blob from the SVG string
+  const svgBlob = new Blob([svgString], {
+    type: "image/svg+xml;charset=utf-8",
+  });
+  const url = URL.createObjectURL(svgBlob);
+
+  // Create an image element to convert SVG to canvas
+  const img = new Image();
+  img.onload = function () {
+    // Create a canvas element
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+
+    // Draw the image on the canvas
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    // Convert canvas to blob and trigger download
+    canvas.toBlob(function (blob) {
+      const downloadUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = downloadUrl;
+      link.download = "bouquet-" + Date.now() + ".png";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Clean up URLs
+      URL.revokeObjectURL(url);
+      URL.revokeObjectURL(downloadUrl);
+    }, "image/png");
+  };
+
+  img.onerror = function () {
+    console.error("Error loading SVG image");
+    URL.revokeObjectURL(url);
+  };
+
+  img.src = url;
+
+  console.log("Bouquet saved successfully!");
+}
+
+// Add click event listener to save button
+saveButton.addEventListener("click", saveSVGAsImage);
+
+// ===== FINISH BUTTON FUNCTIONALITY =====
+//
+// The finish button allows users to view a card message after completing their bouquet.
+// When clicked, it displays a card message animation with a close icon overlapped on it.
+// Users can close the message by clicking the close icon, which hides both the message and icon.
+
+// Audio element for finish sound
+const finishSound = new Audio("finnish.wav");
+finishSound.volume = 0.7; // Set volume to 70% for pleasant experience
+
+// Get the finish button and card message elements
+const finishButton = document.getElementById("finishButton");
+const cardMessageOverlay = document.getElementById("cardMessageOverlay");
+const closeCardMessageBtn = document.getElementById("closeCardMessage");
+
+// Function to show the card message
+function showCardMessage() {
+  finishSound.play().catch(() => console.log("Finish sound play failed"));
+  if (cardMessageOverlay) cardMessageOverlay.style.display = "flex";
+}
+
+// Function to hide the card message
+function hideCardMessage() {
+  if (cardMessageOverlay) cardMessageOverlay.style.display = "none";
+}
+
+// Add click event listener to finish button
+if (finishButton) {
+  finishButton.addEventListener("click", showCardMessage);
+}
+
+// Add click event listener to close button
+if (closeCardMessageBtn) {
+  closeCardMessageBtn.addEventListener("click", hideCardMessage);
+}
+
+// ===== DRAGGABLE FLOWERS ON HAVE FUN IMAGE =====
+//
+// This functionality allows users to drag f1-f5 flower images within the havefun.png container.
+// The flowers are positioned randomly on page load and can be dragged around, but their movement
+// is constrained within the container boundaries to keep them visible and within the design.
+//
+// Features:
+// - Random initial positioning for each flower
+// - Drag and drop interaction
+// - Boundary constraints to keep flowers within container
+// - Visual feedback during dragging
+
+// Wait for DOM to be fully loaded
+document.addEventListener("DOMContentLoaded", function () {
+  const draggableFlowers = document.querySelectorAll(".draggable-flower");
+  const haveFunContainer = document.querySelector(".have-fun-container");
+
+  if (!haveFunContainer || draggableFlowers.length === 0) {
+    console.log("Have fun container or draggable flowers not found");
+    return;
+  }
+
+  // Function to generate random position within container bounds
+  function getRandomPosition(container, flower) {
+    const containerRect = container.getBoundingClientRect();
+    const flowerWidth = flower.offsetWidth || 80; // Default width if not rendered yet
+    const flowerHeight = flower.offsetHeight || 80; // Default height if not rendered yet
+
+    // Calculate random position within bounds
+    const maxX = containerRect.width - flowerWidth;
+    const maxY = containerRect.height - flowerHeight;
+
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+
+    return { x: randomX, y: randomY };
+  }
+
+  // Set random initial positions for all flowers
+  draggableFlowers.forEach((flower) => {
+    const randomPos = getRandomPosition(haveFunContainer, flower);
+    flower.style.left = randomPos.x + "px";
+    flower.style.top = randomPos.y + "px";
+  });
+
+  // Add drag and drop functionality
+  draggableFlowers.forEach((flower) => {
+    let isDragging = false;
+    let initialX;
+    let initialY;
+    let xOffset = 0;
+    let yOffset = 0;
+
+    // Get initial position from style
+    const getCurrentPosition = (element) => {
+      const left = parseInt(element.style.left) || 0;
+      const top = parseInt(element.style.top) || 0;
+      return { left, top };
+    };
+
+    // Mouse events for desktop - only start on the flower
+    flower.addEventListener("mousedown", dragStart);
+
+    // Document-level events to handle dragging anywhere on screen
+    document.addEventListener("mousemove", drag);
+    document.addEventListener("mouseup", dragEnd);
+
+    // Touch events for mobile support
+    flower.addEventListener("touchstart", dragStart);
+    document.addEventListener("touchmove", drag);
+    document.addEventListener("touchend", dragEnd);
+
+    function dragStart(e) {
+      e.preventDefault();
+
+      // Get current position of the flower
+      const pos = getCurrentPosition(flower);
+      xOffset = pos.left;
+      yOffset = pos.top;
+
+      // Get the container position
+      const containerRect = haveFunContainer.getBoundingClientRect();
+
+      // Convert client coordinates to container coordinates
+      if (e.type === "touchstart") {
+        initialX = e.touches[0].clientX - containerRect.left;
+        initialY = e.touches[0].clientY - containerRect.top;
+      } else {
+        initialX = e.clientX - containerRect.left;
+        initialY = e.clientY - containerRect.top;
+      }
+
+      isDragging = true;
+      flower.classList.add("dragging");
+    }
+
+    function dragEnd(e) {
+      if (isDragging) {
+        isDragging = false;
+        flower.classList.remove("dragging");
+      }
+    }
+
+    function drag(e) {
+      if (!isDragging) return;
+
+      e.preventDefault();
+
+      // Get the container position
+      const containerRect = haveFunContainer.getBoundingClientRect();
+
+      // Get current mouse/touch position relative to container
+      let currentMouseX, currentMouseY;
+      if (e.type === "touchmove") {
+        currentMouseX = e.touches[0].clientX - containerRect.left;
+        currentMouseY = e.touches[0].clientY - containerRect.top;
+      } else {
+        currentMouseX = e.clientX - containerRect.left;
+        currentMouseY = e.clientY - containerRect.top;
+      }
+
+      // Calculate new position
+      const newX = currentMouseX - (initialX - xOffset);
+      const newY = currentMouseY - (initialY - yOffset);
+
+      // Get flower dimensions
+      const flowerWidth = flower.offsetWidth;
+      const flowerHeight = flower.offsetHeight;
+
+      // Constrain within container boundaries
+      const maxX = containerRect.width - flowerWidth;
+      const maxY = containerRect.height - flowerHeight;
+
+      const constrainedX = Math.max(0, Math.min(newX, maxX));
+      const constrainedY = Math.max(0, Math.min(newY, maxY));
+
+      // Apply constrained position
+      flower.style.left = constrainedX + "px";
+      flower.style.top = constrainedY + "px";
+    }
+  });
+});

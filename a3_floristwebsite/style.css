@@ -3,7 +3,7 @@
 .audio-control {
   position: fixed;
   top: -45px;
-  right: -73px;
+  right: -20px;
   width: 210px;
   height: 185px;
   z-index: 1002; /* Above doors and other elements */
@@ -181,10 +181,6 @@ body {
   /* Extended padding to match longer scroll distance (200vh) */
   overflow-x: hidden;
   box-sizing: border-box;
-  background-image: url("bgcolor.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 /* Removed unused .outer class - layout is now handled by .svg-and-colors-container */
@@ -220,6 +216,18 @@ Both should align horizontally with consistent spacing, creating a balanced and 
   pointer-events: none;
 }
 
+/* Left column - contains SVG and save button */
+.left-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
+}
+
 /* SVG container - bouquet */
 .svg-container {
   background-color: #ffffff5f;
@@ -228,8 +236,6 @@ Both should align horizontally with consistent spacing, creating a balanced and 
   width: 100%;
   max-width: 500px;
   /* Larger SVG container for main visual area */
-  flex: 1;
-  /* Allow it to grow and take more space */
   position: relative;
   box-sizing: border-box;
 }
@@ -266,6 +272,19 @@ EFFICIENCY ADVANTAGES OVER MANUAL FLEXBOX:
 This creates a natural spiral pattern that looks like real paint dots placed on a spiral palette.
 */
 
+/* Color palette wrapper - flexbox container for palette and reset button */
+.color-palette-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 400px;
+  flex-shrink: 0;
+  transform: translate(50px, 40px);
+  box-sizing: border-box;
+}
+
 /* Color container - color palette at the right side */
 .color-boxes-container {
   background-image: url("palette.png");
@@ -275,16 +294,12 @@ This creates a natural spiral pattern that looks like real paint dots placed on 
   padding: 10px;
   border-radius: 30px;
   width: 100%;
-  max-width: 400px;
   height: auto;
   aspect-ratio: 1;
   /* Fixed aspect ratio to maintain proportions */
   position: relative;
   /* Enable absolute positioning for paint dots */
-  flex-shrink: 0;
-  /* Prevent shrinking to maintain consistent size */
   /* Removed flexbox to prevent image resizing and spacing issues */
-  transform: translate(50px, 40px);
   box-sizing: border-box;
 }
 
@@ -322,6 +337,180 @@ POSITIONING: Each dot positioned individually using spiral coordinates
   transform: scale(1.05); /* Slight scale on hover */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15),
     /* Enhanced shadow on hover */ inset 0 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+/* ===== RESET COLORS BUTTON STYLING ===== */
+.reset-colors-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  z-index: 10;
+}
+
+.reset-colors-btn img {
+  width: clamp(80px, 8vw, 120px);
+  height: auto;
+  display: block;
+}
+
+/* Hover effect - scale up with glow */
+.reset-colors-btn:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 8px rgba(231, 123, 38, 0.6));
+}
+
+/* Active state */
+.reset-colors-btn:active {
+  transform: scale(1.05);
+}
+
+/* ===== SAVE BUTTON STYLING ===== */
+.save-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  z-index: 10;
+  align-self: center;
+}
+
+.save-btn img {
+  width: clamp(200px, 20vw, 300px);
+  height: auto;
+  display: block;
+}
+
+/* Hover effect - scale up with glow */
+.save-btn:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 8px rgba(231, 123, 38, 0.6));
+}
+
+/* Active state */
+.save-btn:active {
+  transform: scale(1.05);
+}
+
+/* ===== FINISH BUTTON STYLING ===== */
+.finish-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  z-index: 10;
+  align-self: center;
+  margin-top: -50px;
+}
+
+.finish-btn img {
+  width: clamp(200px, 20vw, 300px);
+  height: auto;
+  display: block;
+}
+
+/* Hover effect - scale up with glow */
+.finish-btn:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 8px rgba(231, 123, 38, 0.6));
+}
+
+/* Active state */
+.finish-btn:active {
+  transform: scale(1.05);
+}
+
+/* ===== CARD MESSAGE OVERLAY STYLING ===== */
+.card-message-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  pointer-events: auto;
+}
+
+.card-message-wrapper {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  height: fit-content;
+  max-width: 90vw;
+  max-height: 90vh;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 5px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.ribbon-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.letter-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.card-message-gif {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 10px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  display: block;
+  z-index: 1;
+}
+
+.close-card-message-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2001;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.close-card-message-btn img {
+  width: clamp(80px, 8vw, 120px);
+  height: auto;
+  display: block;
+}
+
+/* Hover effect for close button */
+.close-card-message-btn:hover {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+}
+
+/* Active state for close button */
+.close-card-message-btn:active {
+  transform: scale(1.1);
 }
 
 /* ===== INDIVIDUAL PAINT DOT POSITIONING ===== */
@@ -480,6 +669,52 @@ a {
   box-sizing: border-box;
 }
 
+/* ===== HAVE FUN CONTAINER WITH DRAGGABLE FLOWERS ===== */
+.have-fun-container {
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  width: fit-content;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.have-fun-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+/* Draggable flower images */
+.draggable-flower {
+  position: absolute;
+  width: clamp(200px, 32vw, 480px);
+  height: auto;
+  cursor: move;
+  pointer-events: auto;
+  transition: transform 0.2s ease;
+  z-index: 10;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.draggable-flower:hover {
+  transform: scale(1.1);
+}
+
+.draggable-flower.dragging {
+  opacity: 0.7;
+  transform: scale(1.2);
+  z-index: 1000;
+}
+
 /* Butterfly gif fixed at bottom center */
 .butterfly-bottom {
   position: fixed;
@@ -532,7 +767,7 @@ holding a real brush, complete with the perfect angle and visual weight that say
 
 /* SVG Section - positioned after door opening animation */
 .svg-and-colors-container {
-  margin-top: 100vh; /* Reduced margin since body now has 200vh padding */
+  margin-top: 50px; /* Reduced margin to minimize gap after have-fun-container */
   margin-bottom: 50px; /* Add bottom margin for spacing */
   cursor: url("cursor.cur"), auto; /* Custom brush cursor for this container area */
 }
@@ -637,15 +872,23 @@ everything you touch reminds you that you're creating something beautiful.
     padding: 0 0.5rem;
   }
 
+  .left-column {
+    width: 100%;
+    max-width: 500px;
+  }
+
   .svg-container {
     width: 100%;
     max-width: 500px;
   }
 
+  .color-palette-wrapper {
+    transform: translate(0, 20px); /* Reduce transform on mobile */
+  }
+
   .color-boxes-container {
     width: 100%;
     max-width: 400px;
-    transform: translate(0, 20px); /* Reduce transform on mobile */
   }
 
   .scroll-gif {
@@ -660,7 +903,7 @@ everything you touch reminds you that you're creating something beautiful.
     padding: 0 0.25rem;
   }
 
-  .color-boxes-container {
+  .color-palette-wrapper {
     transform: translate(0, 10px);
   }
 
@@ -672,6 +915,11 @@ everything you touch reminds you that you're creating something beautiful.
     margin-top: 20px;
     margin-bottom: 10px;
   }
+
+  .have-fun-image {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }
 
 /* Extra small screens */
@@ -681,7 +929,7 @@ everything you touch reminds you that you're creating something beautiful.
     gap: 0.25rem;
   }
 
-  .color-boxes-container {
+  .color-palette-wrapper {
     transform: translate(0, 5px);
   }
 
