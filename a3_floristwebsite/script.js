@@ -84,19 +84,17 @@ audioControl.addEventListener("click", toggleAudioPlayPause);
 
 // ===== INTERACTION AREA LIMITATION - FOCUSED ARTISTIC EXPERIENCE =====
 //
-// Just like how a real artist works within the boundaries of their canvas, we want to guide
-// users to focus their creative energy within our designated artistic workspace. The svg-and-colors-container
+// Just like how a real artist works within the boundaries of their canvas, I want to guide
+// users to focus their creative energy within  designated artistic workspace. The svg-and-colors-container
 // becomes their creative canvas - this is where the magic happens, where colors meet flowers,
 // where art is born.
 //
-// By limiting the brush cursor to only appear within this container, we're essentially saying:
-// "This is your studio, your creative space. Here, you're an artist. Outside of here, you're
-// just browsing the web." It's a subtle but powerful way to create focus and intention.
+// I also limit the area where the paintbrush cursor appear. This is because I want to give user a hint about this area is the main interaction happens.
 //
 // The brush cursor will only appear when users are actively working within their artistic
 // workspace, making the interaction feel more purposeful and immersive.
 
-// Get the main interaction container - this is our artistic workspace
+// Get the main interaction container - this is my artistic workspace
 const svgAndColorsContainer = document.querySelector(
   ".svg-and-colors-container"
 );
@@ -118,7 +116,7 @@ boxes.forEach((colorBlock) => {
     bgColor = window.getComputedStyle(event.target).backgroundColor;
     console.log("Dragging color:", bgColor); // Debug log
 
-    // Only transform into artist mode if we're in the artistic workspace
+    // Only transform into artist mode if user is in the artistic workspace
     if (isWithinArtisticWorkspace(event)) {
       // Transform the user into an artist! Add brush cursor class during drag
       // This magical moment when their cursor becomes a paintbrush
@@ -149,7 +147,7 @@ boxes.forEach((colorBlock) => {
 // Add mouse movement tracking to dynamically manage brush cursor visibility
 // This ensures the brush cursor only appears when users are actively working in their artistic space
 document.addEventListener("mousemove", (event) => {
-  // Only apply workspace logic if we're currently in brush mode (dragging)
+  // Only apply workspace logic if user is currently in brush mode (dragging)
   if (document.body.classList.contains("brush-cursor")) {
     if (!isWithinArtisticWorkspace(event)) {
       // User moved outside their artistic workspace - remove brush cursor
@@ -255,7 +253,7 @@ bellSound.volume = 0.7; // Set volume to 70% for pleasant experience
 // Track bell states for door opening and closing
 let bellHasPlayedForOpening = false;
 let bellHasPlayedForClosing = false;
-let wasAtTop = true; // Track if we were at the top previously
+let wasAtTop = true; // Track if I was at the top previously
 
 //
 // The scroll motion now creates a real-time following effect where doors and background move with the scroll position while simultaneously rotating to reveal the background. This creates the illusion that the user's scroll action is physically moving the door elements while triggering the door opening animation. The doors and background follow the scroll in real-time until they reach 90 degrees, then normal scrolling continues to the next section.
@@ -440,6 +438,23 @@ resetColorsBtn.addEventListener("click", resetColors);
 //
 // The save function converts the SVG to a PNG image for easy sharing and downloading.
 
+// ===== CAMERA.WAV SOUND EFFECT - MEMORY CAPTURE EXPERIENCE =====
+//
+// The camera.wav audio is a crucial part of the memory preservation experience.
+// When users click on savebutton.png, they are not just downloading an image -
+// they are capturing a precious memory that they designed with their own creative touch.
+//
+// This sound effect mimics the nostalgic experience of taking a photograph with an
+// old camera, creating an emotional connection between the action of saving and the
+// concept of memory preservation. It transforms the technical act of downloading an
+// image into a meaningful moment of capturing something beautiful and personal.
+//
+// The sound plays at the exact moment the user clicks the save button, reinforcing
+// that they are "keeping" the flower bouquet they designed, just like how you would
+// take a photo to keep a memory. This audio feedback enhances the emotional value
+// of the interaction, making users feel that they are truly preserving something
+// special - their own artistic creation and the memories associated with it.
+
 // Audio element for camera sound
 const cameraSound = new Audio("camera.wav");
 cameraSound.volume = 0.7; // Set volume to 70% for pleasant experience
@@ -528,11 +543,31 @@ function saveSVGAsImage() {
 // Add click event listener to save button
 saveButton.addEventListener("click", saveSVGAsImage);
 
-// ===== FINISH BUTTON FUNCTIONALITY =====
+// ===== FINISH BUTTON FUNCTIONALITY - WARM CARD MESSAGE EXPERIENCE =====
 //
-// The finish button allows users to view a card message after completing their bouquet.
-// When clicked, it displays a card message animation with a close icon overlapped on it.
-// Users can close the message by clicking the close icon, which hides both the message and icon.
+// The finish button provides users with a perfect ending to their creative journey.
+// When users click on finishbutton.png after completing their bouquet design, they
+// are presented with a warm card message that creates an emotionally satisfying closure.
+//
+// This isn't just a technical "end" to the interaction - it's a meaningful farewell
+// that acknowledges the personal artistic expression the user just experienced.
+// The card message reads: "Every design tells a story, thank you for sharing your
+// beautiful touch with us, may beauty follow until we meet again."
+//
+// This message brings out the deeper value of the interactive game by:
+// - Recognizing that each color choice and design tells a unique personal story
+// - Expressing gratitude for the time and creativity the user invested
+// - Ending on a positive, hopeful note that wishes them well
+// - Transforming the ending from a simple "game over" into a heartfelt
+//   gratitude and appreciation moment
+//
+// The finish button creates a complete emotional arc: users start by entering a
+// flower shop, they become artists as they paint flowers with colors, they capture
+// memories by saving their creation, and they end with a warm, personal message
+// that validates their creative expression and leaves them feeling appreciated.
+//
+// Users can close the message by clicking the close icon, which hides both the
+// message and icon, allowing them to return to their bouquet if desired.
 
 // Audio element for finish sound
 const finishSound = new Audio("finnish.wav");
@@ -565,6 +600,11 @@ if (closeCardMessageBtn) {
 }
 
 // ===== DRAGGABLE FLOWERS ON HAVE FUN IMAGE =====
+//
+// I added draggable flowers on the have fun image with random initial positions because I want the experience
+// before entering into the main interaction of dragging color dots from the color palette to be more explorable.
+// I want users to discover this drag and drop flower feature on the have fun page as an interactive preview
+// of what they can do in the main design section.
 //
 // This functionality allows users to drag f1-f5 flower images within the havefun.png container.
 // The flowers are positioned randomly on page load and can be dragged around, but their movement
